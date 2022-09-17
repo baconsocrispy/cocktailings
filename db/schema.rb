@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_16_000316) do
+ActiveRecord::Schema[7.0].define(version: 2022_09_16_221902) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -31,13 +31,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_16_000316) do
 
   create_table "garnishes", force: :cascade do |t|
     t.string "garnish_type"
-    t.integer "quantity"
+    t.decimal "amount"
     t.boolean "edible"
     t.string "brand"
-    t.bigint "cabinet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cabinet_id"], name: "index_garnishes_on_cabinet_id"
+    t.string "garnishable_type"
+    t.bigint "garnishable_id"
+    t.index ["garnishable_type", "garnishable_id"], name: "index_garnishes_on_garnishable"
   end
 
   create_table "mixers", force: :cascade do |t|
@@ -45,31 +46,43 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_16_000316) do
     t.string "brand"
     t.string "product"
     t.decimal "size"
-    t.bigint "cabinet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cabinet_id"], name: "index_mixers_on_cabinet_id"
+    t.string "mixable_type"
+    t.bigint "mixable_id"
+    t.decimal "amount"
+    t.index ["mixable_type", "mixable_id"], name: "index_mixers_on_mixable"
   end
 
   create_table "recipes", force: :cascade do |t|
     t.string "name", null: false
-    t.integer "author_id"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
+  create_table "recipes_users", force: :cascade do |t|
+    t.bigint "recipe_id"
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipes_users_on_recipe_id"
+    t.index ["user_id"], name: "index_recipes_users_on_user_id"
+  end
+
   create_table "spirits", force: :cascade do |t|
     t.string "spirit_type", null: false
-    t.string "brand", null: false
+    t.string "brand"
     t.string "product"
     t.decimal "abv"
     t.integer "age"
     t.decimal "size"
-    t.bigint "cabinet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cabinet_id"], name: "index_spirits_on_cabinet_id"
+    t.string "spiritable_type"
+    t.bigint "spiritable_id"
+    t.decimal "amount"
+    t.index ["spiritable_type", "spiritable_id"], name: "index_spirits_on_spiritable"
   end
 
   create_table "steps", force: :cascade do |t|
@@ -86,10 +99,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_16_000316) do
     t.string "tool_type"
     t.string "brand"
     t.text "description"
-    t.bigint "cabinet_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["cabinet_id"], name: "index_tools_on_cabinet_id"
+    t.string "toolable_type"
+    t.bigint "toolable_id"
+    t.index ["toolable_type", "toolable_id"], name: "index_tools_on_toolable"
   end
 
   create_table "users", force: :cascade do |t|
@@ -103,10 +117,5 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_16_000316) do
     t.index ["email"], name: "index_users_on_email"
   end
 
-  add_foreign_key "garnishes", "cabinets"
-  add_foreign_key "mixers", "cabinets"
-  add_foreign_key "recipes", "users", column: "author_id"
-  add_foreign_key "spirits", "cabinets"
   add_foreign_key "steps", "recipes"
-  add_foreign_key "tools", "cabinets"
 end

@@ -1,4 +1,3 @@
 class Garnish < ApplicationRecord
-  belongs_to :cabinet, optional: true
-  belongs_to :recipe
+ belongs_to :garnishable, :polymorphic => true
 end

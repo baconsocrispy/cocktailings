@@ -1,3 +1,3 @@
 class Spirit < ApplicationRecord
-  belongs_to :cabinet, optional: true
+  belongs_to :spiritable, :polymorphic => true
 end

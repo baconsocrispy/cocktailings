@@ -1,3 +1,3 @@
 class Mixer < ApplicationRecord
-  belongs_to :cabinet, optional: true
+  belongs_to :mixable, :polymorphic => true
 end
