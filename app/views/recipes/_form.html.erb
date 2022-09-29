@@ -1,0 +1,69 @@
+<%= form_with(model: recipe) do |f| %>
+  <% if recipe.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+
+      <ul>
+        <% recipe.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div>
+    <%= f.label :name %>
+    <%= f.text_field :name %>
+  </div>
+    <div>
+    <%= f.label :description %>
+    <%= f.text_field :description %>
+  </div>
+
+  <div>
+    <h2>Add Ingredients</h2>
+
+    <h6>Spirits</h6>
+
+    <%= f.collection_select :spirit_id, Spirit.all, :id, :spirit_type, {}, { :size => "5", :multiple => true } %>
+
+    <h6>Mixers</h6>
+
+    <%= f.collection_select :mixer_id, Mixer.all, :id, :mixer_type, {}, { :size => "5", :multiple => true } %>
+
+    <h6>Garnishes</h6>
+
+    <%= f.collection_select :garnish_id, Garnish.all, :id, :garnish_type, {}, { :size => "5", :multiple => true } %>
+  
+  </div>
+
+  <%# Nested form for Adding a step %>
+  <%# Turbo-frame reloads content within its tags rather than the whole page %>
+    <div>
+    <h2>Add Steps</h2>
+  </div>
+  <turbo-frame id='<%= f.field_id(:steps) %>' class='contents'>
+    <%= f.fields_for :steps do |ff| %>
+      <div>
+        <div> 
+          <%= ff.object.id || "New Step" %>
+        </div>
+        <%= ff.number_field :number, placeholder: 'Step No.' %>
+        <%= ff.text_field :name, placeholder: 'Step Title'%>
+        <%= ff.text_field :description, placeholder: 'Description' %>
+      </div>
+    <% end %>
+  </turbo-frame>
+
+  <%= f.file_field :image %>
+  <%# turbo-frame data attribute must match turbo-frame id from above %>
+  <%= f.submit 'Add Step', 
+                data: { turbo_frame: f.field_id(:steps) },
+                name: :add_step 
+  %>
+
+  <div>
+    <%= f.submit %>
+  </div>
+  
+<% end %>
