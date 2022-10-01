@@ -58,3 +58,18 @@ Resolved by checking for image presence:
       <%= image_tag recipe.image %>
     <% end %>
 
+
+STIMULUS
+Troubleshooting: Struggled half a day to get Stimulus Controllers to respond
+Not sure what prompted it to start working, but created a new controller using:
+rails g stimulus controllerName
+and moved the jquery import statement to the top of the application.js import list
+
+SINGLE TABLE INHERITANCE vs. POLYMORPHIC
+Started with polymorphic relationship between ingredient types, but refactored
+for STI. Code felt cleaner and that way all ingredients have a unique id. PM might
+have been better if the database of ingredients was expected to be enormous and
+multiple tables might have sped up search, but can't imagine there will be more 
+than a few thousand potential ingredients.
+
+

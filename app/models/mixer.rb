@@ -1,7 +1,4 @@
-class Mixer < ApplicationRecord
-  belongs_to :mixable, :polymorphic => true
+class Mixer < Ingredient
 
-  def to_s
-    self.mixer_type
-  end
+
 end

@@ -1,0 +1,10 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @portion %>
+
+<div>
+  <%= link_to "Edit this portion", edit_portion_path(@portion) %> |
+  <%= link_to "Back to portions", portions_path %>
+
+  <%= button_to "Destroy this portion", @portion, method: :delete %>
+</div>

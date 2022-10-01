@@ -3,7 +3,7 @@
   <h3>Ingredients</h3>
   <ul>
     <% recipe.ingredients.each do | i | %>
-      <li><%= i.to_s %> | <%= i.amount %> Oz. </li>
+      <li><%= i.display_name %> | <%= i.amount %> Oz. </li>
     <% end%>
   </ul>
   <h3>Description</h3>

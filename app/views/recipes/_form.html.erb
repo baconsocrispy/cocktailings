@@ -20,22 +20,7 @@
     <%= f.text_field :description %>
   </div>
 
-  <div>
-    <h2>Add Ingredients</h2>
-
-    <h6>Spirits</h6>
-
-    <%= f.collection_select :spirit_id, Spirit.all, :id, :spirit_type, {}, { :size => "5", :multiple => true } %>
-
-    <h6>Mixers</h6>
-
-    <%= f.collection_select :mixer_id, Mixer.all, :id, :mixer_type, {}, { :size => "5", :multiple => true } %>
-
-    <h6>Garnishes</h6>
-
-    <%= f.collection_select :garnish_id, Garnish.all, :id, :garnish_type, {}, { :size => "5", :multiple => true } %>
-  
-  </div>
+  <%= render partial: "ingredients/comps/select-widget", locals: {recipe: recipe, f: f} %>
 
   <%# Nested form for Adding a step %>
   <%# Turbo-frame reloads content within its tags rather than the whole page %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_09_27_011024) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_01_003808) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -57,29 +57,48 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_011024) do
     t.index ["user_id", "cabinet_id"], name: "index_cabinets_users_on_user_id_and_cabinet_id"
   end
 
-  create_table "garnishes", force: :cascade do |t|
-    t.string "garnish_type"
-    t.decimal "amount"
-    t.boolean "edible"
-    t.string "brand"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "garnishable_type"
-    t.bigint "garnishable_id"
-    t.index ["garnishable_type", "garnishable_id"], name: "index_garnishes_on_garnishable"
-  end
-
-  create_table "mixers", force: :cascade do |t|
-    t.string "mixer_type"
+  create_table "ingredients", force: :cascade do |t|
+    t.string "display_name"
+    t.string "sub_type"
     t.string "brand"
     t.string "product"
-    t.decimal "size"
+    t.decimal "abv"
+    t.integer "age"
+    t.integer "size"
+    t.decimal "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "mixable_type"
-    t.bigint "mixable_id"
+    t.string "type"
+  end
+
+  create_table "ingredients_portions", force: :cascade do |t|
+    t.bigint "ingredient_id"
+    t.bigint "portion_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_ingredients_portions_on_ingredient_id"
+    t.index ["portion_id"], name: "index_ingredients_portions_on_portion_id"
+  end
+
+  create_table "ingredients_recipes", force: :cascade do |t|
+    t.bigint "ingredient_id"
+    t.bigint "recipe_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["ingredient_id"], name: "index_ingredients_recipes_on_ingredient_id"
+    t.index ["recipe_id"], name: "index_ingredients_recipes_on_recipe_id"
+  end
+
+  create_table "portions", force: :cascade do |t|
     t.decimal "amount"
-    t.index ["mixable_type", "mixable_id"], name: "index_mixers_on_mixable"
+    t.string "unit"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "portionable_type"
+    t.bigint "portionable_id"
+    t.bigint "ingredient_id"
+    t.index ["ingredient_id"], name: "index_portions_on_ingredient_id"
+    t.index ["portionable_type", "portionable_id"], name: "index_portions_on_portionable"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -96,21 +115,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_09_27_011024) do
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_recipes_users_on_recipe_id"
     t.index ["user_id"], name: "index_recipes_users_on_user_id"
-  end
-
-  create_table "spirits", force: :cascade do |t|
-    t.string "spirit_type", null: false
-    t.string "brand"
-    t.string "product"
-    t.decimal "abv"
-    t.integer "age"
-    t.decimal "size"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "spiritable_type"
-    t.bigint "spiritable_id"
-    t.decimal "amount"
-    t.index ["spiritable_type", "spiritable_id"], name: "index_spirits_on_spiritable"
   end
 
   create_table "steps", force: :cascade do |t|
