@@ -40,12 +40,15 @@
     <% end %>
   </turbo-frame>
 
-  <%= f.file_field :image %>
+ 
   <%# turbo-frame data attribute must match turbo-frame id from above %>
   <%= f.submit 'Add Step', 
                 data: { turbo_frame: f.field_id(:steps) },
                 name: :add_step 
   %>
+
+  <%# image attachment %>
+  <%= f.file_field :image %>
 
   <div>
     <%= f.submit %>

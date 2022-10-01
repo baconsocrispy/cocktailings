@@ -1,4 +1,2 @@
 class Mixer < Ingredient
-
-
 end

@@ -18,6 +18,6 @@
       <h6>Garnishes</h6>
       <%= f.collection_select :ingredient_id, Garnish.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "garnishes-select" } %>
     </div>
-    <button data-action="ingredients#addIngredients" id="add-ingredients-btn">Add Ingredients</button>
+    <button data-action="ingredients#addIngredients" data-url="<%=  %>" id="add-ingredients-btn">Add Ingredients</button>
   </div> 
 </div>

@@ -72,4 +72,8 @@ have been better if the database of ingredients was expected to be enormous and
 multiple tables might have sped up search, but can't imagine there will be more 
 than a few thousand potential ingredients.
 
+RAILS AJAX 
+This article was very helpful to understanding the rails ajax methodology, 
+making async calls to controller methods from the view without needing javascript.
+https://medium.com/@codenode/how-to-use-remote-true-to-make-ajax-calls-in-rails-3ecbed40869b
 

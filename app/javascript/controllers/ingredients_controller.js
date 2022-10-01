@@ -9,7 +9,11 @@ export default class extends Controller {
   addIngredients(e) {
     e.preventDefault();
     console.log("Prevent Default Working");
-    console.log(getIngredientIds());
+    ingredientIds = getIngredientIds();
+    $.ajax({
+      type: 'GET',
+      url: 
+    })
   }
 }
 
@@ -18,5 +22,5 @@ function getIngredientIds() {
   var mixer_ids = $('.mixers-select').val();
   var garnish_ids = $('.garnishes-select').val();
 
-  return [spirit_ids, mixer_ids, garnish_ids];
+  return [...spirit_ids, ...mixer_ids, ...garnish_ids];
 }
