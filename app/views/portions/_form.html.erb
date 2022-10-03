@@ -1,27 +1,6 @@
-<%= form_with(model: portion) do |form| %>
-  <% if portion.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(portion.errors.count, "error") %> prohibited this portion from being saved:</h2>
-
-      <ul>
-        <% portion.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
+<% @portions.each do |portion|%>
+  <% if @currentPortions %>
+    <% next if @currentPortions.include?("portion-" + portion.ingredient_id.to_s) %>
   <% end %>
-
-  <div>
-    <%= form.label :amount, style: "display: block" %>
-    <%= form.text_field :amount %>
-  </div>
-
-  <div>
-    <%= form.label :unit, style: "display: block" %>
-    <%= form.text_field :unit %>
-  </div>
-
-  <div>
-    <%= form.submit %>
-  </div>
+  <p id="portion-<%= portion.ingredient_id %>"><%= portion.ingredient.display_name %></p>
 <% end %>

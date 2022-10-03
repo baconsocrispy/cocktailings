@@ -1,4 +1,4 @@
-<div data-controller="ingredients">
+<div data-controller="portions">
   
   <h2>Add Ingredients</h2>
 
@@ -7,17 +7,18 @@
     
     <div class="col">
       <h6>Spirits</h6>
-      <%= f.collection_select :ingredient_id, Spirit.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "spirits-select" } %>
+      <%= collection_select :spirit, :ingredient_id, Spirit.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "spirits-select" } %>
     </div>
 
     <div class="col">
       <h6>Mixers</h6>
-      <%= f.collection_select :ingredient_id, Mixer.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "mixers-select" } %>
+      <%= collection_select :mixer, :ingredient_id, Mixer.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "mixers-select" } %>
     </div>
     <div class="col">
       <h6>Garnishes</h6>
-      <%= f.collection_select :ingredient_id, Garnish.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "garnishes-select" } %>
+      <%= collection_select :garnish, :ingredient_id, Garnish.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "garnishes-select" } %>
     </div>
-    <button data-action="ingredients#addIngredients" data-url="<%=  %>" id="add-ingredients-btn">Add Ingredients</button>
+
+    <button data-action="portions#addIngredients" data-url="<%= new_portion_path.to_s %>" id="add-ingredients-btn">Add Ingredients</button>
   </div> 
 </div>

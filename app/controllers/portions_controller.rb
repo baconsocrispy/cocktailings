@@ -1,5 +1,6 @@
 class PortionsController < ApplicationController
   before_action :set_portion, only: %i[ show edit update destroy ]
+  layout false
 
   # GET /portions or /portions.json
   def index
@@ -12,6 +13,12 @@ class PortionsController < ApplicationController
 
   # GET /portions/new
   def new
+    if params[:portion][:ingredientIds]
+      @currentPortions = params[:portion][:portionIds]
+      @portions = []
+      ingredientIds = params[:portion][:ingredientIds]
+      ingredientIds.each { |id| @portions << Portion.new(ingredient_id: id)}
+    end
     @portion = Portion.new
   end
 
@@ -28,6 +35,7 @@ class PortionsController < ApplicationController
         format.html { redirect_to portion_url(@portion), notice: "Portion was successfully created." }
         format.json { render :show, status: :created, location: @portion }
       else
+        p "NOT WORKING"
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @portion.errors, status: :unprocessable_entity }
       end
@@ -65,6 +73,6 @@ class PortionsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def portion_params
-      params.require(:portion).permit(:amount, :unit)
+      params.require(:portion).permit(:amount, :unit, ingredient_ids: [], portionIds: [])
     end
 end
