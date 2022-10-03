@@ -21,7 +21,7 @@ export default class extends Controller {
       // need to use jQuery.param method to nest params properly
       data: jQuery.param({ portion: { ingredientIds: ingredientIds, portionIds: portionIds }}),
       success: function(response) {
-        $('#test').append(response);
+        $('#recipe-portions-tbl').append(response);
       }
     });
   }
@@ -36,7 +36,7 @@ function getIngredientIds() {
 }
 
 function getPortionIds() {
-  const portionIds = $.map($('#test').children(), function(child) {
+  const portionIds = $.map($('#recipe-portions-tbl').children(), function(child) {
     return $(child).attr('id');
   });
   return portionIds;

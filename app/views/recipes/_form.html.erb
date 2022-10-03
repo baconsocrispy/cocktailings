@@ -22,11 +22,25 @@
 
   <%= render partial: "ingredients/comps/select-widget", locals: {recipe: recipe, f: f} %>
 
+  <div>
+    <turbo_frame>
+      <table id="recipe-portions-tbl" class="table">
+        <thead>
+          <tr>
+            <th>Ingredients</th>
+            <th>Amount</th>
+            <th>Unit</th>
+          </tr>
+        </thead>
+      </table>
+    </turbo_frame>
+  </div>
+
   <div id="test"></div>
 
   <%# Nested form for Adding a step %>
   <%# Turbo-frame reloads content within its tags rather than the whole page %>
-    <div>
+  <div>
     <h2>Add Steps</h2>
   </div>
   <turbo-frame id='<%= f.field_id(:steps) %>' class='contents'>

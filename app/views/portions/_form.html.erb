@@ -2,5 +2,9 @@
   <% if @currentPortions %>
     <% next if @currentPortions.include?("portion-" + portion.ingredient_id.to_s) %>
   <% end %>
-  <p id="portion-<%= portion.ingredient_id %>"><%= portion.ingredient.display_name %></p>
+  <tr id="portion-<%= portion.ingredient_id %>">
+   <td><%= portion.ingredient.display_name %></td>
+   <td>INPUT AMOUNT</td>
+   <td>UNIT</td>
+  </tr>
 <% end %>

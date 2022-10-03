@@ -77,3 +77,38 @@ This article was very helpful to understanding the rails ajax methodology,
 making async calls to controller methods from the view without needing javascript.
 https://medium.com/@codenode/how-to-use-remote-true-to-make-ajax-calls-in-rails-3ecbed40869b
 
+UPDATING RUBY WITH ASDF
+I wanted to install latest version of ruby and read that asdf is the best package manager
+for installing ruby and switching between versions. 
+
+Installed asdf with: brew install asdf
+Needed to add this to ~/.zshrc file (open ~/.zshrc): . /opt/homebrew/opt/asdf/libexec/asdf.sh
+Need to add asdf ruby plugin: asdf plugin add ruby
+List all available ruby versions with: asdf list all ruby
+Installed latest version with: asdf install ruby latest
+Needed to uninstall rbenv: brew remove rbenv
+Then needed to remove the .rbenv directory: rm -rf ~/.rbenv
+Delete references to rbenv from ~/.zshrc
+Set global ruby version for mac (adds it to ~/.tool-version file): asdf global ruby 3.1.2
+Resources:
+-https://mac.install.guide/ruby/6.html
+-https://asdf-vm.com/guide/getting-started.html
+-https://stackoverflow.com/questions/31173968/how-do-you-uninstall-rbenv-on-macos
+
+INSTALLATION
+install ruby 3.1.2
+install postgres
+bundle update
+
+POSTGRESQL
+Using Postgresql@14: brew install postgresql@14
+Create database: rails db:create
+Run migrations: rails db:migrate
+Add db credentials to database.yml: might need to use 
+
+Troubleshooting:
+Got this error running bundle install: An error occurred while installing pg (1.4.3), and Bundler cannot continue.
+
+Solved it with this: gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config
+
+
