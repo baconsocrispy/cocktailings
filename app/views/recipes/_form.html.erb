@@ -22,21 +22,33 @@
 
   <%= render partial: "ingredients/comps/select-widget", locals: {recipe: recipe, f: f} %>
 
-  <div>
-    <turbo_frame>
-      <table id="recipe-portions-tbl" class="table">
+  <div name="portion-tbl">
+      <table id="recipe-portions-tbl" class="table-sm">
         <thead>
           <tr>
             <th>Ingredients</th>
             <th>Amount</th>
             <th>Unit</th>
           </tr>
+          <% recipe.portions.each do |portion| %>
+            <tr>
+               <td>
+                  <input type="hidden" name="portions[ingredient-<%= portion.ingredient_id %>][id]" value="<%= portion.ingredient_id %>">
+                  <%= portion.ingredient.display_name %>
+                </td>
+                <td><input name="portions[ingredient-<%= portion.ingredient_id %>][amount]" type="number" value="<%= portion.amount %>"></td>
+                <td>
+                  <select name="portions[ingredient-<%= portion.ingredient_id %>][unit]" value="<%= portion.unit %>">
+                    <% ['Oz.', 'L', 'mL', 'tbsp', 'tsp', 'Cup'].each do |unit| %>
+                      <option><%= unit %></option>
+                    <% end %>
+                  </select>
+                </td>
+            </tr>
+          <% end %>
         </thead>
       </table>
-    </turbo_frame>
   </div>
-
-  <div id="test"></div>
 
   <%# Nested form for Adding a step %>
   <%# Turbo-frame reloads content within its tags rather than the whole page %>
@@ -47,7 +59,7 @@
     <%= f.fields_for :steps do |ff| %>
       <div>
         <div> 
-          <%= ff.object.id || "New Step" %>
+          <%= ff.object.id  %>
         </div>
         <%= ff.number_field :number, placeholder: 'Step No.' %>
         <%= ff.text_field :name, placeholder: 'Step Title'%>

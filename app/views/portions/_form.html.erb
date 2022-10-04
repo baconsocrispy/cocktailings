@@ -2,9 +2,18 @@
   <% if @currentPortions %>
     <% next if @currentPortions.include?("portion-" + portion.ingredient_id.to_s) %>
   <% end %>
-  <tr id="portion-<%= portion.ingredient_id %>">
-   <td><%= portion.ingredient.display_name %></td>
-   <td>INPUT AMOUNT</td>
-   <td>UNIT</td>
+  <tr id="portion-<%= portion.ingredient_id %>" name="portion-id" value="<%= portion.ingredient_id %>">
+    <td>
+      <input type="hidden" name="portions[ingredient-<%= portion.ingredient_id %>][id]" value="<%= portion.ingredient_id %>">
+      <%= portion.ingredient.display_name %>
+    </td>
+    <td><input name="portions[ingredient-<%= portion.ingredient_id %>][amount]" type="number"></td>
+    <td>
+      <select name="portions[ingredient-<%= portion.ingredient_id %>][unit]">
+        <% ['Oz.', 'L', 'mL', 'tbsp', 'tsp', 'Cup'].each do |unit| %>
+          <option><%= unit %></option>
+        <% end %>
+      </select>
+    </td>
   </tr>
 <% end %>

@@ -1,6 +1,15 @@
 class ApplicationController < ActionController::Base
-  def add_ingredients_to_recipe(recipe, recipe_params)
-    ingredient_ids = recipe_params[:ingredient_id]
-    ingredient_ids.each { |id| recipe.ingredients << Ingredient.find(id) if id != "" }
+  def add_portions(model, params)
+    portion_hashes = params[:portions]
+    portion_hashes.each do |portions|
+      portions.each do |portion|
+        Portion.create(ingredient_id: portion['id'], 
+                       amount: portion['amount'], 
+                       unit: portion['unit'],
+                       portionable_id: model.id,
+                       portionable_type: model.class,
+                      )
+      end
+    end
   end
 end

@@ -2,8 +2,8 @@
   <h2><%= recipe.name %></h2>
   <h3>Ingredients</h3>
   <ul>
-    <% recipe.ingredients.each do | i | %>
-      <li><%= i.display_name %> | <%= i.amount %> Oz. </li>
+    <% recipe.portions.each do | portion | %>
+      <li><%= portion.ingredient.display_name %> | <%= portion.amount %> <%= portion.unit %> </li>
     <% end%>
   </ul>
   <h3>Description</h3>

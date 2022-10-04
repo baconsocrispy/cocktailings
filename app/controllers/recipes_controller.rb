@@ -23,7 +23,7 @@ class RecipesController < ApplicationController
   # POST /recipes or /recipes.json
   def create
     # need to except ingredients or there will be an error
-    @recipe = Recipe.new(recipe_params.except(:ingredient_id))
+    @recipe = Recipe.new(recipe_params.except(:portions))
 
     respond_to do |format|
       # Need to add this to prevent form from submitting
@@ -34,7 +34,7 @@ class RecipesController < ApplicationController
       else
         # tests if recipe both saves and that any selected ingredients were added
         # by sending recipe and params to process_ingredients helper method
-        if @recipe.save && add_ingredients_to_recipe(@recipe, recipe_params)
+        if @recipe.save && add_portions(@recipe, params)
           format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
           format.json { render :show, status: :created, location: @recipe }
         else
@@ -79,7 +79,6 @@ class RecipesController < ApplicationController
       params.require(:recipe).permit(:name, 
                                      :description, 
                                      :image, 
-                                     ingredient_id: [], 
                                      steps_attributes: [
                                       :id, 
                                       :number, 

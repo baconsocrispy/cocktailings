@@ -18,8 +18,8 @@ export default class extends Controller {
       beforeSend: function(xhr) {xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));},
       url: url,
       dataType: 'html',
-      // need to use jQuery.param method to nest params properly
-      data: jQuery.param({ portion: { ingredientIds: ingredientIds, portionIds: portionIds }}),
+      // need to use $.param method to nest params properly
+      data: $.param({ portion: { ingredientIds: ingredientIds, portionIds: portionIds }}),
       success: function(response) {
         $('#recipe-portions-tbl').append(response);
       }
