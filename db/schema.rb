@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_01_003808) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_05_054609) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -69,6 +69,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_01_003808) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type"
+    t.index ["display_name"], name: "index_ingredients_on_display_name", unique: true
   end
 
   create_table "ingredients_portions", force: :cascade do |t|
@@ -90,7 +91,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_01_003808) do
   end
 
   create_table "portions", force: :cascade do |t|
-    t.decimal "amount"
+    t.decimal "amount", null: false
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -99,13 +100,14 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_01_003808) do
     t.bigint "ingredient_id"
     t.index ["ingredient_id"], name: "index_portions_on_ingredient_id"
     t.index ["portionable_type", "portionable_id"], name: "index_portions_on_portionable"
+    t.check_constraint "amount > 0::numeric", name: "amount_check"
   end
 
   create_table "recipes", force: :cascade do |t|
-    t.string "name", null: false
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "name", null: false
   end
 
   create_table "recipes_users", force: :cascade do |t|

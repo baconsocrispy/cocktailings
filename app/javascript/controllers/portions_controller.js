@@ -26,17 +26,17 @@ export default class extends Controller {
         $('#recipe-portions-tbl').append(response);
       }
     });
-  };
+  }
 
   deletePortion(e) {
     e.preventDefault();
-    $(e.target).closest('tr').remove()
-  };
+    $(e.target).closest('tr').remove();
+  }
 
   deletePortionObject(e) {
     e.preventDefault();
-    const url = $(e.target).data('url')
-    $(e.target).closest('tr').remove()
+    const url = $(e.target).data('url');
+    $(e.target).closest('tr').remove();
     $.ajax({
       type: "DELETE",
       beforeSend: function (xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')); },
@@ -44,9 +44,13 @@ export default class extends Controller {
       success: function (response) {
         console.log('Successfully deleted portion');
       }
-    })
+    });
   }
-};
+
+  validatePortion(e) {
+    $()
+  }
+}
 
 // HELPER FUNCTIONS
 function getIngredientIds() {
@@ -55,11 +59,11 @@ function getIngredientIds() {
   var garnish_ids = $('.garnishes-select').val();
 
   return [...spirit_ids, ...mixer_ids, ...garnish_ids];
-};
+}
 
 function getPortionIds() {
   const portionIds = $.map($('#recipe-portions-tbl').children(), function(child) {
     return $(child).attr('id');
   });
   return portionIds;
-};
+}

@@ -19,7 +19,7 @@
               <input type="hidden" name='<%= name %>[ingredient_id]' value="<%= portion.ingredient_id %>">
               <%= portion.ingredient.display_name %>
             </td>
-            <td><input name='<%= name %>[amount]' type="number" value="<%= portion.amount %>"></td>
+            <td><input name='<%= name %>[amount]' type="number" min="1" value="<%= portion.amount %>" required></td>
             <td><%= render partial: 'portions/comps/units-select', locals: { portion: portion, name: name } %></td>
             <%# deletes portion from database via ajax request %>
             <td><button data-action="portions#deletePortionObject" data-url="/portions/<%= portion.id %>">Delete</button></td>

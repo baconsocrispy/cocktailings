@@ -7,6 +7,7 @@ class Recipe < ApplicationRecord
   has_one_attached :image
   # reject_if: :all_blank ensures blank steps aren't accidentally saved
   accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
+  validates :name, presence: true
 
   def authors
     self.users
