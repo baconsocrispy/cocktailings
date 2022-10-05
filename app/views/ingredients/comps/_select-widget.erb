@@ -7,7 +7,7 @@
     
     <div class="col">
       <h6>Spirits</h6>
-      <%= collection_select :spirits, :ingredient_id, Spirit.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "spirits-select" } %>
+      <%= collection_select :spirits, :ingredient_id, Spirit.all, :id, :display_name, {:prompt => "" }, { :size => "5", :multiple => true, :class => "spirits-select" } %>
     </div>
 
     <div class="col">
@@ -19,6 +19,6 @@
       <%= collection_select :garnishes, :ingredient_id, Garnish.all, :id, :display_name, {:prompt => ""}, { :size => "5", :multiple => true, :class => "garnishes-select" } %>
     </div>
 
-    <button data-action="portions#addIngredients" data-url="<%= new_portion_path.to_s %>" id="add-ingredients-btn">Add Ingredients</button>
+    <button data-action="portions#addPortions" data-url="<%= new_portion_path.to_s %>" id="add-portions-btn">Add Ingredients</button>
   </div> 
 </div>

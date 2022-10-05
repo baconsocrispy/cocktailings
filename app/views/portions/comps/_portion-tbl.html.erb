@@ -1,0 +1,30 @@
+
+
+<div name="portion-tbl" data-controller="portions">
+  <table class="table">
+    <thead >
+      <tr>
+        <th>Ingredients</th>
+        <th>Amount</th>
+        <th>Unit</th>
+      </tr>
+    </thead>
+    <tbody id="recipe-portions-tbl">
+      <% recipe.portions.each do |portion| %>
+        <%# concatenates name attribute for parameter nesting %>
+        <% name = 'portions[ingredient-' + portion.ingredient_id.to_s + ']' %>
+
+        <tr id="portion-<%= portion.ingredient_id %>">
+            <td>
+              <input type="hidden" name='<%= name %>[id]' value="<%= portion.ingredient_id %>">
+              <%= portion.ingredient.display_name %>
+            </td>
+            <td><input name='<%= name %>[amount]' type="number" value="<%= portion.amount %>"></td>
+            <td><%= render partial: 'portions/comps/units-select', locals: { portion: portion, name: name } %></td>
+            <%# deletes portion from database via ajax request %>
+            <td><button data-action="portions#deletePortionObject" data-url="/portions/<%= portion.id %>">Delete</button></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

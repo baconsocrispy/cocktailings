@@ -35,7 +35,6 @@ class PortionsController < ApplicationController
         format.html { redirect_to portion_url(@portion), notice: "Portion was successfully created." }
         format.json { render :show, status: :created, location: @portion }
       else
-        p "NOT WORKING"
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @portion.errors, status: :unprocessable_entity }
       end
@@ -60,7 +59,6 @@ class PortionsController < ApplicationController
     @portion.destroy
 
     respond_to do |format|
-      format.html { redirect_to portions_url, notice: "Portion was successfully destroyed." }
       format.json { head :no_content }
     end
   end

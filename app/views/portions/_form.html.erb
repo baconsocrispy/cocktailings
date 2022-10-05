@@ -1,19 +1,24 @@
 <% @portions.each do |portion|%>
+
+  <%# concatenates name attribute %>
+  <% name = 'portions[ingredient-' + portion.ingredient_id.to_s + ']'%>
+
+  <%# filters out empty portions %>
+  <% next if !portion.ingredient %>
+
+  <%# ensures no duplicate portions %>
   <% if @currentPortions %>
     <% next if @currentPortions.include?("portion-" + portion.ingredient_id.to_s) %>
   <% end %>
-  <tr id="portion-<%= portion.ingredient_id %>" name="portion-id" value="<%= portion.ingredient_id %>">
+
+  <%# creates a new row for the portions table assigned to the correct ingredient %>
+  <tr id="portion-<%= portion.ingredient_id %>" name="portion-id" value="<%= portion.ingredient_id %>" data-controller="portions">
     <td>
       <input type="hidden" name="portions[ingredient-<%= portion.ingredient_id %>][id]" value="<%= portion.ingredient_id %>">
       <%= portion.ingredient.display_name %>
     </td>
     <td><input name="portions[ingredient-<%= portion.ingredient_id %>][amount]" type="number"></td>
-    <td>
-      <select name="portions[ingredient-<%= portion.ingredient_id %>][unit]">
-        <% ['Oz.', 'L', 'mL', 'tbsp', 'tsp', 'Cup'].each do |unit| %>
-          <option><%= unit %></option>
-        <% end %>
-      </select>
-    </td>
+    <td><%= render partial: 'portions/comps/units-select', locals: { portion: portion } %></td>
+    <td><button data-action="portions#deletePortion">Delete</button></td>
   </tr>
 <% end %>
