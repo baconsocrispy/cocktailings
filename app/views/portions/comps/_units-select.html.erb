@@ -1,6 +1,6 @@
-<select name='<%= "" || name %>[unit]'>
+<select name=<%= name + '[unit]' %>>
   <% ['Oz.', 'L', 'mL', 'tbsp', 'tsp', 'Cup'].each do |unit| %> 
-    <%# ensures unit displays correctly in edit page %>
+    <%# ensures correct unit displays in edit page %>
     <% if portion.unit == unit %>
       <option selected="selected"><%= unit %></option>
     <% else %>

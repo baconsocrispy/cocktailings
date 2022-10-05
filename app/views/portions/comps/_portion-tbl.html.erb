@@ -1,6 +1,4 @@
-
-
-<div name="portion-tbl" data-controller="portions">
+<div data-controller="portions">
   <table class="table">
     <thead >
       <tr>
@@ -14,9 +12,11 @@
         <%# concatenates name attribute for parameter nesting %>
         <% name = 'portions[ingredient-' + portion.ingredient_id.to_s + ']' %>
 
+        <%# displays all portions already associated with recipe %>
         <tr id="portion-<%= portion.ingredient_id %>">
             <td>
-              <input type="hidden" name='<%= name %>[id]' value="<%= portion.ingredient_id %>">
+              <input type="hidden" name=<%= name + '[id]' %> value='<%= portion.id %>'>
+              <input type="hidden" name='<%= name %>[ingredient_id]' value="<%= portion.ingredient_id %>">
               <%= portion.ingredient.display_name %>
             </td>
             <td><input name='<%= name %>[amount]' type="number" value="<%= portion.amount %>"></td>
