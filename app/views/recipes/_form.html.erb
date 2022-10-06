@@ -24,30 +24,7 @@
 
   <%= render partial: 'portions/comps/portion-tbl', locals: {recipe: recipe, f: f} %>
 
-  <%# Nested form for Adding a step %>
-  <%# Turbo-frame reloads content within its tags rather than the whole page %>
-  <div>
-    <h2>Add Steps</h2>
-  </div>
-  <turbo-frame id='<%= f.field_id(:steps) %>' class='contents'>
-    <%= f.fields_for :steps do |ff| %>
-      <div>
-        <div> 
-          <%= ff.object.id  %>
-        </div>
-        <%= ff.number_field :number, placeholder: 'Step No.' %>
-        <%= ff.text_field :name, placeholder: 'Step Title'%>
-        <%= ff.text_field :description, placeholder: 'Description' %>
-      </div>
-    <% end %>
-  </turbo-frame>
-
- 
-  <%# turbo-frame data attribute must match turbo-frame id from above %>
-  <%= f.submit 'Add Step', 
-                data: { turbo_frame: f.field_id(:steps) },
-                name: :add_step 
-  %>
+  <%= render partial: 'steps/comps/steps-tbl', locals: {recipe: recipe, f: f } %>
 
   <%# image attachment %>
   <%= f.file_field :image %>

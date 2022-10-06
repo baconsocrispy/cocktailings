@@ -32,7 +32,7 @@ class RecipesController < ApplicationController
         @recipe.steps.build
         format.html { render :new, status: :unprocessable_entity}
       else
-        # add_portions method explained in application_controller.rb
+        # process_portions method explained in application_controller.rb
         if @recipe.save && process_portions(@recipe, params)
           format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
           format.json { render :show, status: :created, location: @recipe }
@@ -47,7 +47,7 @@ class RecipesController < ApplicationController
   # PATCH/PUT /recipes/1 or /recipes/1.json
   def update
     respond_to do |format|
-      # add_portions method explained in application_controller.rb
+      # process_portions method explained in application_controller.rb
       if @recipe.update(recipe_params) && process_portions(@recipe, params)
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully updated." }
         format.json { render :show, status: :ok, location: @recipe }
