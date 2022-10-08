@@ -46,10 +46,6 @@ export default class extends Controller {
       }
     });
   }
-
-  validatePortion(e) {
-    $()
-  }
 }
 
 // HELPER FUNCTIONS

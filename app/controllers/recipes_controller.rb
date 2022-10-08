@@ -28,18 +28,14 @@ class RecipesController < ApplicationController
     respond_to do |format|
       # Need to add this to prevent form from submitting
       # when adding a step.
-      if params[:add_step]
-        @recipe.steps.build
-        format.html { render :new, status: :unprocessable_entity}
+      
+      # process_portions method explained in application_controller.rb
+      if @recipe.save && process_portions(@recipe, params) && process_steps(@recipe, params)
+        format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
+        format.json { render :show, status: :created, location: @recipe }
       else
-        # process_portions method explained in application_controller.rb
-        if @recipe.save && process_portions(@recipe, params)
-          format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
-          format.json { render :show, status: :created, location: @recipe }
-        else
-          format.html { render :new, status: :unprocessable_entity }
-          format.json { render json: @recipe.errors, status: :unprocessable_entity }
-        end
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -48,7 +44,7 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       # process_portions method explained in application_controller.rb
-      if @recipe.update(recipe_params) && process_portions(@recipe, params)
+      if @recipe.update(recipe_params) && process_portions(@recipe, params) && process_steps(@recipe, params)
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully updated." }
         format.json { render :show, status: :ok, location: @recipe }
       else

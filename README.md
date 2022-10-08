@@ -111,4 +111,8 @@ Got this error running bundle install: An error occurred while installing pg (1.
 
 Solved it with this: gem install pg -- --with-pg-config=/Applications/Postgres.app/Contents/Versions/latest/bin/pg_config
 
+VIEWS
+To have requests not return the whole layout, you must add 'layout false' to the 
+top of the model controller. Needed this so that when adding a portion or step
+only the html from the requested view showed up and not the whole page layout.
 

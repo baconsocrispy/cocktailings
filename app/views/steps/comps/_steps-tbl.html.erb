@@ -1,23 +1,17 @@
-<%# Nested form for Adding a step %>
-<%# Turbo-frame reloads content within its tags rather than the whole page %>
-<div>
-  <h2>Add Steps</h2>
-</div>
-<turbo-frame id='<%= f.field_id(:steps) %>' class='contents'>
-  <%= f.fields_for :steps do |ff| %>
-    <div>
-      <div> 
-        <%= ff.object.id  %>
-      </div>
-      <%= ff.number_field :number, placeholder: 'Step No.' %>
-      <%= ff.text_field :name, placeholder: 'Step Title'%>
-      <%= ff.text_field :description, placeholder: 'Description' %>
-    </div>
-  <% end %>
-</turbo-frame>
+<div data-controller="steps">
+  <h2>Recipe Steps</h2>
 
-  <%# turbo-frame data attribute must match turbo-frame id from above %>
-<%= f.submit 'Add Step', 
-              data: { turbo_frame: f.field_id(:steps) },
-              name: :add_step 
-%>
+  <ol id="steps-list">
+    <% recipe.steps.each do |step |%>
+      <% next if !step.id%>
+      <li>
+        <input type='hidden' name='steps[steps-<%= step.id %>][id]' value='<%= step.id %>'>
+        <input name='steps[steps-<%= step.id %>][title]' value='<%= step.name %>'>
+        <input name='steps[steps-<%= step.id %>][description]' value='<%= step.description %>'>
+        <button data-action="steps#deleteStepObject" data-url='/steps/<%= step.id %>'>Delete</button>
+      </li>
+    <% end %>
+  </ol>
+
+  <button data-action="steps#addStep" data-url='<%= new_step_path %>'>Add Step</button>
+</div>

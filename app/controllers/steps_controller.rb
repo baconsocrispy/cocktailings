@@ -1,5 +1,6 @@
 class StepsController < ApplicationController
   before_action :set_step, only: %i[ show edit update destroy ]
+  layout false
 
   # GET /steps or /steps.json
   def index
@@ -52,7 +53,7 @@ class StepsController < ApplicationController
     @step.destroy
 
     respond_to do |format|
-      format.html { redirect_to steps_url, notice: "Step was successfully destroyed." }
+      # format.html { redirect_to steps_url, notice: "Step was successfully destroyed." }
       format.json { head :no_content }
     end
   end

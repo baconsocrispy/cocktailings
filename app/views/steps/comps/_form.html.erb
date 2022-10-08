@@ -1,0 +1,11 @@
+<% require "securerandom" %>
+
+<% id = SecureRandom.random_number %>
+
+<div data-controller="steps">
+  <li>
+    <input name='steps[steps-<%= id %>][title]'>
+    <input name='steps[steps-<%= id %>][description]'>
+    <button data-action="steps#deleteStep">Delete</button>
+  </li>
+</div>

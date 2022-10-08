@@ -2,15 +2,6 @@ class PortionsController < ApplicationController
   before_action :set_portion, only: %i[ show edit update destroy ]
   layout false
 
-  # GET /portions or /portions.json
-  def index
-    @portions = Portion.all
-  end
-
-  # GET /portions/1 or /portions/1.json
-  def show
-  end
-
   # GET /portions/new
   def new
     if params[:portion][:ingredientIds]

@@ -30,3 +30,24 @@
 #                          { display_name: "Marschino Cherry", sub_type: "Marschino Cherry"},
 #                          { display_name: "Olive", sub_type: "Olive"}])
 
+# mixers = Mixer.create([{ display_name: "Sweet Vermouth", sub_type: "Sweet Vermouth" }, 
+#                          { display_name: "Dry Vermouth", sub_type: "Dry Vermouth"},
+#                          { display_name: "Compari", sub_type: "Compari"},
+#                          { display_name: "Aperol", sub_type: "Aperol"}])
+
+# spirits = Spirit.create([{ display_name: "Bourbon", sub_type: "Bourbon" }, 
+#                          { display_name: "Scotch", sub_type: "Scotch"},
+#                          { display_name: "Rye", sub_type: "Rye"},
+#                          ])
+
+# mixers = Mixer.create([{ display_name: "Simple Syrup", sub_type: "Simple Syrup" }]) 
+#                          
+
+# garnishes = Garnish.create([{ display_name: "Mint Leaf", sub_type: "Mint Leaf" }])
+
+Mint Spring
+Lemon Wedge
+Lemon Peel
+Lime Wedge
+Lime Peel
+Rosemary Sprig 
