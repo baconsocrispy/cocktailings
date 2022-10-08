@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_06_171322) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_08_181737) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -58,8 +58,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_171322) do
   end
 
   create_table "ingredients", force: :cascade do |t|
-    t.string "display_name"
-    t.string "sub_type"
+    t.string "display_name", null: false
+    t.string "sub_type", null: false
     t.string "brand"
     t.string "product"
     t.decimal "abv"
@@ -95,9 +95,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_171322) do
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "portionable_type"
-    t.bigint "portionable_id"
-    t.bigint "ingredient_id"
+    t.string "portionable_type", null: false
+    t.bigint "portionable_id", null: false
+    t.bigint "ingredient_id", null: false
     t.index ["ingredient_id"], name: "index_portions_on_ingredient_id"
     t.index ["portionable_type", "portionable_id"], name: "index_portions_on_portionable"
     t.check_constraint "amount > 0::numeric", name: "amount_check"
@@ -108,6 +108,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_171322) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name", null: false
+    t.index ["name"], name: "index_recipes_on_name", unique: true
   end
 
   create_table "recipes_users", force: :cascade do |t|
@@ -120,9 +121,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_06_171322) do
   end
 
   create_table "steps", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "description"
-    t.bigint "recipe_id"
+    t.bigint "recipe_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["recipe_id"], name: "index_steps_on_recipe_id"
