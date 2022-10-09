@@ -23,17 +23,15 @@ class RecipesController < ApplicationController
   # POST /recipes or /recipes.json
   def create
     # need to except ingredients or there will be an error
-    @recipe = Recipe.new(recipe_params.except(:portions))
+    @recipe = Recipe.new(recipe_params)
 
     respond_to do |format|
-      # Need to add this to prevent form from submitting
-      # when adding a step.
-      
-      # process_portions method explained in application_controller.rb
-      if @recipe.save && process_portions(@recipe, params) && process_steps(@recipe, params)
+      begin 
+        @recipe.save && process_portions(@recipe, params) && process_steps(@recipe, params)
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
-      else
+      rescue ActiveRecord::RecordNotUnique => e
+        flash[:error] = "Recipe name already in use"
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
@@ -76,12 +74,6 @@ class RecipesController < ApplicationController
       params.require(:recipe).permit(:name, 
                                      :description, 
                                      :image, 
-                                     steps_attributes: [
-                                      :id, 
-                                      :number, 
-                                      :name, 
-                                      :description, 
-                                      :_destroy]
                                     )
     end
 end

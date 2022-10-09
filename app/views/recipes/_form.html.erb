@@ -1,4 +1,4 @@
-<%= form_with(model: recipe) do |f| %>
+<%= form_with(model: recipe, local: true) do |f| %>
   <% if recipe.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
@@ -11,6 +11,7 @@
     </div>
   <% end %>
   
+  <div style="{color: red;}"><%= flash[:error] %></div>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name, required: true %>
