@@ -11,7 +11,7 @@
     </div>
   <% end %>
   
-  <div style="{color: red;}"><%= flash[:error] %></div>
+  <div class="text-danger"><%= flash[:error] %></div>
   <div>
     <%= f.label :name %>
     <%= f.text_field :name, required: true %>

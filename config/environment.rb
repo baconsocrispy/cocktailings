@@ -3,3 +3,6 @@ require_relative "application"
 
 # Initialize the Rails application.
 Rails.application.initialize!
+
+
+config.eager_load_paths += %W(#{config.root}/lib)

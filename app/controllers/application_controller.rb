@@ -4,9 +4,11 @@
 # a drain on resources since there will never be a large
 # number of portions
 
-# NEED TO RAISE/HANDLE AN ERROR WHEN AMOUNT == 0
+require 'errors.rb'
+
 class ApplicationController < ActionController::Base
   def process_portions(model, params)
+    raise PortionMissingError, 'You must add at least one ingredient' if !params[:portions]
     portion_hashes = params[:portions]
     portion_hashes.each do |portions|
       portions.each do |portion|
@@ -30,6 +32,7 @@ class ApplicationController < ActionController::Base
   end
 
   def process_steps(recipe, params)
+    raise StepMissingError, 'You must add at least one step' if !params[:steps]
     step_hashes = params[:steps]
     step_hashes.each do |steps|
       steps.each do |step|

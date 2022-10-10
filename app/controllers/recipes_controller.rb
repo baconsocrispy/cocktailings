@@ -27,11 +27,17 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       begin 
-        @recipe.save && process_portions(@recipe, params) && process_steps(@recipe, params)
+        ActiveRecord::Base.transaction do
+          @recipe.save! && process_portions(@recipe, params) && process_steps(@recipe, params)
+        end
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       rescue ActiveRecord::RecordNotUnique => e
         flash[:error] = "Recipe name already in use"
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @recipe.errors, status: :unprocessable_entity }
+      rescue => e
+        flash[:error] = e.message
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @recipe.errors, status: :unprocessable_entity }
       end
