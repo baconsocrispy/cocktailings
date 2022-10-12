@@ -3,7 +3,7 @@
 </div>
 
 <%= simple_form_for @recipe do |f| %>
-  <%= f.error_notification %>
+  <%= f.error_notification message: 'something went wrong' %>
 
   <%# recipe inputs %>
   <div class='form-inputs'>

@@ -9,7 +9,7 @@
   <% end %>
 
   <%# concatenates name attribute to nest params properly %>
-  <% name = 'portions[ingredient-' + portion.ingredient_id.to_s + ']' %>
+  <% name = 'portions[ingredient-' + portion.ingredient_id.to_s + ']'%>
 
   <%# appends a new portion row to the portions table for each selected ingredient %>
     <tr id="portion-<%= portion.ingredient_id %>" name="portion-id" value="<%= portion.ingredient_id %>" data-controller="portions">
