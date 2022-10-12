@@ -116,3 +116,8 @@ To have requests not return the whole layout, you must add 'layout false' to the
 top of the model controller. Needed this so that when adding a portion or step
 only the html from the requested view showed up and not the whole page layout.
 
+CACHING
+Caching enabled using rails dev:cache using :memory_store
+This enables the recipe page elements to maintain their state if there is an error
+Would need to look into a 3rd party caching solution if in production: Redis/Memcached recommended
+https://www.honeybadger.io/blog/ruby-rails-view-caching/

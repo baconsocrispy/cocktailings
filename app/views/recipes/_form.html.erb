@@ -21,11 +21,11 @@
     <%= f.text_field :description %>
   </div>
 
-  <%= render partial: "ingredients/comps/select-widget", locals: {recipe: recipe, f: f} %>
+  <%= render partial: "portions/comps/portion-select", locals: {recipe: recipe, f: f} %>
 
   <%= render partial: 'portions/comps/portion-tbl', locals: {recipe: recipe, f: f} %>
 
-  <%= render partial: 'steps/comps/steps-tbl', locals: {recipe: recipe, f: f } %>
+  <%= render partial: 'steps/comps/steps-tbl', locals: {recipe: recipe, f: f }, cached: true %>
 
   <%# image attachment %>
   <%= f.file_field :image %>

@@ -17,6 +17,13 @@ class ApplicationController < ActionController::Base
         if portion['id']
           Portion.find(portion['id']).update!(amount: portion['amount'],
                                               unit: portion['unit'])
+        
+        elsif !model.id                 
+          model.portions << Portion.new(ingredient_id: portion['ingredient_id'],
+                                        amount: portion['amount'],
+                                        unit: portion['unit'],
+                                        portionable_type: model.class
+                                      )
 
         # create new portion if one does not exist
         else

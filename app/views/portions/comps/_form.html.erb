@@ -1,5 +1,4 @@
 <%# SHOULD/CAN FILTERING HAPPEN IN CONTROLLER? %>
-
 <% @portions.each do |portion|%>
   <%# filters out empty portions %>
   <% next if !portion.ingredient %>
@@ -10,16 +9,18 @@
   <% end %>
 
   <%# concatenates name attribute to nest params properly %>
-  <% name = 'portions[ingredient-' + portion.ingredient_id.to_s + ']'%>
+  <% name = 'portions[ingredient-' + portion.ingredient_id.to_s + ']' %>
 
   <%# appends a new portion row to the portions table for each selected ingredient %>
-  <tr id="portion-<%= portion.ingredient_id %>" name="portion-id" value="<%= portion.ingredient_id %>" data-controller="portions">
-    <td>
-      <input type="hidden" name=<%= name + '[ingredient_id]'%> value="<%= portion.ingredient_id %>">
-      <%= portion.ingredient.display_name %>
-    </td>
-    <td><input name=<%= name + '[amount]' %> type="number" min="0.1" step="0.1" required></td>
-    <td><%= render partial: 'portions/comps/units-select', locals: { portion: portion, name: name } %></td>
-    <td><button data-action="portions#deletePortion">Delete</button></td>
-  </tr>
+    <tr id="portion-<%= portion.ingredient_id %>" name="portion-id" value="<%= portion.ingredient_id %>" data-controller="portions">
+      <td>
+        <input type="hidden" name=<%= name + '[ingredient_id]'%> value="<%= portion.ingredient_id %>">
+        <%= portion.ingredient.display_name %>
+      </td>
+      <td><input name=<%= name + '[amount]' %> type="number" min="0.1" step="0.1" required></td>
+      <td><%= render partial: 'portions/comps/units-select', locals: { portion: portion, name: name } %></td>
+      <td><button data-action="portions#deletePortion">Delete</button></td>
+    </tr>
+
 <% end %>
+

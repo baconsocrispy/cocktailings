@@ -22,14 +22,13 @@ class RecipesController < ApplicationController
 
   # POST /recipes or /recipes.json
   def create
-    # need to except ingredients or there will be an error
     @recipe = Recipe.new(recipe_params)
 
     respond_to do |format|
       begin 
         ActiveRecord::Base.transaction do
           @recipe.save! && process_portions(@recipe, params) && process_steps(@recipe, params)
-        end
+        end 
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       rescue ActiveRecord::RecordNotUnique => e
@@ -77,9 +76,6 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      params.require(:recipe).permit(:name, 
-                                     :description, 
-                                     :image, 
-                                    )
+      params.require(:recipe).permit(:name, :description, :image)                      
     end
 end
