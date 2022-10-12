@@ -79,3 +79,5 @@ group :test do
 end
 
 gem 'bootstrap'
+gem 'simple_form'
+gem 'cocoon'

@@ -37,25 +37,5 @@ class ApplicationController < ActionController::Base
       end
     end
   end
-
-  def process_steps(recipe, params)
-    raise StepMissingError, 'You must add at least one step' if !params[:steps]
-    step_hashes = params[:steps]
-    step_hashes.each do |steps|
-      steps.each do |step|
-        if step['id']
-          Step.find(step['id']).update!(name: step['title'],
-                                        description: step['description'])
-        else
-          if step['title'] || step['description']
-            Step.create(name: step['title'],
-                        description: step['description'],
-                        recipe_id: recipe.id
-            )  
-          end                  
-        end
-      end
-    end
-  end
 end
 

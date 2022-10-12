@@ -1,37 +1,42 @@
-<%= form_with(model: recipe, local: true) do |f| %>
-  <% if recipe.errors.any? %>
-    <div style="color: red">
-      <h2><%= pluralize(recipe.errors.count, "error") %> prohibited this recipe from being saved:</h2>
+ <div class='text-danger'> 
+  <%= flash[:error] %>
+</div>
 
-      <ul>
-        <% recipe.errors.each do |error| %>
-          <li><%= error.full_message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-  
-  <div class="text-danger"><%= flash[:error] %></div>
-  <div>
-    <%= f.label :name %>
-    <%= f.text_field :name, required: true %>
-  </div>
-    <div>
-    <%= f.label :description %>
-    <%= f.text_field :description %>
+<%= simple_form_for @recipe do |f| %>
+  <%= f.error_notification %>
+
+  <%# recipe inputs %>
+  <div class='form-inputs'>
+    <%= f.input :name %>
+    <%= f.input :description %>
+    <%# image attachment %>
+    <%= f.file_field :image %>
   </div>
 
+  <%# ingredient selector %>
   <%= render partial: "portions/comps/portion-select", locals: {recipe: recipe, f: f} %>
 
   <%= render partial: 'portions/comps/portion-tbl', locals: {recipe: recipe, f: f} %>
 
-  <%= render partial: 'steps/comps/steps-tbl', locals: {recipe: recipe, f: f }, cached: true %>
-
-  <%# image attachment %>
-  <%= f.file_field :image %>
-
-  <div>
-    <%= f.submit %>
+  <table class='table-sm'>
+    <thead>
+    <tr>
+      <th></th>
+      <th>Step Name</th>
+      <th>Description</th>
+    </tr>
+    </thead>
+    <tbody class='steps'>
+      <%= f.simple_fields_for :steps do |step_form| %>
+        <%= render 'step_fields', f: step_form %>
+      <% end %>
+    </tbody>
+  </table>
+  
+  <div class='form-actions'>
+    <%= link_to_add_association 'Add Step', f, :steps, class: 'btn', data: {
+          association_insertion_node: '.steps', association_insertion_method: :append } %>
+    <%= f.button :submit %>
   </div>
   
 <% end %>
