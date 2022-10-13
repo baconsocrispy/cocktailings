@@ -78,6 +78,7 @@ group :test do
   gem "webdrivers"
 end
 
+# additional gems
 gem 'bootstrap'
 gem 'simple_form'
 gem 'cocoon'

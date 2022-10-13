@@ -4,12 +4,6 @@ class IngredientsController < ApplicationController
   # GET /ingredients or /ingredients.json
   def index
     @ingredients = Ingredient.all
-
-    autocomplete_array = []
-    @ingredients.each { |i| autocomplete_array << { label: i.display_name, value: i.id }}
-    respond_to do |format|
-      format.json { render json: autocomplete_array }
-    end
   end
 
   # GET /ingredients/1 or /ingredients/1.json
