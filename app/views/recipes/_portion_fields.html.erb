@@ -1,0 +1,13 @@
+<tr class='nested-fields' data-controller='ingredients'>
+  <td>
+    <%= f.input :ingredient_id, as: :hidden, input_html: {class: 'ingredient-id', data: {action: 'ingredients#updateIngredientId'}} %>
+    <%= f.input :ingredient_id, label: false, as: :search, input_html: {class: 'ui-autocomplete-input', 
+                                                          data: { autocomplete_source: ingredients_url(:format => :json), 
+                                                                  action: 'ingredients#searchIngredients' }
+                                                          } %>
+    <input class="ui-autocomplete-input" data-autocomplete-source="<%= ingredients_url(:format => :json) %>" data-action="ingredients#searchIngredients">
+  </td>
+  <td><%= f.input :amount, label: false, input_html: {min: '0.1', step: '0.1'} %></td>
+  <td><%= f.input :unit, label: false, collection: ['', 'Oz.', 'L', 'mL', 'tbsp', 'tsp'] %></td>
+  <td><%= link_to_remove_association 'Delete', f, class: 'btn btn-xs' %></td>
+</tr>

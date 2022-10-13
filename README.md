@@ -121,3 +121,18 @@ Caching enabled using rails dev:cache using :memory_store
 This enables the recipe page elements to maintain their state if there is an error
 Would need to look into a 3rd party caching solution if in production: Redis/Memcached recommended
 https://www.honeybadger.io/blog/ruby-rails-view-caching/
+
+AUTOCOMPLETE USING SIMPLE_FORM_FOR
+Need to have jqueryui pinned to importmap and imported in application.js
+
+Troubleshooting: syntax in f.input has you provide the data source as data: {autocomplete_source: data}
+but in the js controller it needs to be referenced as autocomplete-controller. Simple Form 
+automatically changes _ to - so the attribute needs to be referred to differently in each file. 
+https://resultfor.dev/337948-ruby-on-rails-simple-form-autocomplete-association-search
+
+*Unable to get autocomplete_source: to process a url and return a json / resolved by 
+doing an ajax get call using the source url and returning a json from controller
+
+This SO was useful for getting name/id pairs for autocomplete
+https://stackoverflow.com/questions/11435433/jquery-ui-autocomplete-with-json
+https://www.mcbsys.com/blog/2012/10/convert-a-select-drop-down-box-to-an-autocomplete-in-rails/

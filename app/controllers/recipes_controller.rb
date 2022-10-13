@@ -14,6 +14,7 @@ class RecipesController < ApplicationController
   def new
     @recipe = Recipe.new
     @recipe.steps.build
+    @recipe.portions.build
   end
 
   # GET /recipes/1/edit
@@ -26,9 +27,7 @@ class RecipesController < ApplicationController
 
     respond_to do |format|
       begin 
-        ActiveRecord::Base.transaction do
-          @recipe.save! && process_portions(@recipe, params)
-        end 
+        @recipe.save!
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       rescue ActiveRecord::RecordNotUnique => e
@@ -47,7 +46,7 @@ class RecipesController < ApplicationController
   def update
     respond_to do |format|
       # process_portions method explained in application_controller.rb
-      if @recipe.update(recipe_params) && process_portions(@recipe, params)
+      if @recipe.update(recipe_params)
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully updated." }
         format.json { render :show, status: :ok, location: @recipe }
       else
@@ -76,13 +75,20 @@ class RecipesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def recipe_params
-      # need to explicitly include :id for :steps for :_destroy to work
+      # need to explicitly include :id for :steps/:portions for :_destroy to work
       params.require(:recipe).permit(:name, :description, :image, 
                                      steps_attributes: [:id,
                                                         :ingredient_id,
                                                         :name,
                                                         :description,
                                                         :_destroy
-                                    ])                      
+                                                        ],
+                                     portions_attributes: [:id,
+                                                           :ingredient_id,
+                                                           :amount,
+                                                           :unit,
+                                                           :portionable_type,
+                                                           :portionable_id,
+                                                           :_destroy])                      
     end
 end

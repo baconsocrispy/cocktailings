@@ -14,16 +14,36 @@
   </div>
 
   <%# ingredient selector %>
-  <%= render partial: "portions/comps/portion-select", locals: {recipe: recipe, f: f} %>
-
-  <%= render partial: 'portions/comps/portion-tbl', locals: {recipe: recipe, f: f} %>
+  <%# <%= render partial: "portions/comps/portion-select", locals: {recipe: recipe, f: f} %> 
+<%# 
+  <%= render partial: 'portions/comps/portion-tbl', locals: {recipe: recipe, f: f} %> 
 
   <table class='table-sm'>
     <thead>
     <tr>
-      <th></th>
+      <th>Ingredients</th>
+      <th>Amount</th>
+      <th>Units</th>
+    </tr>
+    </thead>
+    <tbody class='portions'>
+      <%= f.simple_fields_for :portions do |portion_form| %>
+        <%= render 'portion_fields', f: portion_form %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class='form-actions'>
+    <%= link_to_add_association 'Add Ingredient', f, :portions, class: 'btn btn-secondary', data: {
+          association_insertion_node: '.portions', association_insertion_method: :append } %>
+  </div>
+
+  <table class='table-sm'>
+    <thead>
+    <tr>
       <th>Step Name</th>
       <th>Description</th>
+      <th></th>
     </tr>
     </thead>
     <tbody class='steps'>
@@ -34,9 +54,9 @@
   </table>
   
   <div class='form-actions'>
-    <%= link_to_add_association 'Add Step', f, :steps, class: 'btn', data: {
+    <%= link_to_add_association 'Add Step', f, :steps, class: 'btn btn-secondary', data: {
           association_insertion_node: '.steps', association_insertion_method: :append } %>
-    <%= f.button :submit %>
+    <%= f.button :submit, class: 'btn btn-success' %>
   </div>
   
 <% end %>
