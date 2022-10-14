@@ -32,14 +32,14 @@ than rbenv and other package managers.
 
 * Install from terminal: `asdf install ruby latest`
 * If necessary, uninstall rbenv: `brew remove rbenv`
-* Will need to remove the .rbenv directory: `r`````m -rf ~/.rbenv\`
+* Will need to remove the .rbenv directory: `r```m -rf ~/.rbenv\`
 * Delete references to rbenv from ~/.zshrc
 * Set global ruby version for mac (adds it to ~/.tool-version file): `asdf global ruby 3.1.2`
 
 Resources:
--https://mac.install.guide/ruby/6.html
--https://asdf-vm.com/guide/getting-started.html
--https://stackoverflow.com/questions/31173968/how-do-you-uninstall-rbenv-on-macos
+* https://mac.install.guide/ruby/6.html
+* https://asdf-vm.com/guide/getting-started.html
+* https://stackoverflow.com/questions/31173968/how-do-you-uninstall-rbenv-on-macos
 
 ### Rails / PostgreSQL
 
@@ -74,7 +74,7 @@ pinning cdn paths to the importmap.rb file in the config folder.
 
 * Add this to importmap.rb: `pin "jquery", to: "https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.js"`
 * Add jQuery to top of application.js file: `import 'jquery'`
-* NOTE: jQuery must be imported first or it won't function properly
+* NOTE: jQuery must be imported before other libraries or it won't function properly
 * Rails 7 relies on Stimulus JS controllers. They are saved as follows: /javascript/controllers: controllerName_controller.js
 * Add controller to HTML element attributes: `data-controller='controllerName'`
 * Add controller action: `data-action='controllerName#controllerAction'`
@@ -92,51 +92,19 @@ Help from here: https://blog.eq8.eu/til/how-to-use-bootstrap-5-in-rails-7.html
 
 ## NESTED FORMS
 The cocktail recipe requires multiple nested forms inside the recipe form to generate
-associated recipe steps and ingredients (portions in this app). I used simple_form and
+associated recipe steps, tools, and ingredients (portions in this app). I used simple_form and
 the cocoon app to streamline this process
 
 * Add the cocoon gem to the gemfile: `gem cocoon`
 * Add the simple_form gem to gemfile: `gem simple_form`
 * bundle install: `bundle install`
 
-
-
 ## ACTIVE STORAGE
 To store images you need to install rails active storage:
-To install: rails active_storage:install
-Migrate DB: rails db:migrate
-Declare storage services in config/storage.yml
-Tell Active Storage which service to use in config/environments, add this line to relevant environment.rb: config.active_storage.service = :local (but specify other service if not local)
-Troubleshooting: 
-Was getting this error from vie when a record did not have an image attachment: Can't resolve image into URL: undefined method `persisted?' for nil:NilClass
-Resolved by checking for image presence:
-    <% if recipe.image.present? %>
-      <%= image_tag recipe.image %>
-    <% end %>
 
-
-## STIMULUS
-Troubleshooting: Struggled half a day to get Stimulus Controllers to respond
-Not sure what prompted it to start working, but created a new controller using:
-rails g stimulus controllerName
-and moved the jquery import statement to the top of the application.js import list
-
-## SINGLE TABLE INHERITANCE vs. POLYMORPHIC
-Started with polymorphic relationship between ingredient types, but refactored
-for STI. Code felt cleaner and that way all ingredients have a unique id. PM might
-have been better if the database of ingredients was expected to be enormous and
-multiple tables might have sped up search, but can't imagine there will be more 
-than a few thousand potential ingredients.
-
-## RAILS AJAX 
-This article was very helpful to understanding the rails ajax methodology, 
-making async calls to controller methods from the view without needing javascript.
-https://medium.com/@codenode/how-to-use-remote-true-to-make-ajax-calls-in-rails-3ecbed40869b
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
+* To install: `rails active_storage:install`
+* Migrate DB: `rails db:migrate`
+* Declare storage services in config/storage.yml
+* Tell Active Storage which service to use in config/environments, add this line 
+to relevant environment.rb: `config.active_storage.service = :local` (but specify other service if not local)
 
