@@ -1,5 +1,5 @@
 <div>
-  <table class='table-sm'>
+  <table class='table'>
     <thead>
     <tr>
       <th>Step Name</th>
@@ -15,7 +15,7 @@
   </table>
 
   <div class='form-actions'>
-    <%= link_to_add_association 'Add Step', f, :steps, class: 'btn btn-secondary', data: {
+    <%= link_to_add_association 'Add Step', f, :steps, class: 'btn btn-outline-dark btn-sm', data: {
           association_insertion_node: '.steps', association_insertion_method: :append } %>
   </div>
 </div>

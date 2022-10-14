@@ -4,7 +4,6 @@
     <%= f.association :ingredient, 
                       collection: Ingredient.all.order(:display_name), 
                       label: false,
-                      required: true,
                       label_method: :display_name, 
                       value_method: :id %>
   </td>
@@ -14,5 +13,5 @@
   <td><%= f.input :unit, label: false, collection: ['', 'Oz.', 'L', 'mL', 'tbsp', 'tsp'] %></td>
 
   <%# coccoon gem helper to destroy object %>
-  <td><%= link_to_remove_association 'Delete', f, class: 'btn btn-xs' %></td>
+  <td><%= link_to_remove_association 'Delete', f, class: 'btn btn-dark btn-sm' %></td>
 </tr>

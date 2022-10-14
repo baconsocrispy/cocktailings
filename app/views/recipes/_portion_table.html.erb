@@ -1,10 +1,11 @@
 <div>  
-  <table class='table-sm'>
+  <table class='table'>
     <thead>
     <tr>
       <th>Ingredients</th>
       <th>Amount</th>
       <th>Units</th>
+      <th></th>
     </tr>
     </thead>
     <tbody class='portions'>
@@ -15,7 +16,7 @@
   </table>
 
   <div class='form-actions'>
-    <%= link_to_add_association 'Add Ingredient', f, :portions, class: 'btn btn-secondary', data: {
+    <%= link_to_add_association 'Add Ingredient', f, :portions, class: 'btn btn-outline-dark btn-sm', data: {
           association_insertion_node: '.portions', association_insertion_method: :append } %>
   </div>
 </div>

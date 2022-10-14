@@ -1,5 +1,6 @@
+<%# must include 'nested-fields' class for cocoon remove_association to work %>
 <tr class='nested-fields'>
-  <td><%= f.input :name, label: false %></td>
-  <td><%= f.input :description, label: false %></td>
-  <td> <%= link_to_remove_association 'Delete', f, class: 'btn btn-xs' %></td>
+  <td><%= f.input :name, required: true, label: false %></td>
+  <td><%= f.input :description, required: true,  label: false %></td>
+  <td> <%= link_to_remove_association 'Delete', f, class: 'btn btn-dark btn-sm' %></td>
 </tr>

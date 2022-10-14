@@ -1,25 +1,46 @@
-<div class='text-danger'> 
-  <%= flash[:error] %>
+ <div id='recipe-form' data-controller='recipes' class='w-50 fs-6 fw-bold'> 
+  <%# recipe form using simple_form/cocoon gems %>
+  <%= simple_form_for @recipe do |f| %>
+    <%= f.error_notification %>
+
+    <%# recipe inputs %>
+    <div class='row'>
+      <div class='form-inputs'>
+        <%= f.input :name, required: true, input_html: {class: 'w-50'} %>
+        <%= f.input :description, input_html: {class: 'w-100'} %>
+      </div>
+    </div>
+
+    <%# recipe ingredients %>
+    <div class='row'>
+      <%= render partial: 'portion_table', locals: { f: f } %>
+    </div>
+
+    <%# recipe steps %>
+    <div class='row'>
+      <%= render partial: 'step_table', locals: { f: f } %>
+    </div>
+    
+    <%# add image %>
+    <div class='row my-2'>
+      <div class='text-center'>
+
+        <%# wrapping file_field in a label to style the attach button %>
+        <label class='btn btn-sm btn-outline-dark'>
+          <%= @recipe.id ? 'Edit Image' : 'Add Image' %>
+          <span class='d-none'><%= f.file_field :image, id: 'add-image-btn' %></span>
+        </label>
+
+        <%# image filename inserted via jquery after upload%>
+        <p id='img-file-name' class='fst-italic fw-normal mt-2 text-danger'></p>
+      </div>
+    </div>
+
+    <%# form submit %>
+    <div class='row'>
+      <div class='text-center'>
+        <%= f.button :submit, class: 'btn-sm btn-success' %>
+      </div>
+    </div> 
+  <% end %>
 </div>
-
-<%= simple_form_for @recipe do |f| %>
-  <%= f.error_notification message: 'something went wrong' %>
-
-  <%# recipe inputs %>
-  <div class='form-inputs'>
-     <%# image attachment %>
-    <%= f.file_field :image %>
-    <%= f.input :name %>
-    <%= f.input :description %>
-   
-  </div>
-
-  <%= render partial: 'portion_table', locals: { f: f } %>
-
-  <%= render partial: 'step_table', locals: { f: f } %>
-  
-  <div class='form-actions'>
-    <%= f.button :submit, class: 'btn btn-success' %>
-  </div>
-  
-<% end %>
