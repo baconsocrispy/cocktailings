@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :cabinets
   devise_for :users
   devise_scope :user do 
     #reroutes users to sign-in after sign-out

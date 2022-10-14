@@ -4,38 +4,6 @@
 # a drain on resources since there will never be a large
 # number of portions
 
-require 'errors.rb'
-
 class ApplicationController < ActionController::Base
-  def process_portions(model, params)
-    raise PortionMissingError, 'You must add at least one ingredient' if !params[:portions]
-    portion_hashes = params[:portions]
-    portion_hashes.each do |portions|
-      portions.each do |portion|
-
-        # update if portion already exists
-        if portion['id']
-          Portion.find(portion['id']).update!(amount: portion['amount'],
-                                              unit: portion['unit'])
-        
-        elsif !model.id                 
-          model.portions << Portion.new(ingredient_id: portion['ingredient_id'],
-                                        amount: portion['amount'],
-                                        unit: portion['unit'],
-                                        portionable_type: model.class
-                                      )
-
-        # create new portion if one does not exist
-        else
-          Portion.create(ingredient_id: portion['ingredient_id'], 
-                        amount: portion['amount'], 
-                        unit: portion['unit'],
-                        portionable_id: model.id,
-                        portionable_type: model.class,
-                        )
-        end
-      end
-    end
-  end
 end
 

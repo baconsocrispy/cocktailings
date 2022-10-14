@@ -1,0 +1,20 @@
+<div id="<%= dom_id cabinet %>">
+
+  <div class='container'>
+  
+    <%# cabinet name %>
+    <div class='row text-center'>
+      <h2><%= cabinet.name %></h2>
+    </div>
+
+    <%# cabinet contents %>
+    <div class='row border'>
+      <h3>Contents</h3>
+      <ul class='list-unstyled'>
+        <% cabinet.portions.each do | portion | %>
+          <li><%= portion.ingredient.display_name %> | <%= portion.amount %> <%= portion.unit %> </li>
+        <% end%>
+      </ul>
+    </div>
+  </div>
+</div>

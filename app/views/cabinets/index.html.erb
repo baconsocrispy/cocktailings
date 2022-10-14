@@ -1,0 +1,30 @@
+<p style="color: green"><%= notice %></p>
+
+<%# page title %>
+<div class='row'>
+  <h1 class="text-center">My Liquor Cabinets</h1>
+</div>
+
+<%# divider %>
+<div class="row text-light bg-dark">
+  <div class="d-flex justify-content-center px-3">
+    <span class="text-dark">Cabinets</span>
+  </div>
+</div>
+
+<div class="d-flex flex-row-reverse">
+  <div class='me-2 mt-2'>
+    <a class='text-decoration-none btn btn-sm btn-outline-dark' href='<%= new_cabinet_path %>'>Add Cabinet</a>
+  </div>
+</div>
+
+<div id="cabinets">
+  <% @cabinets.each do |cabinet| %>
+    <%= render cabinet %>
+    <div class='row text-center m-2'>
+      <div>
+        <a class='btn btn-sm btn-outline-dark text-decoration-none' href="<%= cabinet_path(cabinet) %>">Show this Cabinet</a>
+      </div>
+    </div>
+  <% end %>
+</div>

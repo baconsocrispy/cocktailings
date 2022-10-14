@@ -1,0 +1,16 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @cabinet %>
+
+<div class='row'>
+  <div class='d-flex justify-content-center'>
+    <span class='mx-2'><%= link_to "Edit this cabinet", edit_cabinet_path(@cabinet), class: 'btn btn-sm btn-outline-secondary' %></span>
+    <span class='mx-2'><%= link_to "Back to cabinets", cabinets_path, class: 'btn btn-sm btn-outline-secondary' %></span>
+  </div>
+</div>
+
+<div class='row my-2'>
+  <div class='d-flex justify-content-center'>
+    <%= button_to "Destroy this cabinet", @cabinet, method: :delete, class: 'btn btn-sm btn-dark' %>
+  </div>
+</div>
