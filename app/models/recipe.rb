@@ -3,11 +3,10 @@ class Recipe < ApplicationRecord
   include Portionable
   
   has_and_belongs_to_many :users
-  has_and_belongs_to_many :ingredients
+  has_many :ingredients, through: :portions
   has_one_attached :image
-  # reject_if: :all_blank ensures blank steps aren't accidentally saved
   has_many :steps, dependent: :destroy
-  accepts_nested_attributes_for :steps, allow_destroy: true, reject_if: :all_blank
+  accepts_nested_attributes_for :steps, allow_destroy: true
   accepts_nested_attributes_for :portions, allow_destroy: true, reject_if: proc { |att| att['ingredient_id'].blank? }
   validates :name, presence: true
 

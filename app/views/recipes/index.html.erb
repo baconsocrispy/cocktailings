@@ -1,9 +1,11 @@
 <p style="color: green"><%= notice %></p>
 
+<%# page title %>
 <div class='row'>
   <h1 class="text-center">What're we having today?</h1>
 </div>
 
+<%# divider %>
 <div class="row text-light bg-dark">
   <div class="d-flex justify-content-center px-3">
     <span class="px-3">Punches</span>
@@ -13,12 +15,15 @@
     <span class="px-3">Bitters</span>
   </div>
 </div>
+
+<%# new recipe button %>
 <div class="d-flex flex-row-reverse">
   <div class='me-2 mt-2'>
     <a class='text-decoration-none btn btn-sm btn-outline-dark' href='<%= new_recipe_path %>'>New Recipe</a>
   </div>
 </div>
 
+<%# cocktail card container %>
 <div class="container-fluid mx-3 mt-2">
   <div id="recipes" class="row row-cols-1 row-cols-md-5 g-4">
     <% @recipes.each do |recipe| %>

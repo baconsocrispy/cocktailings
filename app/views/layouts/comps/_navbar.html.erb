@@ -13,7 +13,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a class="nav-link" aria-current="page" href="#">Liquor Cabinet</a>
+          <a class="nav-link" aria-current="page" href="<%= cabinets_path %>">Liquor Cabinet</a>
         </li>
         <li class="nav-item">
           <%= link_to "Recipes", recipes_path, class: "nav-link" %>
@@ -25,7 +25,7 @@
           <%= link_to "New Recipe", new_recipe_path, class: "nav-link" %>
         </li>
       </ul>
-      <div>
+      <div class="mx-2">
         <%= button_to('Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-dark') %>
       </div>
       <form class="d-flex" role="search">

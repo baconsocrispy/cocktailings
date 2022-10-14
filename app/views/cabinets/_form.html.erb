@@ -1,0 +1,23 @@
+<div id='cabinet-form' class='w-50 fs-6 fw-bold'>
+  <%= simple_form_for(@cabinet) do |f| %>
+    <%= f.error_notification %>
+    <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
+    
+    <div class='row'>
+      <div class="form-inputs">
+        <%= f.hidden_field :user_id, value: current_user.id  %>
+        <%= f.input :name, label: 'Name Your Liquor Cabinet' %>
+      </div>
+    </div>
+
+    <div class='row'>
+      <%= render partial: 'portion_table', locals: { f: f } %>
+    </div>
+
+    <div class='row'>
+      <div class="form-actions">
+        <%= f.button :submit, class: 'btn-sm btn-success' %>
+      </div>
+    </div>
+  <% end %>
+</div>

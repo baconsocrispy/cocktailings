@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_172509) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_14_213425) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -43,11 +43,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_172509) do
   end
 
   create_table "cabinets", force: :cascade do |t|
-    t.string "name"
-    t.boolean "locked"
+    t.string "name", null: false
+    t.boolean "locked", default: true
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
     t.index ["name"], name: "index_cabinets_on_name"
+    t.index ["user_id"], name: "index_cabinets_on_user_id"
   end
 
   create_table "cabinets_users", id: false, force: :cascade do |t|
@@ -79,15 +81,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_172509) do
     t.datetime "updated_at", null: false
     t.index ["ingredient_id"], name: "index_ingredients_portions_on_ingredient_id"
     t.index ["portion_id"], name: "index_ingredients_portions_on_portion_id"
-  end
-
-  create_table "ingredients_recipes", force: :cascade do |t|
-    t.bigint "ingredient_id"
-    t.bigint "recipe_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["ingredient_id"], name: "index_ingredients_recipes_on_ingredient_id"
-    t.index ["recipe_id"], name: "index_ingredients_recipes_on_recipe_id"
   end
 
   create_table "portions", force: :cascade do |t|

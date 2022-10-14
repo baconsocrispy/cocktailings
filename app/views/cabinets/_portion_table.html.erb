@@ -10,7 +10,7 @@
     </thead>
     <tbody class='portions'>
       <%= f.simple_fields_for :portions do |portion_form| %>
-        <%= render 'recipes/portion_fields', f: portion_form %>
+        <%= render 'portion_fields', f: portion_form %>
       <% end %>
     </tbody>
   </table>
