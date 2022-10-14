@@ -1,5 +1,6 @@
 class StepsController < ApplicationController
   before_action :set_step, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
   layout false
 
   # GET /steps or /steps.json

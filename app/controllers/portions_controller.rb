@@ -1,5 +1,6 @@
 class PortionsController < ApplicationController
   before_action :set_portion, only: %i[ show edit update destroy ]
+  before_action :authenticate_user!
   layout false
 
   # GET /portions/new

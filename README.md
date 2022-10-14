@@ -16,6 +16,7 @@ cocktail recipes that they can make from that collection.
 * jQuery 3.6.0
 * cocoon 1.2.15
 * simple_form 5.1.0
+* devise 3.8.1
 
 ### Ruby
 
@@ -107,4 +108,19 @@ To store images you need to install rails active storage:
 * Declare storage services in config/storage.yml
 * Tell Active Storage which service to use in config/environments, add this line 
 to relevant environment.rb: `config.active_storage.service = :local` (but specify other service if not local)
+
+## USER AUTHENTICATION / AUTHORIZATION
+I'm using the devise gem to handle user authentication in the app. There are 
+complications with Turbo in Rails 7 that prevent flash messages from displaying 
+properly. I found excellent help from the article by Nick Francisci below. 
+
+INSTALL /CONFIGURE LATEST DEVISE GEM
+
+`bundle add devise`
+
+Don't forget to add `before_action :authenticate_user!` to relevant controllers
+
+Help from: 
+* https://betterprogramming.pub/devise-auth-setup-in-rails-7-44240aaed4be
+* Devise Docs: https://github.com/heartcombo/devise
 
