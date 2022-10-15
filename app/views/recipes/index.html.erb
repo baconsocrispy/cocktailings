@@ -22,8 +22,8 @@
 </div>
 
 <%# cocktail card container %>
-<div class="container-fluid mx-3 mt-2">
-  <div id="recipes" class="row row-cols-1 row-cols-md-5 g-4">
+<div class="container-fluid mt-2 mx-3">
+  <div id="recipes" class="row row-cols-1 row-cols-md-5 g-4" data-controller='recipes'>
     <% @recipes.each do |recipe| %>
       <%= render partial: "recipes/comps/recipe-card", locals: {recipe: recipe} %>
     <% end %>

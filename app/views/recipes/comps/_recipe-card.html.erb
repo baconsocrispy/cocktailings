@@ -1,6 +1,23 @@
 
 <div class="col">
   <div class="card" style="width: 15rem;">
+
+    <%# favoriting icon %>
+    <div class="position-absolute">
+      <i role='button' 
+         value='<%= recipe.id %>'
+
+          <% if current_user.favorites.include?(recipe) %>
+            class="fa-solid fa-heart text-danger"
+          <% else %>
+            class="fa-regular fa-heart text-danger" 
+          <% end %>
+          
+         data-action='click->recipes#favorite' 
+         data-url='<%= favorite_recipe_url(recipe) %>'>
+      </i>
+    </div>
+
     <% if recipe.image.present? %>
       <%= image_tag recipe.image, class: ""  %>
     <% else %>

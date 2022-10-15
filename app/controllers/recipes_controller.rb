@@ -2,6 +2,15 @@ class RecipesController < ApplicationController
   before_action :set_recipe, only: %i[ show edit update destroy ]
   before_action :authenticate_user!
 
+  # handles favoriting/unfavoriting
+  def favorite
+    set_recipe
+    current_user.favorites.include?(@recipe) ?
+      current_user.favorites.delete(@recipe) :
+      current_user.favorites << @recipe
+    render json: { favorite: current_user.favorites.include?(@recipe) }
+  end
+
   # GET /recipes or /recipes.json
   def index
     @recipes = Recipe.all
