@@ -13,17 +13,18 @@ export default class extends Controller {
   }
 
   favorite(e) {
-    console.log('working');
     $.ajax({
       beforeSend: function (xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')); },
       type: 'PUT',
       dataType: 'json',
-      url: $(e.target).data('url'),
+      url:  $(e.target).data('url'),
       data: {id: $(e.target).val()},
       success: function(response) {
-        response['favorite'] ? 
-          $(e.target).removeClass('fa-regular').addClass('fa-solid') :
+        if (response['favorite']) {
+          $(e.target).removeClass('fa-regular').addClass('fa-solid');
+        } else {
           $(e.target).removeClass('fa-solid').addClass('fa-regular');
+        }
       }
     }); 
   }
