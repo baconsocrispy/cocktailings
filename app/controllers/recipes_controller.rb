@@ -11,6 +11,13 @@ class RecipesController < ApplicationController
     render json: { favorite: current_user.favorites.include?(@recipe) }
   end
 
+  def favorites
+    @favorites = current_user.favorites
+    respond_to do |format|
+      format.html { render :favorites_index }
+    end
+  end
+
   # GET /recipes or /recipes.json
   def index
     @recipes = Recipe.all

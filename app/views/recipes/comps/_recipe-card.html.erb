@@ -3,18 +3,17 @@
   <div class="card" style="width: 15rem;">
 
     <%# favoriting icon %>
-    <div class="position-absolute">
+    <div class="position-absolute favorite-icon m-2" data-action='click->recipes#favorite' value='<%= recipe.id %>'>
       <i
-         value='<%= recipe.id %>'
-
+         
           <% if current_user.favorites.include?(recipe) %>
             class="fa-solid fa-heart text-danger"
           <% else %>
             class="fa-regular fa-heart text-danger" 
           <% end %>
           
-         data-action='click->recipes#favorite' 
-         data-url='<%= favorite_recipe_url(recipe) %>'>
+         <%# data-action='click->recipes#favorite'  %>
+         data-url='<%= favorite_recipe_path(recipe) %>'>
       </i>
     </div>
 

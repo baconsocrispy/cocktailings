@@ -1,0 +1,24 @@
+<%# page title %>
+<div class='row'>
+  <h1 class="text-center">What're we having today?</h1>
+</div>
+
+<%# divider %>
+<div class="row text-light bg-dark">
+  <div class="d-flex justify-content-center px-3">
+    <span class="px-3">Punches</span>
+    <span class="px-3">Ancestrals</span>
+    <span class="px-3">Juleps</span>
+    <span class="px-3">Daiqueries</span>
+    <span class="px-3">Bitters</span>
+  </div>
+</div>
+
+<%# cocktail card container %>
+<div class="container-fluid mt-2 mx-3">
+  <div id="recipes" class="row row-cols-1 row-cols-md-5 g-4" data-controller='recipes'>
+    <% current_user.favorites.each do |recipe| %>
+      <%= render partial: "recipes/comps/recipe-card", locals: {recipe: recipe} %>
+    <% end %>
+  </div>
+</div>

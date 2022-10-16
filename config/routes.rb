@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   resources :ingredients
 
   resources :recipes do
-    put :favorite, on: :member
+    post :favorite, on: :member
+    get :favorites, on: :collection
   end
 
   # authentication routes
