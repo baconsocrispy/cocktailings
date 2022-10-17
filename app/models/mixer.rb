@@ -1,2 +1,0 @@
-class Mixer < Ingredient
-end

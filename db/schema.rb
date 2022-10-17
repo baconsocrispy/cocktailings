@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_14_222234) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_17_190114) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,8 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_222234) do
     t.string "product"
     t.decimal "abv"
     t.integer "age"
-    t.integer "size"
-    t.decimal "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "type"
@@ -98,6 +96,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_14_222234) do
     t.string "portionable_type", null: false
     t.bigint "portionable_id", null: false
     t.bigint "ingredient_id", null: false
+    t.decimal "size"
     t.index ["ingredient_id"], name: "index_portions_on_ingredient_id"
     t.index ["portionable_type", "portionable_id"], name: "index_portions_on_portionable"
     t.check_constraint "amount > 0::numeric", name: "amount_check"

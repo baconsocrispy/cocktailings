@@ -5,6 +5,7 @@
     <%# favoriting icon %>
     <div class="position-absolute favorite-icon m-2" >
       <i
+        role='button'
         value='<%= recipe.id %>'
         <% if current_user.favorites.include?(recipe) %>
           class="fa-solid fa-heart text-danger"
