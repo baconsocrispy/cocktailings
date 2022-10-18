@@ -8,4 +8,18 @@ class User < ApplicationRecord
   has_many :favorite_recipes
   has_many :favorites, through: :favorite_recipes, source: :recipe
   has_and_belongs_to_many :recipes
+
+  # get a hash of ingredient ids from a user's cabinet
+  def ingredients(cabinet_id)
+    c = Cabinet.find(cabinet_id)
+    ingredient_ids = {}
+    c.ingredients.each { |i| ingredient_ids[i.id] = 1 }
+    return ingredient_ids
+  end
+
+  def default_cab
+    c = Cabinet.find(self.default_cabinet)
+    return c
+  end
+  
 end

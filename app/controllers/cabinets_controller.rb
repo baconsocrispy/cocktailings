@@ -9,6 +9,11 @@ class CabinetsController < ApplicationController
 
   # GET /cabinets/1 or /cabinets/1.json
   def show
+    if params[:update_id]
+      current_user.update!(default_cabinet: params[:update_id])
+      @cabinet = Cabinet.find(params[:update_id])
+      render partial: 'liquor_cabinet_display', locals: { cabinet: @cabinet }
+    end
   end
 
   # GET /cabinets/new

@@ -16,14 +16,16 @@
 
 <div class='row'>
   <%# liquor cabinet ingredients widget %>
-  <%= render partial: 'liquor_cabinet_display' %>
+  <div class='liquor-cabinet-display col-2 border-end' data-controller='cabinets'>
+    <%= render partial: 'cabinets/liquor_cabinet_display' %>
+  </div>
 
   <%# cocktail card container %>
   <div class='col-10'>
     <div class="container-fluid mt-2 mx-3">
       <div id="recipes" class="row row-cols-1 row-cols-md-5 g-4" data-controller='recipes'>
         <% current_user.favorites.each do |recipe| %>
-          <%= render partial: "recipes/comps/recipe-card", locals: { recipe: recipe } %>
+          <%= render partial: "recipe-card", locals: { recipe: recipe } %>
         <% end %>
       </div>
     </div>

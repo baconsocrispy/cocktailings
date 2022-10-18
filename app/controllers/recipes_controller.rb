@@ -3,14 +3,19 @@ class RecipesController < ApplicationController
   before_action :authenticate_user!
 
   # handles favoriting/unfavoriting
+  # POST /recipes/1/favorite
   def favorite
     set_recipe
-    current_user.favorites.include?(@recipe) ?
-      current_user.favorites.delete(@recipe) :
+    if current_user.favorites.include?(@recipe)
+      current_user.favorites.delete(@recipe)
+      render partial: 'unfavorite', locals: {recipe: @recipe}
+    else
       current_user.favorites << @recipe
-    render json: { favorite: current_user.favorites.include?(@recipe) }
+      render partial: 'favorite', locals: {recipe: @recipe}
+    end
   end
 
+  # GET /recipes/favorites
   def favorites
     @favorites = current_user.favorites
     respond_to do |format|
@@ -21,6 +26,7 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     @recipes = Recipe.all
+    @possible_recipes = Recipe.possible_recipes(current_user.ingredients(current_user.cabinets.first.id))
   end
 
   # GET /recipes/1 or /recipes/1.json
@@ -41,7 +47,6 @@ class RecipesController < ApplicationController
   # POST /recipes or /recipes.json
   def create
     @recipe = Recipe.new(recipe_params)
-
     respond_to do |format|
       begin 
         @recipe.save!
@@ -93,7 +98,7 @@ class RecipesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def recipe_params
       # need to explicitly include :id for :steps/:portions for :_destroy to work
-      params.require(:recipe).permit(:name, :description, :image, 
+      params.require(:recipe).permit(:id, :name, :description, :image, 
                                      steps_attributes: [:id,
                                                         :ingredient_id,
                                                         :name,

@@ -1,21 +1,8 @@
-
 <div class="col">
   <div class="card" style="width: 15rem;">
 
-    <%# favoriting icon %>
-    <div class="position-absolute favorite-icon m-2" >
-      <i
-        role='button'
-        value='<%= recipe.id %>'
-        <% if current_user.favorites.include?(recipe) %>
-          class="fa-solid fa-heart text-danger"
-        <% else %>
-          class="fa-regular fa-heart text-danger" 
-        <% end %>
-        data-action='click->recipes#favorite' 
-        data-url='<%= favorite_recipe_path(recipe) %>'>
-      </i>
-    </div>
+    <%# favoriting widget %>
+    <%= render partial: 'favoriting_widget', locals: { recipe: recipe } %>
 
     <%# if custom image not added, adds default image %>
     <% if recipe.image.present? %>

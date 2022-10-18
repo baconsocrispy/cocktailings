@@ -1,0 +1,8 @@
+
+<div role='button' class='position-absolute favoriting-widget m-2' data-url='<%= favorite_recipe_path(recipe) %>' data-controller='recipes' data-action='click->recipes#favorite' >
+  <% if current_user.favorites.include?(recipe) %>
+    <%= render partial: 'favorite' %>
+  <% else %>
+    <%= render partial: 'unfavorite' %>
+  <% end %>
+</div>

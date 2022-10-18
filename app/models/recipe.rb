@@ -13,4 +13,16 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :portions, allow_destroy: true, reject_if: proc { |att| att['ingredient_id'].blank? }
 
   validates :name, presence: true
+
+  def self.possible_recipes(ingredients_hash)
+    recipes = []
+    Recipe.all.each do |r|
+      missing_ingredients = 0
+      r.ingredients.each do |i|
+        missing_ingredients += 1 if !ingredients_hash[i.id]
+      end
+      recipes << r if missing_ingredients == 0
+    end
+    return recipes
+  end
 end

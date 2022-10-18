@@ -1,6 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
 
-// Connects to data-controller="test"
 export default class extends Controller {
   connect() {
     console.log("Recipes Controller Loaded");
@@ -12,21 +11,17 @@ export default class extends Controller {
     });
   }
 
-  // handles recipe favoriting/unfavoriting logic
   favorite(e) {
+    var url = $(this.element).data('url');
     $.ajax({
       beforeSend: function (xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')); },
       type: 'POST',
-      dataType: 'json',
-      url:  $(e.target).data('url'),
-      data: {id: $(e.target).val()},
-      success: function(response) {
-        if (response['favorite']) {
-          $(e.target).removeClass('fa-regular').addClass('fa-solid');
-        } else {
-          $(e.target).removeClass('fa-solid').addClass('fa-regular');
-        }
+      dataType: 'html',
+      url: url,
+      success: function (response) {
+        $('.favoriting-widget').html(response);
       }
-    }); 
+    });
   }
 }
+

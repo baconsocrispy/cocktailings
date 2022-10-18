@@ -15,23 +15,27 @@
 </div>
 
 <%# new recipe button %>
-<div class="d-flex flex-row-reverse">
+<div class="d-flex flex-row-reverse justify-content-between">
+
   <div class='me-2 mt-2'>
     <a class='text-decoration-none btn btn-sm btn-outline-dark' href='<%= new_recipe_path %>'>New Recipe</a>
   </div>
 </div>
 
+<%# main content %>
 <div class='row'>
 
   <%# liquor cabinet ingredients widget %>
-  <%= render partial: 'liquor_cabinet_display' %>
+  <div class='liquor-cabinet-display col-2 border-end' data-controller='cabinets'>
+    <%= render partial: 'cabinets/liquor_cabinet_display' %>
+  </div>
 
   <%# cocktail card container %>
   <div class='col-10'>
     <div class="container-fluid mt-2 mx-3">
       <div id="recipes" class="row row-cols-1 row-cols-md-4 g-4" data-controller='recipes'>
-        <% @recipes.each do |recipe| %>
-          <%= render partial: "recipes/comps/recipe-card", locals: {recipe: recipe} %>
+        <% @possible_recipes.each do |recipe| %>
+          <%= render partial: "recipe-card", locals: { recipe: recipe } %>
         <% end %>
       </div>
     </div>
