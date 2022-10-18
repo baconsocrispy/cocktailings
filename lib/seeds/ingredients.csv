@@ -1,4 +1,4 @@
-﻿Type,display_name,sub_type,brand,product,abv,age
+﻿type,display_name,sub_type,brand,product,abv,age
 Garnish,Allspice,Spice,,,,
 Garnish,Almonds,Nuts,,,,
 Garnish,Apple Slices,Fruit,,,,
@@ -126,6 +126,7 @@ Spirit,Rye Whiskey,Rye Whiskey,,,0.4,
 Spirit,Santa Cruz Rum,Rum,,,0.4,
 Spirit,Scotch,Scotch,,,0.4,
 Spirit,Single Malt Scotch Whisky,Scotch Whisky,,,0.4,
+Spirit,Vodka,Vodka,,,0.4,
 Spirit,Whiskey,Whiskey,,,0.45,
 Sugar,Brown Sugar,Sugar,,,,
 Sugar,Capillaire,Syrup,,,,

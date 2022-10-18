@@ -10,7 +10,7 @@
 
   <td><%= f.input :amount, label: false, input_html: { min: '0.1', step: '0.1' } %></td>
 
-  <td><%= f.input :unit, label: false, collection: ['', 'Oz.', 'L', 'mL', 'tbsp', 'tsp'] %></td>
+  <td><%= f.input :unit, label: false, collection: ['', 'oz.', 'tbsp', 'tsp', 'qt', 'g' ] %></td>
 
   <%# coccoon gem helper to destroy object %>
   <td><%= link_to_remove_association 'Delete', f, class: 'btn btn-dark btn-sm' %></td>

@@ -26,7 +26,7 @@
 
     <%# displays cocktail name and snippet of description %>
     <div class="card-body">
-      <h5 class="card-title"><%= link_to recipe.name, recipe %></h5>
+      <h5 class="card-title"><%= link_to recipe.name, recipe, class: 'text-decoration-none text-dark' %></h5>
       <p class="card-text h-75 text-truncate"><%= recipe.description %></p>
     </div>
     

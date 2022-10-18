@@ -3,7 +3,7 @@
   <h1 class="text-center">What're we having today?</h1>
 </div>
 
-<%# divider %>
+<%# category / filtering divider %>
 <div class="row text-light bg-dark">
   <div class="d-flex justify-content-center px-3">
     <span class="px-3">Punches</span>
@@ -21,11 +21,19 @@
   </div>
 </div>
 
-<%# cocktail card container %>
-<div class="container-fluid mt-2 mx-3">
-  <div id="recipes" class="row row-cols-1 row-cols-md-5 g-4" data-controller='recipes'>
-    <% @recipes.each do |recipe| %>
-      <%= render partial: "recipes/comps/recipe-card", locals: {recipe: recipe} %>
-    <% end %>
+<div class='row'>
+
+  <%# liquor cabinet ingredients widget %>
+  <%= render partial: 'liquor_cabinet_display' %>
+
+  <%# cocktail card container %>
+  <div class='col-10'>
+    <div class="container-fluid mt-2 mx-3">
+      <div id="recipes" class="row row-cols-1 row-cols-md-4 g-4" data-controller='recipes'>
+        <% @recipes.each do |recipe| %>
+          <%= render partial: "recipes/comps/recipe-card", locals: {recipe: recipe} %>
+        <% end %>
+      </div>
+    </div>
   </div>
 </div>

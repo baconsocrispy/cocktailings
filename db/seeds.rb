@@ -11,13 +11,24 @@ require 'csv'
 # seed the database with ingredients 
 csv_text = File.read(Rails.root.join('lib', 'seeds', 'ingredients.csv'))
 csv = CSV.parse(csv_text, :headers => true)
-csv.each do |i|
-  next if Ingredient.exists?(:display_name => i['display_name'])
-  Ingredient.create(type: i['Type'],
-                    display_name: i['display_name'],
-                    sub_type: i['sub_type'],
-                    brand: i['brand'],
-                    product: i['product'],
-                    abv: i['abv'],
-                    age: i['age'])
+csv.each do |row|
+  ingredient = Ingredient.where(:display_name => row['display_name'])
+  if !ingredient.empty?
+    ingredient.update!(type: row[0],
+                      display_name: row['display_name'],
+                      sub_type: row['sub_type'],
+                      brand: row['brand'],
+                      product: row['product'],
+                      abv: row['abv'],
+                      age: row['age'])
+  
+  else
+    Ingredient.create(type: row[0],
+                      display_name: row['display_name'],
+                      sub_type: row['sub_type'],
+                      brand: row['brand'],
+                      product: row['product'],
+                      abv: row['abv'],
+                      age: row['age'])
+  end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_17_190114) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_17_224723) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -89,14 +89,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_17_190114) do
   end
 
   create_table "portions", force: :cascade do |t|
-    t.decimal "amount", null: false
+    t.decimal "amount"
     t.string "unit"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "portionable_type", null: false
     t.bigint "portionable_id", null: false
     t.bigint "ingredient_id", null: false
-    t.decimal "size"
     t.index ["ingredient_id"], name: "index_portions_on_ingredient_id"
     t.index ["portionable_type", "portionable_id"], name: "index_portions_on_portionable"
     t.check_constraint "amount > 0::numeric", name: "amount_check"
