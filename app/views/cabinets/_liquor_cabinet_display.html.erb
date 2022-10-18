@@ -1,21 +1,29 @@
 <%# liquor cabinet display %>
 <% cabinet = current_user.default_cab %>
-<%# cabinet header %>
+
+
 <div class='row'>
+  <%# cabinet header %>
   <h5 class='current-cabinet text-center'><%= cabinet.name %></h5>
-  <a class='change-cabinet text-center' href='#' data-action='click->cabinets#toggleCabinetSelect'>Change</a>
-  <div class='cabinet-select position-absolute d-none'>
-    <div>
-      <%= collection_select :cabinet,
-                            :name,
-                            current_user.cabinets,
-                            :id,
-                            :name,
-                            { include_blank: '-- Please Select --' },
-                            { data: { url: cabinet_path(cabinet) }}
-                          %>
+  <div class='row border-bottom m-0'>
+    <div class='text-center'>
+      <a class='change-cabinet' href='#' data-action='click->cabinets#toggleCabinetSelect'>Change</a>
     </div>
   </div>
+
+  <%# cabinet-select pop-up %>
+  <div class='row cabinet-select d-none'>
+    <%= collection_select :cabinet,
+                          :name,
+                          current_user.cabinets,
+                          :id,
+                          :name,
+                          { include_blank: '-- Please Select --' },
+                          { data: { url: cabinet_path(cabinet) },
+                            class: ''}
+                        %>
+  </div>
+    
 </div>
 
 <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>

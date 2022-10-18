@@ -19,7 +19,8 @@ export default class extends Controller {
       dataType: 'html',
       url: url,
       success: function (response) {
-        $('.favoriting-widget').html(response);
+        console.log($(e.target));
+        $(e.target).closest('.favoriting-widget').html(response);
       }
     });
   }
