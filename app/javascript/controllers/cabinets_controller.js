@@ -8,7 +8,7 @@ export default class extends Controller {
   }
   toggleCabinetSelect(e) {
     e.preventDefault();
-    $('.cabinet-select').addClass('d-block').removeClass('d-none');
+    $('.cabinet-select-wrapper').addClass('d-block').removeClass('d-none');
   }
 }
 

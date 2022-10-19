@@ -24,5 +24,19 @@ export default class extends Controller {
       }
     });
   }
+
+  filter(e) {
+    var url = $(this.element).data('url');
+    var sort_option = $(this.element).val();
+    $.ajax({
+      type: 'GET',
+      dataType: 'html',
+      url: url,
+      data: { 'sort_option': sort_option},
+      success: function(response) {
+        $('.recipe-cards').html(response);
+      }
+    });
+  }
 }
 

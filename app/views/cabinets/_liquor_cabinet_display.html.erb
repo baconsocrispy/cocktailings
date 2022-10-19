@@ -12,7 +12,7 @@
   </div>
 
   <%# cabinet-select pop-up %>
-  <div class='row cabinet-select d-none'>
+  <div class='row d-none cabinet-select-wrapper'>
     <%= collection_select :cabinet,
                           :name,
                           current_user.cabinets,
@@ -20,7 +20,7 @@
                           :name,
                           { include_blank: '-- Please Select --' },
                           { data: { url: cabinet_path(cabinet) },
-                            class: ''}
+                            class: 'cabinet-select'}
                         %>
   </div>
     
@@ -41,7 +41,7 @@
                                 :id, 
                                 :display_name, 
                                 {}, 
-                                html_options = { size: 5 } %>
+                                html_options = { size: 5, multiple: true } %>
         </div>
       <% end %>
     </div>

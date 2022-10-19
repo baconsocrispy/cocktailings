@@ -8,10 +8,10 @@ class RecipesController < ApplicationController
     set_recipe
     if current_user.favorites.include?(@recipe)
       current_user.favorites.delete(@recipe)
-      render partial: 'unfavorite', locals: {recipe: @recipe}
+      render partial: 'unfavorite', locals: { recipe: @recipe }
     else
       current_user.favorites << @recipe
-      render partial: 'favorite', locals: {recipe: @recipe}
+      render partial: 'favorite', locals: { recipe: @recipe }
     end
   end
 
@@ -26,7 +26,13 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     @recipes = Recipe.all
-    @possible_recipes = Recipe.possible_recipes(current_user.ingredients(current_user.cabinets.first.id))
+    case params[:sort_option]
+    when 'All Recipes'
+      render partial: 'recipe_cards', locals: { recipes: @recipes }
+    when 'Possible Recipes'
+      @possible_recipes = Recipe.possible_recipes(current_user.ingredients(current_user.default_cabinet))
+      render partial: 'recipe_cards', locals: { recipes: @possible_recipes }
+    end
   end
 
   # GET /recipes/1 or /recipes/1.json

@@ -1,0 +1,1 @@
+SORT_OPTIONS = ['All Recipes', 'Possible Recipes']
