@@ -23,7 +23,7 @@ csv.each do |row|
                       age: row['age'])
   
   else
-    Ingredient.create(type: row[0],
+    Ingredient.create!(type: row[0],
                       display_name: row['display_name'],
                       sub_type: row['sub_type'],
                       brand: row['brand'],
@@ -32,3 +32,26 @@ csv.each do |row|
                       age: row['age'])
   end
 end
+
+universal_cabinet = Cabinet.find_by(:name => 'Universal Cabinet')
+
+if universal_cabinet
+  universal_cabinet.portions.destroy_all
+  Ingredient.all.each do |i|
+    portion = Portion.create!(ingredient_id: i.id,
+                        portionable_type: 'Cabinet',
+                        portionable_id: universal_cabinet.id)
+    universal_cabinet.portions << portion
+  end
+else
+  universal_cabinet = Cabinet.create!(name: 'Universal Cabinet')
+  Ingredient.all.each do |i|
+    portion = Portion.create!(ingredient_id: i.id,
+                        portionable_type: 'Cabinet',
+                        portionable_id: universal_cabinet.id)
+    universal_cabinet.portions << portion
+  end
+  universal_cabinet.save!
+end
+
+p 'SEEDS SUCCESSFULLY RUN'

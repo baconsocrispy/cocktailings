@@ -1,8 +1,10 @@
+<% universal_cabinet = Cabinet.find_by(name: 'Universal Cabinet')%>
+<% cabinet = current_user.default_cabinet ? 
+      current_user.default_cab : universal_cabinet %>
+
 <%# liquor cabinet display %>
-<% cabinet = current_user.default_cab %>
-
-
 <div class='row'>
+
   <%# cabinet header %>
   <h5 class='current-cabinet text-center'><%= cabinet.name %></h5>
   <div class='row border-bottom m-0'>
@@ -15,35 +17,35 @@
   <div class='row d-none cabinet-select-wrapper'>
     <%= collection_select :cabinet,
                           :name,
-                          current_user.cabinets,
+                          [*current_user.cabinets, universal_cabinet],
                           :id,
                           :name,
-                          { include_blank: '-- Please Select --' },
+                          { include_blank: '-- Please Select --',
+                            class: 'cabinet-option' },
                           { data: { url: cabinet_path(cabinet) },
                             class: 'cabinet-select'}
                         %>
   </div>
-    
 </div>
 
+<%# select widgets for each category of ingredient %>
 <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
   <div class='row'>
     <div class='mx-4'>
       <div>
         <h6 class='fw-bold'><%= ingredient_type.pluralize %></h6>
       </div>
-
-      <% if !current_user.cabinets.empty? %>
-        <div>
-          <%= collection_select :ingredient, 
-                                :display_name, 
-                                cabinet.ingredients.where(:type => ingredient_type), 
-                                :id, 
-                                :display_name, 
-                                {}, 
-                                html_options = { size: 5, multiple: true } %>
-        </div>
-      <% end %>
+      <div>
+        <%= collection_select :ingredient, 
+                              :display_name, 
+                              cabinet.ingredients.where(:type => ingredient_type), 
+                              :id, 
+                              :display_name, 
+                              { prompt: '- None -' }, 
+                              html_options = { size: 5, 
+                                                multiple: true, 
+                                                class: 'cabinet-ingredients cabinet-' + ingredient_type.downcase.pluralize } %>
+      </div>
     </div>
   </div>
 <% end %>

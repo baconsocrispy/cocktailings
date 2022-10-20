@@ -20,7 +20,7 @@
   <div class='d-flex align-items-center'>
     <%= select_tag 'Sort', options_for_select(SORT_OPTIONS), 
                            include_blank: 'Sort Options', 
-                           class: '', 
+                           class: 'sort-options', 
                            data: { controller: 'recipes', 
                                    action: 'recipes#filter',
                                    url: recipes_path } %>

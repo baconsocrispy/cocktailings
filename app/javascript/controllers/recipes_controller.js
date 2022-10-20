@@ -19,13 +19,12 @@ export default class extends Controller {
       dataType: 'html',
       url: url,
       success: function (response) {
-        console.log($(e.target));
         $(e.target).closest('.favoriting-widget').html(response);
       }
     });
   }
 
-  filter(e) {
+  filter() {
     var url = $(this.element).data('url');
     var sort_option = $(this.element).val();
     $.ajax({

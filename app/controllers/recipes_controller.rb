@@ -27,10 +27,22 @@ class RecipesController < ApplicationController
   def index
     @recipes = Recipe.all
     case params[:sort_option]
+    when ''
+      params[:ingredientIds] ?
+        @recipes = Recipe.filter_all_recipes(params[:ingredientIds]) :
+        @recipes = Recipe.all
+
+      render partial: 'recipe_cards', locals: { recipes: @recipes }
     when 'All Recipes'
+      params[:ingredientIds] ?
+        @recipes = Recipe.filter_all_recipes(params[:ingredientIds]) :
+        @recipes = Recipe.all
+
       render partial: 'recipe_cards', locals: { recipes: @recipes }
     when 'Possible Recipes'
-      @possible_recipes = Recipe.possible_recipes(current_user.ingredients(current_user.default_cabinet))
+      params[:ingredientIds] ?
+        @possible_recipes = Recipe.filter_possible_recipes(params[:ingredientIds], current_user.ingredients) :
+        @possible_recipes = Recipe.possible_recipes(current_user.ingredients)
       render partial: 'recipe_cards', locals: { recipes: @possible_recipes }
     end
   end
