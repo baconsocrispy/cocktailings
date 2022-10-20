@@ -12,8 +12,8 @@ class User < ApplicationRecord
   # get a hash of ingredient ids from a user's cabinet
   def ingredients
     c = Cabinet.find(self.default_cabinet)
-    ingredient_ids = {}
-    c.ingredients.each { |i| ingredient_ids[i.id] = 1 }
+    ingredient_ids = []
+    c.ingredients.each { |i| ingredient_ids << i.id }
     return ingredient_ids
   end
 
@@ -21,5 +21,4 @@ class User < ApplicationRecord
     c = Cabinet.find(self.default_cabinet)
     return c
   end
-  
 end

@@ -14,7 +14,7 @@ export default class extends Controller {
     $(document).on('change', '.cabinet-ingredients', filterCabinetIngredients);
 
 
-    // $(document).on('click', '.cabinet-ingredients option', deselectOption);
+    // 
     $('.cabinet-ingredients option').on('click', function(e) {
       if ($(this).html() == '- None -') {
         $(this).closest('.cabinet-ingredients').val([]);
@@ -72,9 +72,10 @@ function filterCabinetIngredients() {
   });
 }
 
-function deselectOption(e) {
-  console.log($('.cabinet-ingredients').val());
-  if ($('.cabinet-ingredients').val().includes($(this).val())) {
-    $(this).prop('selected', false);
-  }
-}
+// function deselectOption(e) {
+//   console.log($('.cabinet-ingredients').val());
+//   if ($('.cabinet-ingredients').val().includes($(this).val())) {
+//     $(this).prop('selected', false);
+//     $(this).closest('.cabinet-ingredients').val([]);
+//   }
+// }

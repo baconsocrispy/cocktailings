@@ -25,24 +25,24 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.all
+    @recipes = Recipe.alphabetical.take(100)
     case params[:sort_option]
     when ''
       params[:ingredientIds] ?
         @recipes = Recipe.filter_all_recipes(params[:ingredientIds]) :
-        @recipes = Recipe.all
+        @recipes = Recipe.alphabetical.take(100)
 
       render partial: 'recipe_cards', locals: { recipes: @recipes }
     when 'All Recipes'
       params[:ingredientIds] ?
         @recipes = Recipe.filter_all_recipes(params[:ingredientIds]) :
-        @recipes = Recipe.all
+        @recipes = Recipe.alphabetical.take(100)
 
       render partial: 'recipe_cards', locals: { recipes: @recipes }
     when 'Possible Recipes'
       params[:ingredientIds] ?
         @possible_recipes = Recipe.filter_possible_recipes(params[:ingredientIds], current_user.ingredients) :
-        @possible_recipes = Recipe.possible_recipes(current_user.ingredients)
+        @possible_recipes = Recipe.match_all_ingredients(current_user.ingredients).take(100)
       render partial: 'recipe_cards', locals: { recipes: @possible_recipes }
     end
   end
