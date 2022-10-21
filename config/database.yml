@@ -21,8 +21,8 @@ default: &default
   # https://guides.rubyonrails.org/configuring.html#database-pooling
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   # db password saved in environment variable to .zprofile
-  username: cocktail
-  password: <%= ENV['COCKTAIL_DATABASE_PASSWORD'] %>
+  username: carterbacon
+  password: brucelee
 
 development:
   <<: *default

@@ -33,7 +33,7 @@ class Recipe < ApplicationRecord
   # made from any of the ingredients in the array
   def self.match_any_ingredient(ingredients_array)
     recipes = Recipe.includes(:portions)
-                    .where(portions: { ingredient_id: array })
+                    .where(portions: { ingredient_id: ingredients_array })
     return recipes
   end
   
@@ -41,10 +41,27 @@ class Recipe < ApplicationRecord
   # made from all of the ingredients in the array
   def self.match_all_ingredients(ingredients_array)
     all_recipes = []
-    any_recipes = match_any_ingredient(array)
+    any_recipes = match_any_ingredient(ingredients_array)
     any_recipes.each do |r|
-      all_recipes << r if (r.ingredients.map(&:id) - array).empty?
+      all_recipes << r if (r.ingredients.map(&:id) - ingredients_array).empty?
     end
     return all_recipes
+  end
+
+  def self.match_all_subset(ingredients_array, subset_array)
+    subset = []
+    match_all = match_all_ingredients(ingredients_array)
+    match_all.each do |r|
+      ingredients = r.ingredients.map(&:id)
+      subset << r if ingredients.any? { |id| subset_array.include?(id.to_s) }
+    end
+    return subset
+  end
+
+  private
+  def self.get_recipe_ids(recipes)
+    ids = []
+    recipes.each { |r| ids << r.id }
+    return ids
   end
 end

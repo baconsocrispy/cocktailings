@@ -71,11 +71,3 @@ function filterCabinetIngredients() {
     }
   });
 }
-
-// function deselectOption(e) {
-//   console.log($('.cabinet-ingredients').val());
-//   if ($('.cabinet-ingredients').val().includes($(this).val())) {
-//     $(this).prop('selected', false);
-//     $(this).closest('.cabinet-ingredients').val([]);
-//   }
-// }

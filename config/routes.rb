@@ -8,10 +8,11 @@ Rails.application.routes.draw do
   end
 
   # authentication routes
-  devise_for :users
+  devise_for :users, controllers: { sessions: 'users/sessions', 
+                                    registrations: 'users/registrations' }
   devise_scope :user do 
     #reroutes users to sign-in after sign-out
-    get "users", to: "devise/sessions#new"
+    get "users", to: "users/sessions#new"
   end
 
   # Defines the root path route ("/")
