@@ -55,19 +55,29 @@ function getIngredientIds() {
   return ingredientIds;
 }
 
+
 // filters recipes by criteria selected in the liquor cabinet display
 // and which sort option is selected
 function filterCabinetIngredients() {
   var ingredientIds = getIngredientIds();
   var url = $('.sort-options').data('url');
   var sort_option = $('.sort-options').val();
+  var recipeIds = getRecipeIds();
   $.ajax({
     type: 'GET',
     dataType: 'html',
     url: url,
-    data: { 'sort_option': sort_option, 'ingredientIds': ingredientIds },
+    data: { 'sort_option': sort_option, 'ingredientIds': ingredientIds, 'recipeIds': recipeIds },
     success: function (response) {
       $('.recipe-cards').html(response);
     }
   });
+}
+
+function getRecipeIds() {
+  var recipeIds = []
+  $('.card').each( function() {
+    recipeIds.push($(this).data('value')); 
+  });
+  return recipeIds;
 }

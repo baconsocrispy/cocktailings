@@ -5,6 +5,11 @@
     <h2><%= recipe.name %></h2>
   </div>
 
+  <%# cocktail categories %>
+  <div class='row text-center'>
+    <h2><%= recipe.categories.map(&:name) %></h2>
+  </div>
+
   <%# image display %>
   <div class='row'>
     <div class='d-flex justify-content-center'>

@@ -1,10 +1,14 @@
 def seed_recipes(count, text, max_name_length)
+  Recipe.destroy_all
+
   until Recipe.count == count   
     recipe = Recipe.new
     ingredients = seed_recipe_ingredients(recipe)
     update_recipe_name(recipe, text, max_name_length)
     recipe.save!
   end
+  
+  p 'Recipes successfully seeded'
 end
 
 # --------------- RECIPE SEEDING HELPERS ---------------- #
@@ -27,8 +31,11 @@ def seed_ingredient_type(type, quantity)
 end
 
 def update_recipe_name(recipe, text, max_length)
-  words = get_random_words(text, max_length)
-  name = make_name(words)
+  name = ''
+  until name != '' && !Recipe.find_by(name: name)
+    words = get_random_words(text, max_length)
+    name = make_name(words)
+  end
   recipe.name = name
 end
 
@@ -58,7 +65,7 @@ def get_random_words(text, count)
 end
 
 def clean_word(word)
-  rejected_chars = ['.', '"\"', ',', '!', '"', '-', '?', ';']
+  rejected_chars = ['.', '"\"', ',', '!', '"', '-', '?', ';', '(', ')', ':']
   clean_word = ''
   word.each_char { |c| clean_word += c unless rejected_chars.include?(c) }
   return clean_word

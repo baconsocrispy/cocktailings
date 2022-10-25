@@ -25,24 +25,28 @@ class RecipesController < ApplicationController
 
   # GET /recipes or /recipes.json
   def index
-    @recipes = Recipe.alphabetical.take(20)
+    take_amount = 25
+    @recipes = Recipe.alphabetical.take(take_amount)
     case params[:sort_option]
     when ''
       params[:ingredientIds] ?
-        @recipes = Recipe.filter_all_recipes(params[:ingredientIds]) :
-        @recipes = Recipe.alphabetical.take(20)
-
+        @recipes = Recipe.alphabetical.filter_all_recipes(params[:ingredientIds]).take(take_amount) :
+        @recipes = Recipe.alphabetical.take(take_amount)
       render partial: 'recipe_cards', locals: { recipes: @recipes }
     when 'All Recipes'
       params[:ingredientIds] ?
-        @recipes = Recipe.filter_all_recipes(params[:ingredientIds]) :
-        @recipes = Recipe.alphabetical.take(20)
-
+        @recipes = Recipe.alphabetical.filter_all_recipes(params[:ingredientIds]).take(take_amount) :
+        @recipes = Recipe.alphabetical.take(take_amount)
       render partial: 'recipe_cards', locals: { recipes: @recipes }
-    when 'Possible Recipes'
+    when 'Any Ingredient'
       params[:ingredientIds] ?
-        @possible_recipes = Recipe.match_all_subset(current_user.ingredients, params[:ingredientIds]) :
-        @possible_recipes = Recipe.alphabetical.match_all_ingredients(current_user.ingredients).take(20)
+        @recipes = Recipe.alphabetical.match_any_subset(params[:ingredientIds], current_user.ingredients).take(take_amount) :
+        @recipes = Recipe.alphabetical.match_any_ingredient(current_user.ingredients).take(take_amount)
+      render partial: 'recipe_cards', locals: { recipes: @recipes }
+    when 'All Ingredients'
+      params[:ingredientIds] ?
+        @possible_recipes = Recipe.match_all_subset(params[:recipeIds], params[:ingredientIds]).take(take_amount) :
+        @possible_recipes = Recipe.alphabetical.match_all_ingredients(current_user.ingredients).take(take_amount)
       render partial: 'recipe_cards', locals: { recipes: @possible_recipes }
     end
   end
@@ -56,6 +60,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @recipe.steps.build
     @recipe.portions.build
+    @recipe.recipe_categories.build
   end
 
   # GET /recipes/1/edit
@@ -129,6 +134,10 @@ class RecipesController < ApplicationController
                                                            :unit,
                                                            :portionable_type,
                                                            :portionable_id,
-                                                           :_destroy])                      
+                                                           :_destroy],
+                                     recipe_categories_attributes: [:id,
+                                                                    :recipe_id,
+                                                                    :_destroy,
+                                                                    :category_id => []])                      
     end
 end

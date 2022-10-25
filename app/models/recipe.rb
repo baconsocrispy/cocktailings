@@ -6,12 +6,16 @@ class Recipe < ApplicationRecord
   has_and_belongs_to_many :users
   has_many :ingredients, through: :portions
   has_many :steps, dependent: :destroy
+  has_many :recipe_categories
+  has_many :categories, through: :recipe_categories, source: :category
   has_many :favorite_recipes
   has_many :favorited_by, through: :favorite_recipes, source: :user
 
+  # add most_recent, popular (favorited?/viewed?), highest_rated
   scope :alphabetical, -> { order(:name) }
 
   accepts_nested_attributes_for :steps, allow_destroy: true
+  accepts_nested_attributes_for :recipe_categories, allow_destroy: true
   accepts_nested_attributes_for :portions, allow_destroy: true, reject_if: proc { |att| att['ingredient_id'].blank? }
 
   validates :name, presence: true
@@ -31,37 +35,38 @@ class Recipe < ApplicationRecord
   
   # returns the set of recipes from all recipes that can be
   # made from any of the ingredients in the array
-  def self.match_any_ingredient(ingredients_array)
-    recipes = Recipe.includes(:portions)
-                    .where(portions: { ingredient_id: ingredients_array })
+  def self.match_any_ingredient(ingredient_ids)
+    recipes = Recipe.joins(:portions)
+                    .where(portions: { ingredient_id: ingredient_ids })
+                    .distinct            
     return recipes
   end
-  
+
+  # filters results from match any to those that have all the selected
+  # ingredients from liquor cabinet display
+  def self.match_any_subset(selected_ingredient_ids, user_ingredient_ids)
+    recipes = match_any_ingredient(user_ingredient_ids)
+    recipes = recipes.filter_all_recipes(selected_ingredient_ids)
+    return recipes
+  end
+
   # returns the set of recipes from all recipes that can be
-  # made from all of the ingredients in the array
-  def self.match_all_ingredients(ingredients_array)
-    all_recipes = []
-    any_recipes = match_any_ingredient(ingredients_array)
-    any_recipes.each do |r|
-      all_recipes << r if (r.ingredients.map(&:id) - ingredients_array).empty?
-    end
-    return all_recipes
+  # made from all of the ingredients in the array. N + 1. TOO SLOW.
+  def self.match_all_ingredients(ingredient_ids)
+    recipes = match_any_ingredient(ingredient_ids)     
+                .joins(:portions => :ingredient)
+                .group(:id)
+                .select { |r| (r.ingredient_ids - ingredient_ids).empty? }
+    return recipes
   end
 
-  def self.match_all_subset(ingredients_array, subset_array)
-    subset = []
-    match_all = match_all_ingredients(ingredients_array)
-    match_all.each do |r|
-      ingredients = r.ingredients.map(&:id)
-      subset << r if ingredients.any? { |id| subset_array.include?(id.to_s) }
-    end
-    return subset
-  end
-
-  private
-  def self.get_recipe_ids(recipes)
-    ids = []
-    recipes.each { |r| ids << r.id }
-    return ids
+  # works fast  but probably not the best implementation
+  def self.match_all_subset(recipe_ids, ingredient_ids)
+    recipes = Recipe.where(:id => recipe_ids)
+                    .joins(:portions)
+                    .where(portions: { ingredient_id: ingredient_ids})
+                    .group(:id)
+                    .having('count(distinct portions.ingredient_id) = ?', ingredient_ids.size)
+    return recipes
   end
 end

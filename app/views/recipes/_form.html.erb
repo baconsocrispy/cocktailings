@@ -11,6 +11,11 @@
       </div>
     </div>
 
+    <%# recipe categories %>
+    <div class='row'>
+      <%= render partial: 'category_widget', locals: { f: f } %>
+    </div>
+
     <%# recipe ingredients %>
     <div class='row'>
       <%= render partial: 'portion_table', locals: { f: f } %>

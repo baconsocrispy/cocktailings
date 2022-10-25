@@ -7,58 +7,32 @@
 #   Character.create(name: "Luke", movie: movies.first)
 
 require 'csv'
+require Rails.root.join('db', 'seed_ingredient.rb')
+require Rails.root.join('db', 'universal_cabinet.rb')
+require Rails.root.join('db', 'seed_categories.rb')
 require Rails.root.join('db', 'seed_recipe.rb')
 
-# seed the database with ingredients 
-csv_text = File.read(Rails.root.join('lib', 'seeds', 'ingredients.csv'))
-csv = CSV.parse(csv_text, :headers => true)
-csv.each do |row|
-  ingredient = Ingredient.where(:display_name => row['display_name'])
-  if !ingredient.empty?
-    ingredient.update!(type: row[0],
-                      display_name: row['display_name'],
-                      sub_type: row['sub_type'],
-                      brand: row['brand'],
-                      product: row['product'],
-                      abv: row['abv'],
-                      age: row['age'])
-  
-  else
-    Ingredient.create!(type: row[0],
-                      display_name: row['display_name'],
-                      sub_type: row['sub_type'],
-                      brand: row['brand'],
-                      product: row['product'],
-                      abv: row['abv'],
-                      age: row['age'])
-  end
-end
+# populates ingredients table from ingredients csv
+create_or_update_ingredients
 
-universal_cabinet = Cabinet.find_by(:name => 'Universal Cabinet')
+# creates or updates the cabinet with all ingredients
+# accessible by all users
+create_or_reset_universal_cabinet
 
-if universal_cabinet
-  universal_cabinet.portions.destroy_all
-  Ingredient.all.each do |i|
-    portion = Portion.create!(ingredient_id: i.id,
-                        portionable_type: 'Cabinet',
-                        portionable_id: universal_cabinet.id)
-    universal_cabinet.portions << portion
-  end
-else
-  universal_cabinet = Cabinet.create!(name: 'Universal Cabinet')
-  Ingredient.all.each do |i|
-    portion = Portion.create!(ingredient_id: i.id,
-                        portionable_type: 'Cabinet',
-                        portionable_id: universal_cabinet.id)
-    universal_cabinet.portions << portion
-  end
-  universal_cabinet.save!
-end
+# populates categories table
+seed_categories
 
+# seeds arbitrary number of recipes with text pulled at random
+# from a txt file to create a name of a max word length
+# (# recipes, text, max word length)
 text = File.read(Rails.root.join('lib', 'seeds', 'iliad.txt'))
 iliad = text.split(' ')
 
 seed_recipes(2000, iliad, 3)
+
+
+
+
 
 
 
