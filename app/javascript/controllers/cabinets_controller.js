@@ -13,8 +13,7 @@ export default class extends Controller {
     // in the liquor cabinet display
     $(document).on('change', '.cabinet-ingredients', filterCabinetIngredients);
 
-
-    // 
+    // resets select box value to [] when user clicks on '- None -' option
     $('.cabinet-ingredients option').on('click', function(e) {
       if ($(this).html() == '- None -') {
         $(this).closest('.cabinet-ingredients').val([]);
@@ -31,31 +30,6 @@ export default class extends Controller {
 
 }
 
-// reloads liquor cabinet display with selected liquor cabinet
-function changeLiquorCabinet(e) {
-  var cabinet_id = $(e.target).val();
-  $.ajax({
-    type: 'GET',
-    dataType: 'html',
-    data: { update_id: cabinet_id },
-    url: $(e.target).data('url'),
-    success: function (response) {
-      $('.liquor-cabinet-display').html(response);
-    }
-  });
-}
-
-// gets selected ingredient ids from liquor cabinet display
-// select options and returns them in an array
-function getIngredientIds() {
-  var ingredientIds = [...$('.cabinet-spirits').val(),
-                       ...$('.cabinet-modifiers').val(),
-                       ...$('.cabinet-sugars').val(),
-                       ...$('.cabinet-garnishes').val()];
-  return ingredientIds;
-}
-
-
 // filters recipes by criteria selected in the liquor cabinet display
 // and which sort option is selected
 function filterCabinetIngredients() {
@@ -63,6 +37,7 @@ function filterCabinetIngredients() {
   var url = $('.sort-options').data('url');
   var sort_option = $('.sort-options').val();
   var recipeIds = getRecipeIds();
+
   $.ajax({
     type: 'GET',
     dataType: 'html',
@@ -75,9 +50,33 @@ function filterCabinetIngredients() {
 }
 
 function getRecipeIds() {
-  var recipeIds = []
+  var recipeIds = [];
   $('.card').each( function() {
     recipeIds.push($(this).data('value')); 
   });
   return recipeIds;
+}
+
+// gets selected ingredient ids from liquor cabinet display
+// select options and returns them in an array
+function getIngredientIds() {
+  var ingredientIds = [...$('.cabinet-spirits').val(),
+  ...$('.cabinet-modifiers').val(),
+  ...$('.cabinet-sugars').val(),
+  ...$('.cabinet-garnishes').val()];
+  return ingredientIds;
+}
+
+// reloads liquor cabinet display with selected liquor cabinet
+function changeLiquorCabinet(e) {
+  var cabinet_id = $(e.target).val();
+  $.ajax({
+    type: 'GET',
+    dataType: 'html',
+    data: { update_id: cabinet_id },
+    url: $(e.target).data('url'),
+    success: function (response) {
+      $('.liquor-cabinet-display').html(response);
+    }
+  });
 }

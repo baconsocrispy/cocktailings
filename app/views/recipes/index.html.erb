@@ -5,13 +5,11 @@
 </div>
 
 <%# category / filtering divider %>
-<div class="row text-light bg-dark">
+<div class="row text-light bg-dark border">
   <div class="d-flex justify-content-center px-3">
-    <span class="px-3">Punches</span>
-    <span class="px-3">Ancestrals</span>
-    <span class="px-3">Juleps</span>
-    <span class="px-3">Daiqueries</span>
-    <span class="px-3">Bitters</span>
+   <% Category.all.each do |c| %>
+    <span role='button' class='mx-3 category-option'><%= c.name.pluralize %></span>
+   <% end %>
   </div>
 </div>
 

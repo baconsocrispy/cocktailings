@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_24_231300) do
+ActiveRecord::Schema[7.0].define(version: 2022_10_25_162917) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,6 +66,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_231300) do
     t.index ["name"], name: "index_categories_on_name"
   end
 
+  create_table "categories_recipes", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "category_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["category_id"], name: "index_categories_recipes_on_category_id"
+    t.index ["recipe_id", "category_id"], name: "index_categories_recipes_on_recipe_id_and_category_id", unique: true
+    t.index ["recipe_id"], name: "index_categories_recipes_on_recipe_id"
+  end
+
   create_table "favorite_recipes", force: :cascade do |t|
     t.integer "recipe_id", null: false
     t.integer "user_id", null: false
@@ -106,16 +116,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_231300) do
     t.index ["ingredient_id"], name: "index_portions_on_ingredient_id"
     t.index ["portionable_type", "portionable_id"], name: "index_portions_on_portionable"
     t.check_constraint "amount > 0::numeric", name: "amount_check"
-  end
-
-  create_table "recipe_categories", force: :cascade do |t|
-    t.bigint "recipe_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_recipe_categories_on_category_id"
-    t.index ["recipe_id", "category_id"], name: "index_recipe_categories_on_recipe_id_and_category_id", unique: true
-    t.index ["recipe_id"], name: "index_recipe_categories_on_recipe_id"
   end
 
   create_table "recipes", force: :cascade do |t|
@@ -170,7 +170,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_24_231300) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "recipe_categories", "categories"
-  add_foreign_key "recipe_categories", "recipes"
+  add_foreign_key "categories_recipes", "categories"
+  add_foreign_key "categories_recipes", "recipes"
   add_foreign_key "steps", "recipes"
 end
