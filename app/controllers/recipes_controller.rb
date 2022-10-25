@@ -60,7 +60,7 @@ class RecipesController < ApplicationController
     @recipe = Recipe.new
     @recipe.steps.build
     @recipe.portions.build
-    @recipe.recipe_categories.build
+    @recipe.categories.build
   end
 
   # GET /recipes/1/edit
@@ -138,6 +138,6 @@ class RecipesController < ApplicationController
                                      recipe_categories_attributes: [:id,
                                                                     :recipe_id,
                                                                     :_destroy,
-                                                                    :category_id => []])                      
+                                                                    :category_ids => []])                      
     end
 end

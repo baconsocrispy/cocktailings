@@ -1,10 +1,11 @@
-<div class=''>
-  <%= f.simple_fields_for :recipe_categories do |rc_form| %>
-    <%= rc_form.association :category,
+<div>
+ 
+    <%= f.association :category,
                       as: :check_boxes,
                       include_hidden: false,
                       collection: Category.all.order(:name), 
                       label_method: :name, 
                       value_method: :id %>
-  <% end %>
+
+  
 </div>
