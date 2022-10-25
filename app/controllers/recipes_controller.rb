@@ -26,27 +26,29 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     take_amount = 24
+    category_id = params[:categoryId]
+    ingredient_ids = params[:ingredientIds]
     @recipes = Recipe.alphabetical.take(take_amount)
     case params[:sort_option]
     when ''
       params[:ingredientIds] ?
-        @recipes = Recipe.alphabetical.filter_all_recipes(params[:ingredientIds]).take(take_amount) :
-        @recipes = Recipe.alphabetical.take(take_amount)
+        @recipes = Recipe.alphabetical.filter_all_recipes(ingredient_ids, category_id).take(take_amount) :
+        @recipes = Recipe.filter_all_by_category(category_id).take(take_amount)
       render partial: 'recipe_cards', locals: { recipes: @recipes }
     when 'All Recipes'
       params[:ingredientIds] ?
-        @recipes = Recipe.alphabetical.filter_all_recipes(params[:ingredientIds]).take(take_amount) :
-        @recipes = Recipe.alphabetical.take(take_amount)
+        @recipes = Recipe.alphabetical.filter_all_recipes(ingredient_ids, category_id).take(take_amount) :
+        @recipes = Recipe.filter_all_by_category(category_id).take(take_amount)
       render partial: 'recipe_cards', locals: { recipes: @recipes }
     when 'Any Ingredient'
       params[:ingredientIds] ?
-        @recipes = Recipe.alphabetical.match_any_subset(params[:ingredientIds], current_user.ingredients).take(take_amount) :
-        @recipes = Recipe.alphabetical.match_any_ingredient(current_user.ingredients).take(take_amount)
+        @recipes = Recipe.alphabetical.match_any_subset(ingredient_ids, current_user.ingredients, category_id).take(take_amount) :
+        @recipes = Recipe.alphabetical.match_any_ingredient(current_user.ingredients, category_id).take(take_amount)
       render partial: 'recipe_cards', locals: { recipes: @recipes }
     when 'All Ingredients'
       params[:ingredientIds] ?
-        @possible_recipes = Recipe.match_all_subset(params[:recipeIds], params[:ingredientIds]).take(take_amount) :
-        @possible_recipes = Recipe.alphabetical.match_all_ingredients(current_user.ingredients).take(take_amount)
+        @possible_recipes = Recipe.match_all_subset(params[:recipeIds], ingredient_ids, category_id).take(take_amount) :
+        @possible_recipes = Recipe.alphabetical.match_all_ingredients(current_user.ingredients, category_id).take(take_amount)
       render partial: 'recipe_cards', locals: { recipes: @possible_recipes }
     end
   end

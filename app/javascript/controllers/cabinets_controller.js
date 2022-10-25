@@ -13,6 +13,8 @@ export default class extends Controller {
     // in the liquor cabinet display
     $(document).on('change', '.cabinet-ingredients', filterCabinetIngredients);
 
+    $('.category-option').on('click', filterByCategory);
+
     // resets select box value to [] when user clicks on '- None -' option
     $('.cabinet-ingredients option').on('click', function(e) {
       if ($(this).html() == '- None -') {
@@ -43,6 +45,23 @@ function filterCabinetIngredients() {
     dataType: 'html',
     url: url,
     data: { 'sort_option': sort_option, 'ingredientIds': ingredientIds, 'recipeIds': recipeIds },
+    success: function (response) {
+      $('.recipe-cards').html(response);
+    }
+  });
+}
+
+function filterByCategory() {
+  var categoryId = $(this).data('value');
+  var ingredientIds = getIngredientIds();
+  var sort_option = $('.sort-options').val();
+  var recipeIds = getRecipeIds();
+
+  $.ajax({
+    type: 'GET',
+    dataType: 'html',
+    url: $('.sort-options').data('url'),
+    data: { 'sort_option': sort_option, 'ingredientIds': ingredientIds, 'categoryId': categoryId, 'recipeIds': recipeIds },
     success: function (response) {
       $('.recipe-cards').html(response);
     }

@@ -8,7 +8,9 @@
 <div class="row text-light bg-dark border">
   <div class="d-flex justify-content-center px-3">
    <% Category.all.each do |c| %>
-    <span role='button' class='mx-3 category-option'><%= c.name.pluralize %></span>
+    <span role='button' class='mx-3 category-option' data-value='<%= c.id %>'>
+      <%= c.name.pluralize %>
+    </span>
    <% end %>
   </div>
 </div>
