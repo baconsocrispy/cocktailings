@@ -15,13 +15,17 @@
   </head>
 
   <body>
-    <%= render "layouts/comps/navbar" %>
+    <%= render 'layouts/comps/navbar' %>
+
     <% if notice %>
-      <p class="alert alert-success"><%= notice %></p>
+      <p class='alert alert-success'><%= notice %></p>
     <% end %>
     <% if alert %>
-      <p class="alert alert-danger"><%= alert %></p>
+      <p class='alert alert-danger'><%= alert %></p>
     <% end %>
+    
     <%= yield %>
+
+    <%= render 'layouts/comps/footer' %>
   </body>
 </html>

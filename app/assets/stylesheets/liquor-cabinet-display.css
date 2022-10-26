@@ -1,13 +1,17 @@
 .liquor-cabinet-display {
   -ms-flex: 0 0 230px;
   flex: 0 0 230px;
+  position: fixed;
+  height: 100%;
+  color: rgb(1, 55, 1);
 }
 
 .cabinet-ingredients {
   max-width: 150px;
   min-width: 150px;
-  box-shadow: 5px 5px rgba(0, 0, 0, 0.4);
   border-radius: 5px;
+  background: none;
+  color: rgb(253, 246, 220);
 }
 
 .cabinet-select {
