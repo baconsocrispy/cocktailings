@@ -37,5 +37,12 @@ export default class extends Controller {
       }
     });
   }
+
+  toggleCategoryMenu() {
+    const menu = $('.category-toggle')
+    let isMenuExpanded = menu.attr('aria-expanded') === 'true';
+    menu.attr('aria-expanded', !isMenuExpanded);
+    console.log(isMenuExpanded);
+  }
 }
 

@@ -13,7 +13,13 @@
 
     <%# recipe categories %>
     <div class='row'>
-      <%= render partial: 'category_widget', locals: { f: f } %>
+      <div>
+        <%= f.collection_check_boxes :category_ids, 
+                                     Category.all.order(:name), 
+                                     :id, 
+                                     :name, 
+                                     include_hidden: false %>
+      </div>
     </div>
 
     <%# recipe ingredients %>

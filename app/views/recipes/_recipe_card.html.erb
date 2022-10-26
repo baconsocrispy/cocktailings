@@ -1,15 +1,17 @@
-<div class="col">
+<div class='card-container'>
   <div class="card" data-value='<%= recipe.id %>'>
 
     <%# favoriting widget %>
     <%= render partial: 'favoriting_widget', locals: { recipe: recipe } %>
 
     <%# if custom image not added, adds default image %>
-    <% if recipe.image.present? %>
-      <%= image_tag recipe.image, class: ""  %>
-    <% else %>
-      <img src=<%= asset_path('default.webp') %> class="">
-    <% end %>
+    <div class='card-img-container'>
+      <% if recipe.image.present? %>
+        <%= image_tag recipe.image, class: "card-img"  %>
+      <% else %>
+        <img src=<%= asset_path('default.webp') %> class="card-img">
+      <% end %>
+    </div>
 
     <%# displays cocktail name and snippet of description %>
     <div class="card-body">

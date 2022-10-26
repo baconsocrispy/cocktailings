@@ -1,0 +1,48 @@
+.category-option:hover {
+  font-size: larger;
+}
+
+.category-menu-wrapper {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 55px;
+  height: 30px;
+  background-image: image-url('lime-mint.jpg');
+  z-index: 5;
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.4)
+}
+
+/* .category-menu {
+  height: 30px;
+  max-height: 30px;
+  margin-bottom: 0px;
+} */
+
+.category-menu {
+  position: fixed;
+  top: 85px;
+  background-color: rgba(0, 0, 0, 0.4);
+  bottom: 0;
+  opacity: 0;
+  visibility: hidden;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+}
+
+.category-toggle[aria-expanded='true'] ~ .category-menu {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* .category-list {
+  height: 30px;
+  max-height: 30px;
+  margin-bottom: 0px;
+} */
+
+.category-divider {
+  background-image: image-url('lime-mint.jpg');
+}
+

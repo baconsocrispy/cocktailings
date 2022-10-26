@@ -1,0 +1,31 @@
+.liquor-cabinet-display {
+  -ms-flex: 0 0 230px;
+  flex: 0 0 230px;
+}
+
+.cabinet-ingredients {
+  max-width: 150px;
+  min-width: 150px;
+  box-shadow: 5px 5px rgba(0, 0, 0, 0.4);
+  border-radius: 5px;
+}
+
+.cabinet-select {
+  position: absolute;
+  z-index: 1000;
+  max-width: 200px;
+  left: 30px;
+}
+
+.current-cabinet {
+}
+
+.bg-img {
+  background-image: image-url('bartop.jpeg')
+}
+
+@media (max-width: 690px) {
+  .liquor-cabinet-display {
+    display: none;
+  }
+}

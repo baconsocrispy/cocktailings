@@ -28,7 +28,9 @@ class RecipesController < ApplicationController
     take_amount = 24
     category_id = params[:categoryId]
     ingredient_ids = params[:ingredientIds]
+    
     @recipes = Recipe.alphabetical.take(take_amount)
+
     case params[:sort_option]
     when ''
       params[:ingredientIds] ?

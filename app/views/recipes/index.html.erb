@@ -1,45 +1,35 @@
-<% sort_collection = @recipe %>
-<%# page title %>
-<div class='row'>
-  <h1 class="text-center">What're we having today?</h1>
+<%# category filtering divider %>
+<div class="text-light bg-dark category-divider">
+  <%= render partial: 'category-widget' %>
 </div>
 
-<%# category / filtering divider %>
-<div class="row text-light bg-dark border">
-  <div class="d-flex justify-content-center px-3">
-   <% Category.all.each do |c| %>
-    <span role='button' class='mx-3 category-option' data-value='<%= c.id %>'>
-      <%= c.name.pluralize %>
-    </span>
-   <% end %>
-  </div>
-</div>
-
-<%# sorting / new recipe / stats bar %>
-<div class="d-flex flex-row-reverse">
-  <div class='d-flex align-items-center'>
-    <%= select_tag 'Sort', options_for_select(SORT_OPTIONS), 
-                           include_blank: 'Sort Options', 
-                           class: 'sort-options', 
-                           data: { controller: 'recipes', 
-                                   action: 'recipes#filter',
-                                   url: recipes_path } %>
-  </div>
-  <div class='me-2 mt-2'>
-    <a class='text-decoration-none btn btn-sm btn-outline-dark' href='<%= new_recipe_path %>'>New Recipe</a>
-  </div>
-</div>
 
 <%# main content %>
-<div class='row'>
+<div class='bg-img main-content-wrapper'>
 
-  <%# liquor cabinet display widget %>
-  <div class='liquor-cabinet-display col-2 border-end' data-controller='cabinets'>
-    <%= render partial: 'cabinets/liquor_cabinet_display' %>
+  <%# sorting / new recipe / stats bar %>
+  <div class="d-flex flex-row-reverse">
+    <div class='me-3 mt-2'>
+      <%= select_tag 'Sort', options_for_select(SORT_OPTIONS), 
+                            include_blank: 'Sort Options', 
+                            class: 'sort-options', 
+                            data: { controller: 'recipes', 
+                                    action: 'recipes#filter',
+                                    url: recipes_path } %>
+    </div>
   </div>
 
-  <%# cocktail card container %>
-  <div class='col-10 recipe-cards'>
-   <%= render partial: 'recipe_cards', locals: { recipes: @recipes } %>
+  
+  <div class='row flex-nowrap'>
+
+    <%# liquor cabinet display widget %>
+    <div class='liquor-cabinet-display col-2' data-controller='cabinets'>
+      <%= render partial: 'cabinets/liquor_cabinet_display' %>
+    </div>
+
+    <%# cocktail card container %>
+    <div class='col recipe-cards me-3'>
+    <%= render partial: 'recipe_cards', locals: { recipes: @recipes } %>
+    </div>
   </div>
 </div>

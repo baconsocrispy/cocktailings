@@ -3,14 +3,12 @@
       current_user.default_cab : universal_cabinet %>
 
 <%# liquor cabinet display %>
-<div class='row'>
+<div class='row text-light'>
 
   <%# cabinet header %>
-  <h5 class='current-cabinet text-center'><%= cabinet.name %></h5>
-  <div class='row border-bottom m-0'>
-    <div class='text-center'>
-      <a class='change-cabinet' href='#' data-action='click->cabinets#toggleCabinetSelect'>Change</a>
-    </div>
+  <div class='d-flex flex-row justify-content-center'>
+    <h5 class='current-cabinet mx-2'><%= cabinet.name %></h5>
+    <i class="fa-regular fa-square-plus mt-1 change-cabinet" role='button' data-action='click->cabinets#toggleCabinetSelect'></i>
   </div>
 
   <%# cabinet-select pop-up %>
@@ -30,10 +28,10 @@
 
 <%# select widgets for each category of ingredient %>
 <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
-  <div class='row'>
+  <div class='row mt-2'>
     <div class='mx-4'>
       <div>
-        <h6 class='fw-bold'><%= ingredient_type.pluralize %></h6>
+        <h6 class='fw-bold text-light'><%= ingredient_type.pluralize %></h6>
       </div>
       <div>
         <%= collection_select :ingredient, 

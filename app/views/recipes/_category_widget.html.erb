@@ -1,7 +1,0 @@
-<div>
-  <%= f.collection_check_boxes :category_ids, 
-                                Category.all.order(:name), 
-                                :id, 
-                                :name, 
-                                include_hidden: false %>
-</div>
