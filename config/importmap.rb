@@ -10,3 +10,4 @@ pin_all_from "app/javascript/controllers", under: "controllers"
 pin "bootstrap", to: "https://ga.jspm.io/npm:bootstrap@5.2.1/dist/js/bootstrap.esm.js" # add to include bootstrap
 pin "@popperjs/core", to: "https://unpkg.com/@popperjs/core@2.11.6/dist/esm/index.js" # Use unpkg to avoid some glitches with jspm
 pin "@fortawesome/fontawesome-free", to: "https://ga.jspm.io/npm:@fortawesome/fontawesome-free@6.2.0/js/all.js" # fonts for favoriting
+pin_all_from "app/javascript/controllers", under: "controllers"

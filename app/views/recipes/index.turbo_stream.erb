@@ -1,0 +1,9 @@
+
+<%# this is receiving an empty @recipes variable from the controller %>
+<%= turbo_stream.append 'recipes' do %>
+
+<div><%= @recipes.any? %></div>
+  <% @recipes.each do |recipe| %>
+    <%= render partial: "recipe_card", locals: { recipe: recipe } %>
+  <% end %>
+<% end %>

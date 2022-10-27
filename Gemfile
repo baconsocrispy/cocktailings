@@ -54,8 +54,6 @@ group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
 
   gem "pry"
-
-  gem "rspec"
 end
 
 group :development do
@@ -83,3 +81,4 @@ gem 'bootstrap'
 gem 'simple_form'
 gem 'cocoon'
 gem "devise", "~> 4.8"
+gem 'kaminari'

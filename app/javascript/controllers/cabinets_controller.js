@@ -22,14 +22,6 @@ export default class extends Controller {
         filterCabinetIngredients();
       }
     });
-
-    // $(document).click(function(e) {
-    //   console.log(!$(e.target).closest('.change-cabinet').length);
-    //   console.log($('.cabinet-select').is(':visible'));
-    //   if (!$(e.target).closest('.change-cabinet').length && $('.cabinet-select').is(':visible')) {
-    //     $('.cabinet-select').hide();
-    //   }
-    // });
   }
 
   // opens liquor cabinet select popup when 'change' button clicked
@@ -37,9 +29,6 @@ export default class extends Controller {
     e.preventDefault();
     $('.cabinet-select-wrapper').addClass('d-block').removeClass('d-none');
   }
-
-  
-
 }
 
 // filters recipes by criteria selected in the liquor cabinet display

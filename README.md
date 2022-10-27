@@ -17,6 +17,7 @@ cocktail recipes that they can make from that collection.
 * cocoon 1.2.15
 * simple_form 5.1.0
 * devise 3.8.1
+* kaminari 1.2.2
 
 ### Ruby
 
@@ -124,3 +125,11 @@ Help from:
 * https://betterprogramming.pub/devise-auth-setup-in-rails-7-44240aaed4be
 * Devise Docs: https://github.com/heartcombo/devise
 
+## INFINITE SCROLLING
+
+I used the Kaminari gem coupled with a Stimulus controller and Turbo Streams to 
+implement infinite page scrolling on the recipes index. 
+
+help from:
+* https://dev.to/rockwell/infinite-scroll-with-hotwire-part-2-adding-stimulus-48o2
+* https://github.com/hotwired/turbo/issues/34

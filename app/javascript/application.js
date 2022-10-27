@@ -16,3 +16,5 @@ import './gems/cocoon';
 
 
 
+import "controllers"
+import "@hotwired/turbo-rails"

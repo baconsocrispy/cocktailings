@@ -1,3 +1,8 @@
+/* body {
+  overflow: hidden;
+  margin-right: 0;
+} */
+
 .category-option:hover {
   font-size: larger;
 }
