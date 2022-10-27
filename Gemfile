@@ -67,8 +67,6 @@ group :development do
 
   # Speed up commands on slow machines / big apps [https://github.com/rails/spring]
   # gem "spring"
-
-  gem "rspec"
 end
 
 group :test do
@@ -83,3 +81,4 @@ gem 'bootstrap'
 gem 'simple_form'
 gem 'cocoon'
 gem "devise", "~> 4.8"
+gem 'kaminari'
