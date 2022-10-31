@@ -1,57 +1,94 @@
 import { Controller } from "@hotwired/stimulus";
 
-const spinner = `
-  <div class='col-span-12 container mx-auto h-24 mb-8' id='spinner'>
-    <div class='loader'>Loading...</div>
-  </div>`;
-
 export default class extends Controller {
-  connect() {
-    console.log("Recipes Controller Loaded");
 
-    document.addEventListener('scroll', this.scroll);
-  }
+  // gets/sets record fetching flag
+  static get fetching() { return this.fetching; }
+  static set fetching(bool) {
+    this.fetching = bool;
+  } 
 
-  static fetching = false;
-
-  static values = {
+  // gets url and page number from target element
+  static get values() { return {
     url: String,
     page: { type: Number, default: 1 },
-  };
+  };}
 
-  static targets = ['recipes', 'noRecords']
+  // adds the scroll event listener and sets fetching flag to false
+  connect() {
+    console.log("Pagination Controller Loaded");
+    document.addEventListener('scroll', this.scroll);
+    this.fetching = false;
+  }
 
+  // binds this to the controller rather than document
   initialize() {
     this.scroll = this.scroll.bind(this);
   }
 
+  // calls loadRecords() when scroll reaches the bottom of the page
   scroll() {
-    if (this.pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
-      // add spinner to end of page
-      this.recipesTarget.insertAdjacentHTML('beforeend', spinner);
-
-      this.loadRecords();
+    if (this.pageEnd && !this.fetching) {
+      this.loadRecords(); 
     }
   }
 
+  // record fetching function
   async loadRecords() {
-    var url = new URL(this.urlValue);
-    url.searchParams.set('page', this.pageValue);
-
+    // get pre-configured url from helper method
+    const url = getUrl(this.urlValue, this.pageValue);
+    
+    // sets fetching flag to true
     this.fetching = true;
 
+    // sends a turbo_stream fetch request to the recipes controller
     await fetch(url.toString(), {
-      responseKind: 'turbo-stream',
-    });
+      headers: {
+        Accept: 'text/vnd.turbo-stream.html',
+      },
+    }).then(r => r.text())
+      .then(html => Turbo.renderStreamMessage(html));
 
+    // sets fetching flag to false
     this.fetching = false;
 
+    // increments the target element's page number
     this.pageValue += 1;
   }
 
+  // sets the boundary where the loadRecords() function gets called
   get pageEnd() {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
     return scrollHeight - scrollTop - clientHeight < 40; // can adjust to desired limit
   }
 }
 
+//  -------------  HELPER FUNCTIONS ----------------
+
+// gets selected ingredient ids from liquor cabinet display
+// options and returns them in an array
+function getIngredientIds() {
+  var ingredientIds = [...$('.cabinet-spirits').val(),
+  ...$('.cabinet-modifiers').val(),
+  ...$('.cabinet-sugars').val(),
+  ...$('.cabinet-garnishes').val()];
+  return ingredientIds;
+}
+
+// if there are ingredientIds, appends them as an array to searchParams
+function appendIngredientIds(url) {
+  var ingredientIds = getIngredientIds();
+  if (ingredientIds.length != 0) {
+    ingredientIds.map(i => url.searchParams.append('ingredientIds', i));
+  }
+  return url;
+}
+
+// configures url searchParams and returns the url
+function getUrl(urlValue, pageValue) {
+  var url = new URL(urlValue);
+  url.searchParams.set('page', pageValue);
+  url.searchParams.append('sort_option', $('.sort-options').val());
+  url = appendIngredientIds(url);
+  return url;
+}

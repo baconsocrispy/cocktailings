@@ -24,7 +24,7 @@
   <%# cocktail card container %>
   <div class='col-10'>
     <div class="container-fluid mt-2 mx-3">
-      <div id="recipes" class="row row-cols-1 row-cols-md-5 g-4" data-controller='recipes'>
+      <div class="row row-cols-1 row-cols-md-5 g-4" data-controller='recipes'>
         <% current_user.favorites.each do |recipe| %>
           <%= render partial: "recipe_card", locals: { recipe: recipe } %>
         <% end %>

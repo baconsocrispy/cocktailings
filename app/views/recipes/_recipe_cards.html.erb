@@ -6,9 +6,8 @@
                     data-pagination-url-value='<%= recipes_url %>'
                     data-pagination-page-value='<%= 2 %>'>
 
-    <% recipes.each do |recipe| %>
+    <% @recipes.each do |recipe| %>
       <%= render partial: "recipe_card", locals: { recipe: recipe } %>
     <% end %>
-
   </div>
 </div>
