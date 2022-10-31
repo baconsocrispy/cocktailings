@@ -22,14 +22,6 @@ export default class extends Controller {
         filterCabinetIngredients();
       }
     });
-
-    // $(document).click(function(e) {
-    //   console.log(!$(e.target).closest('.change-cabinet').length);
-    //   console.log($('.cabinet-select').is(':visible'));
-    //   if (!$(e.target).closest('.change-cabinet').length && $('.cabinet-select').is(':visible')) {
-    //     $('.cabinet-select').hide();
-    //   }
-    // });
   }
 
   // opens liquor cabinet select popup when 'change' button clicked
@@ -37,9 +29,6 @@ export default class extends Controller {
     e.preventDefault();
     $('.cabinet-select-wrapper').addClass('d-block').removeClass('d-none');
   }
-
-  
-
 }
 
 // filters recipes by criteria selected in the liquor cabinet display
@@ -57,6 +46,7 @@ function filterCabinetIngredients() {
     data: { 'sort_option': sort_option, 'ingredientIds': ingredientIds, 'recipeIds': recipeIds },
     success: function (response) {
       $('.recipe-cards').html(response);
+      resetPageValue();
     }
   });
 }
@@ -74,6 +64,7 @@ function filterByCategory() {
     data: { 'sort_option': sort_option, 'ingredientIds': ingredientIds, 'categoryId': categoryId, 'recipeIds': recipeIds },
     success: function (response) {
       $('.recipe-cards').html(response);
+      resetPageValue();
     }
   });
 }
@@ -108,4 +99,11 @@ function changeLiquorCabinet(e) {
       $('.liquor-cabinet-display').html(response);
     }
   });
+}
+
+function resetPageValue() {
+  console.log('TEST');
+  var recipeCards = document.querySelector('.recipe-cards');
+  recipeCards.setAttribute('data-pagination-page-value', 2);
+  console.log($('.recipe-cards').data('pagination-page-value'));
 }

@@ -82,3 +82,4 @@ gem 'simple_form'
 gem 'cocoon'
 gem "devise", "~> 4.8"
 gem 'kaminari'
+gem 'requestjs-rails'

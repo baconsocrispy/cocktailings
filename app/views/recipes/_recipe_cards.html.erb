@@ -1,11 +1,6 @@
 <div class="container-fluid mt-2 mx-3">
   
-  <div id="recipes" class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-2" 
-                    data-controller='pagination'
-                    data-pagination-target='recipes'
-                    data-pagination-url-value='<%= recipes_url %>'
-                    data-pagination-page-value='<%= 2 %>'>
-
+  <div id="recipes" class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-2">
     <% @recipes.each do |recipe| %>
       <%= render partial: "recipe_card", locals: { recipe: recipe } %>
     <% end %>

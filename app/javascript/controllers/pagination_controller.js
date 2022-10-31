@@ -42,18 +42,20 @@ export default class extends Controller {
     this.fetching = true;
 
     // sends a turbo_stream fetch request to the recipes controller
-    await fetch(url.toString(), {
+    await fetch(url, {
       headers: {
         Accept: 'text/vnd.turbo-stream.html',
       },
     }).then(r => r.text())
       .then(html => Turbo.renderStreamMessage(html));
 
+    // increments the target element's page number
+    this.pageValue += 1;
+    console.log(this.pageValue);
+
     // sets fetching flag to false
     this.fetching = false;
 
-    // increments the target element's page number
-    this.pageValue += 1;
   }
 
   // sets the boundary where the loadRecords() function gets called
@@ -90,5 +92,5 @@ function getUrl(urlValue, pageValue) {
   url.searchParams.set('page', pageValue);
   url.searchParams.append('sort_option', $('.sort-options').val());
   url = appendIngredientIds(url);
-  return url;
+  return url.toString();
 }

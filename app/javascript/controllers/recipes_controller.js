@@ -34,6 +34,7 @@ export default class extends Controller {
       data: { 'sort_option': sort_option},
       success: function(response) {
         $('.recipe-cards').html(response);
+        resetPageValue();
       }
     });
   }
@@ -42,7 +43,13 @@ export default class extends Controller {
     const menu = $('.category-toggle')
     let isMenuExpanded = menu.attr('aria-expanded') === 'true';
     menu.attr('aria-expanded', !isMenuExpanded);
-    console.log(isMenuExpanded);
   }
+}
+
+function resetPageValue() {
+  console.log('TEST');
+  var recipeCards = document.querySelector('.recipe-cards');
+  recipeCards.setAttribute('data-pagination-page-value', 2);
+  console.log($('.recipe-cards').data('pagination-page-value'));
 }
 
