@@ -1,8 +1,4 @@
-.main-header {
-  background-image: image-url('bartop.jpeg');
-}
-
-.navbar {
+body {
   background-image: image-url('bartop.jpeg');
 }
 
