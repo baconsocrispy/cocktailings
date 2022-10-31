@@ -14,6 +14,8 @@ export default class extends Controller {
     page: { type: Number, default: 1 },
   };}
 
+  static get targets() { return ['recipes', 'noRecords']; }
+
   // adds the scroll event listener and sets fetching flag to false
   connect() {
     console.log("Pagination Controller Loaded");
@@ -28,7 +30,7 @@ export default class extends Controller {
 
   // calls loadRecords() when scroll reaches the bottom of the page
   scroll() {
-    if (this.pageEnd && !this.fetching && !noMoreRecords()) {
+    if (this.pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
       this.loadRecords(); 
     }
   }
@@ -94,3 +96,7 @@ function getUrl(urlValue, pageValue) {
   url = appendIngredientIds(url);
   return url.toString();
 }
+
+// function noMoreRecords() {
+  
+// }

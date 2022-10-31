@@ -3,4 +3,8 @@
   <% @recipes.each do |recipe| %>
     <%= render partial: "recipe_card", locals: { recipe: recipe } %>
   <% end %>
+
+  <% if @recipes.page(@page.to_i + 1).out_of_range? %>
+    <div class='hidden' data-pagination-target='noRecords'>
+  <% end %>
 <% end %>
