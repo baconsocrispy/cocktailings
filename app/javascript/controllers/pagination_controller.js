@@ -28,7 +28,7 @@ export default class extends Controller {
 
   // calls loadRecords() when scroll reaches the bottom of the page
   scroll() {
-    if (this.pageEnd && !this.fetching) {
+    if (this.pageEnd && !this.fetching && !noMoreRecords()) {
       this.loadRecords(); 
     }
   }
