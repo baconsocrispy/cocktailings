@@ -53,7 +53,6 @@ export default class extends Controller {
 
     // increments the target element's page number
     this.pageValue += 1;
-    console.log(this.pageValue);
 
     // sets fetching flag to false
     this.fetching = false;

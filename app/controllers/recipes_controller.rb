@@ -26,7 +26,7 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   def index
     @page = params[:page] || 1
-    category_id = params[:categoryId]
+    category_id = params[:categoryId] != '' ? params[:categoryId] : nil
     ingredient_ids = params[:ingredientIds] ? [*params[:ingredientIds]].map(&:to_i) : nil
     
     @recipes = Recipe.alphabetical.page(@page)

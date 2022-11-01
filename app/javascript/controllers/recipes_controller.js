@@ -47,9 +47,7 @@ export default class extends Controller {
 }
 
 function resetPageValue() {
-  console.log('TEST');
   var recipeCards = document.querySelector('.recipe-cards');
   recipeCards.setAttribute('data-pagination-page-value', 2);
-  console.log($('.recipe-cards').data('pagination-page-value'));
 }
 
