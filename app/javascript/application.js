@@ -16,6 +16,3 @@ import 'bootstrap';
 
 // manually import cocoon js (see javascript/gems/cocoon.js)
 import './gems/cocoon';
-
-// requestjs
-import "@rails/request.js";

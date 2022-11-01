@@ -5,14 +5,13 @@ export default class extends Controller {
     // lets me know controller is function properly
     console.log("Cabinets Controller Loaded");
 
-    // calls changeLiquorCabinet function below when a new 
-    // liquor cabinet is selected
+    // adds onChange listener for when user changes the current cabinet
     $(document).on('change', '.cabinet-select', changeLiquorCabinet);
 
-    // calls filterCabinetIngredients when ingredients are selected/deselected
-    // in the liquor cabinet display
+    // adds onChange listener to the liquor cabinet display ingredient select options
     $(document).on('change', '.cabinet-ingredients', filterCabinetIngredients);
 
+    // adds click listener to category options 
     $('.category-option').on('click', filterByCategory);
 
     // resets select box value to [] when user clicks on '- None -' option
@@ -56,6 +55,8 @@ function filterByCategory() {
   var ingredientIds = getIngredientIds();
   var sort_option = $('.sort-options').val();
   var recipeIds = getRecipeIds();
+
+  updateCurrentCategory(categoryId);
 
   $.ajax({
     type: 'GET',
@@ -106,4 +107,8 @@ function resetPageValue() {
   var recipeCards = document.querySelector('.recipe-cards');
   recipeCards.setAttribute('data-pagination-page-value', 2);
   console.log($('.recipe-cards').data('pagination-page-value'));
+}
+
+function updateCurrentCategory(id=null) {
+  $('.current-category').data('value', id);
 }

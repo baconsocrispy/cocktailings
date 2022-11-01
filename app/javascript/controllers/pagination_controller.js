@@ -88,15 +88,18 @@ function appendIngredientIds(url) {
   return url;
 }
 
+// gets categoryId from the hidden current-category div
+function getCategoryId() {
+  var categoryId = $('.current-category').data('value');
+  return categoryId;
+}
+
 // configures url searchParams and returns the url
 function getUrl(urlValue, pageValue) {
   var url = new URL(urlValue);
   url.searchParams.set('page', pageValue);
   url.searchParams.append('sort_option', $('.sort-options').val());
+  url.searchParams.append('categoryId', getCategoryId());
   url = appendIngredientIds(url);
   return url.toString();
 }
-
-// function noMoreRecords() {
-  
-// }

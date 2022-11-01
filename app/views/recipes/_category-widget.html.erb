@@ -9,7 +9,11 @@
     </i>
     <div class='category-menu'>
       <ul class='category-list'>
+        <li role='button' class='mx-3 mt-1 list-group-item text-end'>
+          All
+        </li>
         <% Category.all.each do |c| %>
+          
           <li role='button' class='mx-3 mt-1 list-group-item text-end' >
             <div class='category-option' data-value='<%= c.id %>'>
               <%= c.name.pluralize %>
@@ -17,6 +21,7 @@
           </li>
         <% end %>
       </ul>
+      <div class='current-category hidden' data-value='<%= nil %>'></div>
     </div>
   
   </div>
