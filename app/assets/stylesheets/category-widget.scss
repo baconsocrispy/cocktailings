@@ -1,7 +1,9 @@
+// increases category font-size on hover
 .category-option:hover {
   font-size: larger;
 }
 
+// styling for full-width category container
 .category-menu-wrapper {
   position: fixed;
   left: 0;
@@ -13,28 +15,22 @@
   box-shadow: 0px 5px rgba(0, 0, 0, 0.4)
 }
 
+// styling for the category menu/mask
 .category-menu {
   position: fixed;
-  top: 85px;
-  background-color: rgba(0, 0, 0, 0.5);
-  bottom: 0;
   opacity: 0;
   visibility: hidden;
+  top: 85px;
+  bottom: 0;
   left: 0;
   right: 0;
+  background-color: rgba(0, 0, 0, 0.5);
   z-index: 4;
 }
 
-.category-toggle {
-  z-index: 5;
-}
-
+// makes category menu visible when toggled
 .category-toggle[aria-expanded='true'] ~ .category-menu {
   opacity: 1;
   visibility: visible;
-}
-
-.category-divider {
-  background-image: image-url('lime-mint.jpg');
 }
 

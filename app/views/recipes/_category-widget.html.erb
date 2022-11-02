@@ -1,38 +1,45 @@
-  <div class='category-menu-wrapper d-flex flex-row align-items-center justify-content-end' data-controller='recipes'>
-    <span class='me-2'>Categories</span>
-    <i 
-      class="fa-solid fa-bars category-toggle me-3" 
-      aria-expanded='false' 
-      aria-label='toggle-menu' 
-      aria-controls='category-menu' 
-      role='button'
-      data-action='click->recipes#toggleCategoryMenu'>
-    </i>
-    <div class='category-menu'>
-      <ul class='category-list'>
+<%# creates a full-width bar for displaying and selecting category sort %>
+<div 
+  class='category-menu-wrapper d-flex flex-row align-items-center justify-content-end' 
+  data-controller='categories'
+>
+  <%# category menu toggle controls %>
+  <span class='me-2'>Categories</span>
+  <i 
+    class="fa-solid fa-bars category-toggle me-3" 
+    aria-expanded='false' 
+    aria-label='toggle-menu' 
+    aria-controls='category-menu' 
+    role='button'
+    data-action='click->categories#toggleCategoryMenu'>
+  </i>
 
-        <%# resets category to all categories %>
-        <li 
-          role='button' 
-          class='category-option mx-3 mt-1 list-group-item text-end' 
-          data-value='<%= nil %>'
-        >
-          All
+  <%# category menu / hidden by default %>
+  <div 
+    class='category-menu d-flex justify-content-end' 
+    data-action='click->categories#toggleCategoryMenu'
+  >
+    <ul class='category-list'>
+      <%# resets category to all categories %>
+      <li 
+        role='button' 
+        class='category-option mx-3 mt-1 list-group-item text-end' 
+        data-value='<%= nil %>'
+      >
+        All
+      </li>
+
+      <%# displays category options %>
+      <% Category.all.each do |c| %>
+        <li role='button' class='mx-3 mt-1 list-group-item text-end' >
+          <div class='category-option' data-value='<%= c.id %>'>
+            <%= c.name.pluralize %>
+          </div>
         </li>
+      <% end %>
+    </ul>
 
-        <%# displays all categories %>
-        <% Category.all.each do |c| %>
-          
-          <li role='button' class='mx-3 mt-1 list-group-item text-end' >
-            <div class='category-option' data-value='<%= c.id %>'>
-              <%= c.name.pluralize %>
-            </div>
-          </li>
-        <% end %>
-      </ul>
-
-      <%# hidden field to capture currently-selected category id %>
-      <div class='current-category hidden' data-value='<%= nil %>'></div>
-    </div>
-  
+    <%# hidden field to capture currently-selected category id %>
+    <div class='current-category hidden' data-value='<%= nil %>'></div>
   </div>
+</div>
