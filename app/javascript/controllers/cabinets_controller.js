@@ -5,8 +5,16 @@ export default class extends Controller {
     // lets me know controller is function properly
     console.log("Cabinets Controller Loaded");
 
-    // adds onChange listener for when user changes the current cabinet
-    $(document).on('change', '.cabinet-select', changeLiquorCabinet);
+    // closes cabinet menu when clicking elsewhere on the page
+    $(document).on('click', ({ target }) => {
+      if (target.classList.contains('toggle-cabinet-menu')) return;
+      if ($('.toggle-cabinet-menu').attr('aria-expanded') === 'true') {
+        $('.toggle-cabinet-menu').attr('aria-expanded', false);
+      }
+    });
+
+    // adds onClick listener for when user changes the current cabinet
+    $(document).on('click', '.cabinet-option', changeLiquorCabinet);
 
     // adds onChange listener to the liquor cabinet display ingredient select options
     $(document).on('change', '.cabinet-ingredients', filterCabinetIngredients);
@@ -23,10 +31,11 @@ export default class extends Controller {
     });
   }
 
-  // opens liquor cabinet select popup when 'change' button clicked
-  toggleCabinetSelect(e) {
-    e.preventDefault();
-    $('.cabinet-select-wrapper').addClass('d-block').removeClass('d-none');
+  // opens/closes liquor cabinet menu when '+' icon is clicked
+  toggleCabinetMenu() {
+    const menu = $('.toggle-cabinet-menu');
+    let isMenuExpanded = menu.attr('aria-expanded') === 'true';
+    menu.attr('aria-expanded', !isMenuExpanded);
   }
 }
 

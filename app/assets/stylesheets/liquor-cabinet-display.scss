@@ -14,18 +14,32 @@
   color: rgb(253, 246, 220);
 }
 
-.cabinet-select {
+.cabinet-menu-container {
   position: absolute;
+  width: 200px;
+  top: 30px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.cabinet-menu {
+  border-radius: 5px;
+  div {
+    cursor: default;
+  }
+
+  li {
+    &:hover {
+      color: lightgreen;
+    }
+  }
+}
+
+// makes cabinet menu visible when toggled
+.toggle-cabinet-menu[aria-expanded='true'] ~ .cabinet-menu-container {
+  opacity: 1;
+  visibility: visible;
   z-index: 1000;
-  max-width: 200px;
-  left: 30px;
-}
-
-.current-cabinet {
-}
-
-.bg-img {
-  background-image: image-url('bartop.jpeg')
 }
 
 @media (max-width: 690px) {

@@ -8,21 +8,42 @@
   <%# cabinet header %>
   <div class='d-flex flex-row justify-content-center'>
     <h5 class='current-cabinet mx-2'><%= cabinet.name %></h5>
-    <i class="fa-regular fa-square-plus mt-1 change-cabinet" role='button' data-action='click->cabinets#toggleCabinetSelect'></i>
-  </div>
-
-  <%# cabinet-select pop-up %>
-  <div class='row d-none cabinet-select-wrapper'>
-    <%= collection_select :cabinet,
-                          :name,
-                          [*current_user.cabinets, universal_cabinet],
-                          :id,
-                          :name,
-                          { include_blank: '-- Please Select --',
-                            class: 'cabinet-option' },
-                          { data: { url: cabinet_path(cabinet) },
-                            class: 'cabinet-select'}
-                        %>
+    <i 
+      class="toggle-cabinet-menu fa-regular fa-square-plus mt-1" 
+      role='button' 
+      aria-expanded='false' 
+      aria-label='toggle-menu' 
+      aria-controls='cabinet-menu-container' 
+      data-action='click->cabinets#toggleCabinetMenu'
+    ></i>
+ 
+    <%# cabinet-menu pop-up %>
+    <div class='cabinet-menu-container'>
+      <ul 
+        class='cabinet-menu bg-light'
+        data-action='click->cabinets#toggleCabinetMenu'
+      >
+        <div class='list-group-item'>-- Please Select --</div>
+        <% current_user.cabinets.each do |cabinet| %>
+          <li 
+            role='button' 
+            class='cabinet-option list-group-item' 
+            value='<%= cabinet.id %>'
+            data-url='<%= cabinet_url(cabinet) %>'
+          >
+            <%= cabinet.name %>
+          </li>
+        <% end %>
+        <li 
+          role='button' 
+          class='cabinet-option list-group-item' 
+          value='<%= 1 %>'
+          data-url='<%= cabinet_url(cabinet) %>' 
+        >
+          Universal Cabinet
+        </li>
+      </ul>
+    </div>
   </div>
 </div>
 
