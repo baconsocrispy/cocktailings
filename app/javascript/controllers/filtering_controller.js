@@ -4,25 +4,17 @@ export default class extends Controller {
   connect() {
     // lets me know controller is functioning properly
     console.log("Filtering Controller Loaded");
-
-    // resets select box value to [] when user clicks on '- None -' option
-    $('.cabinet-ingredients option').on('click', function (e) {
-      if ($(this).html() == '- None -') {
-        $(this).closest('.cabinet-ingredients').val([]);
-        filterRecipes();
-      }
-    });
   }
 
   // filters recipes when user chooses a sort option, 
   // selects ingredients or clicks on a category
   filterRecipes(event) {
-    var url = $('.sort-options').data('url');
+    const url = $('.sort-options').data('url');
 
-    var sortOption = $('.sort-options').val();
-    var ingredientIds = getIngredientIds();
-    var recipeIds = getRecipeIds();
-    var categoryId = getCategoryId(event);
+    const sortOption = $('.sort-options').val();
+    const ingredientIds = getIngredientIds();
+    const recipeIds = getRecipeIds();
+    const categoryId = getCategoryId(event);
 
     updateCurrentCategory(categoryId);
 
