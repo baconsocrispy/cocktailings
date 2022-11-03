@@ -62,7 +62,7 @@ export default class extends Controller {
   // sets the boundary where the loadRecords() function gets called
   get pageEnd() {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
-    return scrollHeight - scrollTop - clientHeight < 20; // can adjust to desired limit
+    return scrollHeight - scrollTop - clientHeight < 10; // can adjust to desired limit
   }
 }
 

@@ -52,7 +52,7 @@ class RecipesController < ApplicationController
     when 'Any Ingredient'
       params[:ingredientIds] ?
         @recipes = Recipe.match_any_subset(ingredient_ids, current_user.ingredients, category_id).alphabetical.page(@page) :
-        @recipes = Recipe.filter_all_recipes(current_user.ingredients, category_id).alphabetical.page(@page)
+        @recipes = Recipe.user_has_any_ingredient(current_user.ingredients, category_id).alphabetical.page(@page)
       respond_to do |format|
         format.html { render partial: 'recipe_cards', formats: [:html] }
         format.turbo_stream

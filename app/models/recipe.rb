@@ -19,7 +19,6 @@ class Recipe < ApplicationRecord
 
   validates :name, presence: true
 
-
   # -------------- RECIPE FILTERING LOGIC BELOW --------------- #
 
   # filters all recipes by category
@@ -31,10 +30,29 @@ class Recipe < ApplicationRecord
   # returns the set of recipes from all recipes that can be
   # made from any of the ingredients in the array
   def self.filter_all_recipes(ingredient_ids, category_id)
+    ingredient_ids = '{' + ingredient_ids.join(', ') + '}'
+    Recipe.filter_all_by_category(category_id)
+          .joins(:ingredients)
+          .group(:id)
+          .having('array_agg(ingredients.id) @> ?', ingredient_ids)
+  end
+
+  # returns the set of recipes from all recipes that can be
+  # made from any of the ingredients in the array
+  def self.user_has_any_ingredient(ingredient_ids, category_id)
     Recipe.filter_all_by_category(category_id)
           .joins(:ingredients)
           .where(ingredients: { id: ingredient_ids })
           .distinct
+  end
+
+  # returns all recipes that match ANY of the user's ingredients and then 
+  # filters those down to those matching ingredients selected from the cabinet
+  def self.match_any_subset(subset_ids, primary_ingredient_ids, category_id)
+    subset_ids = '{' + subset_ids.join(', ') + '}'
+    Recipe.user_has_any_ingredient(primary_ingredient_ids, category_id)
+          .group(:id)
+          .having('array_agg(ingredients.id) @> ?', subset_ids)
   end
 
   # returns all recipes that the user has all the ingredients for
@@ -45,15 +63,6 @@ class Recipe < ApplicationRecord
           .joins(:ingredients)
           .group(:id)
           .having('array_agg(ingredients.id) <@ ?', ingredient_ids)
-  end
-
-  # returns all recipes that match ANY of the user's ingredients and then 
-  # filters those down to those matching ingredients selected from the cabinet
-  def self.match_any_subset(subset_ids, primary_ingredient_ids, category_id)
-    subset_ids = '{' + subset_ids.join(', ') + '}'
-    Recipe.filter_all_recipes(primary_ingredient_ids, category_id)
-          .group(:id)
-          .having('array_agg(ingredients.id) @> ?', subset_ids)
   end
 
   # returns all recipes that the user has ALL the ingredients for and then
