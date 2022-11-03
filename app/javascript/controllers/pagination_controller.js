@@ -97,7 +97,7 @@ function getCategoryId() {
 function getUrl(urlValue, pageValue) {
   var url = new URL(urlValue);
   url.searchParams.set('page', pageValue);
-  url.searchParams.append('sort_option', $('.sort-options').val());
+  url.searchParams.append('sortOption', $('.sort-options').val());
   url.searchParams.append('categoryId', getCategoryId());
   url = appendIngredientIds(url);
   return url.toString();

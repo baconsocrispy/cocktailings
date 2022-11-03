@@ -31,7 +31,7 @@ class RecipesController < ApplicationController
     
     @recipes = Recipe.alphabetical.page(@page)
 
-    case params[:sort_option]
+    case params[:sortOption]
     when ''
       params[:ingredientIds] ?
         @recipes = Recipe.alphabetical.filter_all_recipes(ingredient_ids, category_id).page(@page) :

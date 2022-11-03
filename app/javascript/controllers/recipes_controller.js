@@ -23,25 +23,5 @@ export default class extends Controller {
       }
     });
   }
-
-  filter() {
-    var url = $(this.element).data('url');
-    var sort_option = $(this.element).val();
-    $.ajax({
-      type: 'GET',
-      dataType: 'html',
-      url: url,
-      data: { 'sort_option': sort_option},
-      success: function(response) {
-        $('.recipe-cards').html(response);
-        resetPageValue();
-      }
-    });
-  }
-}
-
-function resetPageValue() {
-  var recipeCards = document.querySelector('.recipe-cards');
-  recipeCards.setAttribute('data-pagination-page-value', 2);
 }
 

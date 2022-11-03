@@ -19,20 +19,25 @@
     class='category-menu d-flex justify-content-end' 
     data-action='click->categories#toggleCategoryMenu'
   >
-    <ul class='category-list'>
+    <ul class='category-list' data-controller='filtering'>
       <%# resets category to all categories %>
       <li 
         role='button' 
         class='category-option mx-3 mt-1 list-group-item text-end' 
         data-value='<%= nil %>'
+        data-action='click->filtering#filterRecipes'
       >
         All
       </li>
 
       <%# displays category options %>
       <% Category.all.each do |c| %>
-        <li role='button' class='mx-3 mt-1 list-group-item text-end' >
-          <div class='category-option' data-value='<%= c.id %>'>
+        <li role='button' class='mx-3 mt-1 list-group-item text-end'>
+          <div 
+            class='category-option' 
+            data-value='<%= c.id %>' 
+            data-action='click->filtering#filterRecipes'
+          >
             <%= c.name.pluralize %>
           </div>
         </li>
