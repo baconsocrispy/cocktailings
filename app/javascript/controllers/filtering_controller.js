@@ -13,7 +13,6 @@ export default class extends Controller {
 
     const sortOption = $('.sort-options').val();
     const ingredientIds = getIngredientIds();
-    const recipeIds = getRecipeIds();
     const categoryId = getCategoryId(event);
 
     updateCurrentCategory(categoryId);
@@ -25,7 +24,6 @@ export default class extends Controller {
       data: {
         'sortOption': sortOption,
         'ingredientIds': ingredientIds,
-        'recipeIds': recipeIds,
         'categoryId': categoryId
       },
       success: function (response) {
@@ -44,14 +42,6 @@ function getCategoryId({ target }) {
     categoryId = target.getAttribute('data-value');
   }
   return categoryId;
-}
-
-function getRecipeIds() {
-  var recipeIds = [];
-  $('.card').each(function () {
-    recipeIds.push($(this).data('value'));
-  });
-  return recipeIds;
 }
 
 // gets selected ingredient ids from liquor cabinet display

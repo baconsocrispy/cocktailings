@@ -31,6 +31,7 @@ export default class extends Controller {
   // calls loadRecords() when scroll reaches the bottom of the page
   scroll() {
     if (this.pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
+      console.log(this);
       this.loadRecords(); 
     }
   }
@@ -56,7 +57,6 @@ export default class extends Controller {
 
     // sets fetching flag to false
     this.fetching = false;
-
   }
 
   // sets the boundary where the loadRecords() function gets called
