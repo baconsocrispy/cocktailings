@@ -28,14 +28,18 @@
       <div class="mx-2">
         <%= button_to('Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-dark') %>
       </div>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" 
-               type="search" 
-               placeholder="Search" 
-               aria-label="Search"
-        >
-        <button class="btn" type="Submit">Search</button>
-      </form>
+
+      <%= simple_form_for :search, url: recipes_path, method: 'GET', html: { class: 'd-flex' } do |form | %>
+        <%= form.input_field :query, placeholder: 'Search Cocktails', id: 'search-field' %>                     
+        <%= form.submit 'Search', id: 'search-btn', 
+                                  class: 'btn btn-sm btn-light', 
+                                  data: { controller: 'filtering',
+                                          action: 'click->filtering#filterRecipes',
+                                          url: recipes_path
+                                        }
+        %>
+      <% end %>
+
     </div>
   </div>
 </nav>

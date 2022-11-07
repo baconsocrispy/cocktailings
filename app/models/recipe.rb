@@ -19,7 +19,15 @@ class Recipe < ApplicationRecord
 
   validates :name, presence: true
 
-  # -------------- RECIPE FILTERING LOGIC BELOW --------------- #
+  # -------------- RECIPE SEARCH / FILTERING LOGIC BELOW --------------- #
+
+  def self.search(query)
+    joins(:ingredients).scoping do
+      where('recipes.name ILIKE ?', "%#{ query }%")
+      .or(where('ingredients.display_name ILIKE ?', "%#{ query }%"))
+      .distinct
+    end
+  end
 
   # filters all recipes by category
   def self.filter_all_by_category(category_id)

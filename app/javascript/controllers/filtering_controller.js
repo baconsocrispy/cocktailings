@@ -6,26 +6,19 @@ export default class extends Controller {
     console.log("Filtering Controller Loaded");
   }
 
-  // filters recipes when user chooses a sort option, 
-  // selects ingredients or clicks on a category
+  // filters/searches recipes when user chooses a sort option, 
+  // selects ingredients, clicks on a category or enters a search term
   filterRecipes(event) {
-    const url = $('.sort-options').data('url');
+    event.preventDefault();
 
-    const sortOption = $('.sort-options').val();
-    const ingredientIds = getIngredientIds();
-    const categoryId = getCategoryId(event);
-
-    updateCurrentCategory(categoryId);
+    const url = getUrl(event);
+    const params = getParams(event);
 
     $.ajax({
       type: 'GET',
       dataType: 'html',
       url: url,
-      data: {
-        'sortOption': sortOption,
-        'ingredientIds': ingredientIds,
-        'categoryId': categoryId
-      },
+      data: params,
       success: function (response) {
         $('.recipe-cards').html(response);
         resetPageValue();
@@ -35,6 +28,13 @@ export default class extends Controller {
 }
 
 // ----------- HELPERS ------------
+function getUrl({ target }) {
+  var url = $('.sort-options').data('url');
+  if (target.id === 'search-btn') {
+    url = target.getAttribute('data-url');
+  }
+  return url;
+}
 
 function getCategoryId({ target }) {
   var categoryId = $('.current-category').data('value');
@@ -44,8 +44,6 @@ function getCategoryId({ target }) {
   return categoryId;
 }
 
-// gets selected ingredient ids from liquor cabinet display
-// select options and returns them in an array
 function getIngredientIds() {
   var ingredientIds = [...$('.cabinet-spirits').val(),
   ...$('.cabinet-modifiers').val(),
@@ -61,4 +59,20 @@ function resetPageValue() {
 
 function updateCurrentCategory(id = null) {
   $('.current-category').data('value', id);
+}
+
+function getParams(event) {
+  const searchTerm = $('#search-field').val();
+  const sortOption = $('.sort-options').val();
+  const ingredientIds = getIngredientIds();
+  const categoryId = getCategoryId(event);
+
+  updateCurrentCategory(categoryId);
+
+  return {
+    'sortOption': sortOption,
+    'ingredientIds': ingredientIds,
+    'categoryId': categoryId,
+    'searchTerm': searchTerm
+  };
 }
