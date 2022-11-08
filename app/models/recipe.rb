@@ -31,12 +31,12 @@ class Recipe < ApplicationRecord
     case sort_option
     when '', 'All Recipes'
       ingredient_ids ? 
-        by_category_and_ingredient(category_ids, ingredient_ids).search(search_term) :
+        match_ingredients(category_ids, ingredient_ids).search(search_term) :
         by_category(category_ids).search(search_term)
     when 'Any Ingredient'
       ingredient_ids ?
         match_any_subset(category_ids, user_ingredients, ingredient_ids).search(search_term) :
-        by_category_and_ingredient(category_ids, user_ingredients).search(search_term)
+        match_ingredients(category_ids, user_ingredients).search(search_term)
     when 'All Ingredients'
       ingredient_ids ?
         match_all_subset(category_ids, user_ingredients, ingredient_ids).search(search_term) :
@@ -52,31 +52,41 @@ class Recipe < ApplicationRecord
     end
   end
 
+  # returns the set of recipes from all recipes that can be
+  # made from any of the ingredients in the array
+  def self.match_ingredients(category_ids, user_ingredients)
+    user_ingredients = '{' + user_ingredients.join(', ') + '}'
+    by_category(category_ids)
+      .joins(:ingredients)
+      .group(:id)
+      .having('array_agg(ingredients.id) @> ?', user_ingredients)
+  end
+
   # returns all recipes that match ANY of the user's ingredients and then 
   # filters those down to those matching ingredients selected from the cabinet
   def self.match_any_subset(category_ids, primary_ingredient_ids, subset_ids)
     subset_ids = '{' + subset_ids.join(', ') + '}'
-    Recipe.by_category_and_ingredient(category_ids, primary_ingredient_ids)
-          .group(:id)
-          .having('array_agg(ingredients.id) @> ?', subset_ids)
+    by_category_and_ingredient(category_ids, primary_ingredient_ids)
+      .group(:id)
+      .having('array_agg(ingredients.id) @> ?', subset_ids)
   end
 
   # returns all recipes that the user has all the ingredients for
   def self.user_has_all_ingredients(category_ids, user_ingredients)
     # casts user_ingredients to postgres array syntax
     user_ingredients = '{' + user_ingredients.join(', ') + '}'
-    Recipe.by_category(category_ids)
-          .joins(:ingredients)
-          .group(:id)
-          .having('array_agg(ingredients.id) <@ ?', user_ingredients)
+    by_category(category_ids)
+      .joins(:ingredients)
+      .group(:id)
+      .having('array_agg(ingredients.id) <@ ?', user_ingredients)
   end
 
   # returns all recipes that the user has ALL the ingredients for and then
   # filters those down to those matching ingredients selected from the cabinet
   def self.match_all_subset(category_ids, primary_ingredient_ids, subset_ids)
     subset_ids = '{' + subset_ids.join(', ') + '}'
-    Recipe.user_has_all_ingredients(category_ids, primary_ingredient_ids)
-          .group(:id)
-          .having('array_agg(ingredients.id) @> ?', subset_ids)
+    user_has_all_ingredients(category_ids, primary_ingredient_ids)
+      .group(:id)
+      .having('array_agg(ingredients.id) @> ?', subset_ids)
   end
 end
