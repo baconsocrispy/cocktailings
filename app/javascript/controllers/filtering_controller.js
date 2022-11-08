@@ -14,8 +14,6 @@ export default class extends Controller {
     const url = getUrl(event);
     const params = getParams(event);
 
-    console.log(params);
-
     $.ajax({
       type: 'GET',
       dataType: 'html',

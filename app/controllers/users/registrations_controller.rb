@@ -12,7 +12,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     super do |user|
-      user.update!(default_cabinet: Cabinet.find_by(name: 'Universal Cabinet').id)
+      user.update!(default_cabinet: Cabinet.find_by(name: 'Fully-Stocked Cabinet').id)
     end
   end
 

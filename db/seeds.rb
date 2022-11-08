@@ -8,7 +8,7 @@
 
 require 'csv'
 require Rails.root.join('db', 'seed_ingredient.rb')
-require Rails.root.join('db', 'universal_cabinet.rb')
+require Rails.root.join('db', 'fully_stocked_cabinet.rb')
 require Rails.root.join('db', 'seed_categories.rb')
 require Rails.root.join('db', 'seed_recipe.rb')
 
@@ -17,7 +17,7 @@ create_or_update_ingredients
 
 # creates or updates the cabinet with all ingredients
 # accessible by all users
-create_or_reset_universal_cabinet
+create_or_reset_fully_stocked_cabinet
 
 # populates categories table
 seed_categories

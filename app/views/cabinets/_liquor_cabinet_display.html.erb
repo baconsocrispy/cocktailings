@@ -1,6 +1,6 @@
-<% universal_cabinet = Cabinet.find_by(name: 'Universal Cabinet')%>
+<% fully_stocked_cabinet = Cabinet.find_by(name: 'Fully-Stocked Cabinet')%>
 <% cabinet = current_user.default_cabinet ? 
-      current_user.default_cab : universal_cabinet %>
+      current_user.default_cab : fully_stocked_cabinet %>
 
 <%# liquor cabinet display %>
 <div class='row'>
@@ -40,7 +40,7 @@
           value='<%= 1 %>'
           data-url='<%= cabinet_url(cabinet) %>' 
         >
-          Universal Cabinet
+          Fully-Stocked Cabinet
         </li>
       </ul>
     </div>

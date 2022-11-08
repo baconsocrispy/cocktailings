@@ -15,7 +15,6 @@ export default class extends Controller {
 
     // adds onClick listener for when user changes the current cabinet
     $(document).on('click', '.cabinet-option', changeLiquorCabinet);
-
   }
 
   // opens/closes liquor cabinet menu when '+' icon is clicked
