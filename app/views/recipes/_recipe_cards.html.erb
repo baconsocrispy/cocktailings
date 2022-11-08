@@ -4,5 +4,9 @@
     <% @recipes.each do |recipe| %>
       <%= render partial: "recipe_card", locals: { recipe: recipe } %>
     <% end %>
+
+    <% if @recipes.empty? %>
+      <div class='text-light bg-dark'>No recipes found matching your criteria...</div>
+    <% end %>
   </div>
 </div>

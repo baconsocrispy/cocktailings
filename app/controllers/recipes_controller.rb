@@ -36,56 +36,64 @@ class RecipesController < ApplicationController
   def index
     @page = params[:page] || 1
 
-    category_id = params[:categoryId] != '' ? params[:categoryId] : Category.all.map(&:id)
-    ingredient_ids = params[:ingredientIds] ? [*params[:ingredientIds]].map(&:to_i) : nil
-    searchTerm = params[:searchTerm] == '' ? nil : params[:searchTerm]
+    user_ingredients = current_user.ingredients
+    # category_ids = params[:categoryId] != '' ? params[:categoryId] : Category.all.map(&:id)
+    # ingredient_ids = params[:ingredientIds] ? [*params[:ingredientIds]].map(&:to_i) : nil
+    # search_term = params[:searchTerm]
     
     @recipes = Recipe.alphabetical.page(@page)
 
-    if searchTerm
-      @recipes = Recipe.search(params[:searchTerm]).alphabetical.page(@page)
+    if params[:sortOption]
+      @recipes = Recipe.search_recipes(params[:sortOption],
+                                      params[:categoryId],
+                                      params[:ingredientIds],
+                                      params[:searchTerm],
+                                      user_ingredients)
+                        .alphabetical
+                        .page(@page)
       respond_to do |format|
+#       # needed to explicitly call formats: [:html] after adding turbo_stream option
         format.html { render partial: 'recipe_cards', formats: [:html] }
         format.turbo_stream
       end
-    else
-      case params[:sortOption]
-      when ''
-        params[:ingredientIds] ?
-          @recipes = Recipe.filter_all_recipes(ingredient_ids, category_id).alphabetical.page(@page) :
-          @recipes = Recipe.filter_all_by_category(category_id).alphabetical.page(@page)
-        respond_to do |format|
-          # needed to explicitly call formats: [:html] after adding turbo_stream option
-          format.html { render partial: 'recipe_cards', formats: [:html] }
-          format.turbo_stream
-        end
-      when 'All Recipes'
-        params[:ingredientIds] ?
-          @recipes = Recipe.filter_all_recipes(ingredient_ids, category_id).alphabetical.page(@page) :
-          @recipes = Recipe.filter_all_by_category(category_id).alphabetical.page(@page)
-        respond_to do |format|
-          format.html { render partial: 'recipe_cards', formats: [:html] }
-          format.turbo_stream
-        end
-      when 'Any Ingredient'
-        params[:ingredientIds] ?
-          @recipes = Recipe.match_any_subset(ingredient_ids, current_user.ingredients, category_id).alphabetical.page(@page) :
-          @recipes = Recipe.user_has_any_ingredient(current_user.ingredients, category_id).alphabetical.page(@page)
-        respond_to do |format|
-          format.html { render partial: 'recipe_cards', formats: [:html] }
-          format.turbo_stream
-        end
-      when 'All Ingredients'
-        params[:ingredientIds] ?
-          @recipes = Recipe.match_all_subset(ingredient_ids, current_user.ingredients, category_id).alphabetical.page(@page) :
-          @recipes = Recipe.user_has_all_ingredients(current_user.ingredients, category_id).alphabetical.page(@page)
-        respond_to do |format|
-          format.html { render partial: 'recipe_cards', formats: [:html] }
-          format.turbo_stream
-        end
-      end
-    end  
+    end
   end
+      
+  #     case params[:sortOption]
+  #     when ''
+  #       params[:ingredientIds] ?
+  #         @recipes = Recipe.search_recipes(params[:sortOption], category_ids, ingredient_ids, search_term).alphabetical.page(@page) :
+  #         @recipes = Recipe.search_recipes(params[:sortOption], category_ids, ingredient_ids, search_term).alphabetical.page(@page)
+  #       respond_to do |format|
+  #         # needed to explicitly call formats: [:html] after adding turbo_stream option
+  #         format.html { render partial: 'recipe_cards', formats: [:html] }
+  #         format.turbo_stream
+  #       end
+  #     when 'All Recipes'
+  #       params[:ingredientIds] ?
+  #         @recipes = Recipe.search_recipes(params[:sortOption], category_ids, ingredient_ids, search_term).alphabetical.page(@page) :
+  #         @recipes = Recipe.search_recipes(params[:sortOption], category_ids, ingredient_ids, search_term).alphabetical.page(@page)
+  #       respond_to do |format|
+  #         format.html { render partial: 'recipe_cards', formats: [:html] }
+  #         format.turbo_stream
+  #       end
+  #     when 'Any Ingredient'
+  #       params[:ingredientIds] ?
+  #         @recipes = Recipe.search_recipes(params[:sortOption], category_ids, current_user.ingredients, search_term, ingredient_ids).alphabetical.page(@page) :
+  #         @recipes = Recipe.search_recipes(params[:sortOption], category_ids, current_user.ingredients, search_term).alphabetical.page(@page)
+  #       respond_to do |format|
+  #         format.html { render partial: 'recipe_cards', formats: [:html] }
+  #         format.turbo_stream
+  #       end
+  #     when 'All Ingredients'
+  #         @recipes = Recipe.search_recipes(params[:sortOption], category_ids, current_user.ingredients, search_term, ingredient_ids).alphabetical.page(@page) 
+  #       respond_to do |format|
+  #         format.html { render partial: 'recipe_cards', formats: [:html] }
+  #         format.turbo_stream
+  #       end
+  #     end
+  #   # end  
+  # end
 
   # GET /recipes/1 or /recipes/1.json
   def show
