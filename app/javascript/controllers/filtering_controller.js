@@ -14,6 +14,8 @@ export default class extends Controller {
     const url = getUrl(event);
     const params = getParams(event);
 
+    console.log(params);
+
     $.ajax({
       type: 'GET',
       dataType: 'html',
@@ -49,7 +51,8 @@ function getIngredientIds() {
   ...$('.cabinet-modifiers').val(),
   ...$('.cabinet-sugars').val(),
   ...$('.cabinet-garnishes').val()];
-  return ingredientIds;
+  // if (ingredientIds.length === 0) return null;
+  return ingredientIds.filter(n => n);
 }
 
 function resetPageValue() {

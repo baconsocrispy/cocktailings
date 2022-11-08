@@ -26,7 +26,9 @@ class Recipe < ApplicationRecord
 
   def self.search_recipes(sort_option, category_ids, ingredient_ids=nil, search_term='', user_ingredients)
     category_ids = Category.all.map(&:id) if category_ids == ''
-    ingredient_ids = [*ingredient_ids].map(&:to_i) unless ingredient_ids.nil?
+    ingredient_ids = [*ingredient_ids].map(&:to_i) unless ingredient_ids.nil? 
+
+    p user_ingredients
 
     case sort_option
     when '', 'All Recipes'
@@ -36,7 +38,7 @@ class Recipe < ApplicationRecord
     when 'Any Ingredient'
       ingredient_ids ?
         match_any_subset(category_ids, user_ingredients, ingredient_ids).search(search_term) :
-        match_ingredients(category_ids, user_ingredients).search(search_term)
+        by_category_and_ingredient(category_ids, user_ingredients).search(search_term)
     when 'All Ingredients'
       ingredient_ids ?
         match_all_subset(category_ids, user_ingredients, ingredient_ids).search(search_term) :

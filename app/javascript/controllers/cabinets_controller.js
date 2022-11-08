@@ -16,7 +16,6 @@ export default class extends Controller {
     // adds onClick listener for when user changes the current cabinet
     $(document).on('click', '.cabinet-option', changeLiquorCabinet);
 
-    // $(document).on('click', '.cabinet-ingredients option', deselectOption);
   }
 
   // opens/closes liquor cabinet menu when '+' icon is clicked
@@ -41,15 +40,3 @@ function changeLiquorCabinet(e) {
     }
   });
 }
-
-function deselectOption(e) {
-  var optionIsSelected = $(this).prop('selected');
-  $(this).prop('selected', !optionIsSelected);
-  console.log(optionIsSelected);
-}
-
-// function deselectOption() {
-//   let isSelected = $(this).prop('selected') === 'true';
-//   $(this).prop('selected', !isSelected);
-//   console.log(isSelected);
-// }

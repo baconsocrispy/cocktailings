@@ -29,8 +29,11 @@ export default class extends Controller {
   }
 
   // calls loadRecords() when scroll reaches the bottom of the page
+  // $.active == 0 tests whether there are any active ajax requests
+  // which helped prevent multiple new page requests from getting called
+  // at once
   scroll() {
-    if (this.pageEnd && !this.fetching && !this.hasNoRecordsTarget) {
+    if (this.pageEnd && !this.fetching && !this.hasNoRecordsTarget && $.active == 0) {
       console.log(this);
       this.loadRecords(); 
     }
