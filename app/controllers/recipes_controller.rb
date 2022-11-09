@@ -8,10 +8,10 @@ class RecipesController < ApplicationController
     set_recipe
     if current_user.favorites.include?(@recipe)
       current_user.favorites.delete(@recipe)
-      render partial: 'unfavorite', locals: { recipe: @recipe }
+      render partial: 'components/favoriting/unfavorite', locals: { recipe: @recipe }
     else
       current_user.favorites << @recipe
-      render partial: 'favorite', locals: { recipe: @recipe }
+      render partial: 'components/favoriting/favorite', locals: { recipe: @recipe }
     end
   end
 
@@ -42,7 +42,7 @@ class RecipesController < ApplicationController
       request.referer.include?('recipes/') ? 
         (render :index, params.except(:sortOption, :ingredientIds, :categoryId, :searchTerm)) :
         respond_to do |format|
-          format.html { render partial: 'recipe_cards', formats: [:html] }
+          format.html { render partial: 'components/recipe_cards/recipe_cards_container', formats: [:html] }
           format.turbo_stream
         end
     end

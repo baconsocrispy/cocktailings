@@ -3,7 +3,7 @@
     <div class="card" data-value='<%= recipe.id %>'>
 
       <%# favoriting widget %>
-      <%= render partial: 'favoriting_widget', locals: { recipe: recipe } %>
+      <%= render partial: 'components/favoriting/favoriting_widget', locals: { recipe: recipe } %>
       
       <a href='<%= recipe_path(recipe) %>'>
         <%# if custom image not added, adds default image %>

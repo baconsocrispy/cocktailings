@@ -8,7 +8,7 @@
     data-value=<%= @recipe_count %>
   >
     <% @recipes.each do |recipe| %>
-      <%= render partial: "recipe_card", locals: { recipe: recipe } %>
+      <%= render partial: "components/recipe_cards/recipe_card", locals: { recipe: recipe } %>
     <% end %>
 
     <% if @recipes.empty? %>

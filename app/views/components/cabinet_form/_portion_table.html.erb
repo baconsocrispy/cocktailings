@@ -1,0 +1,30 @@
+<div>  
+  <table class='table'>
+    <thead>
+    <tr>
+      <th>Ingredients</th>
+      <th>Amount</th>
+      <th>Units</th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody class='portions'>
+      <%= f.simple_fields_for :portions do |portion_form| %>
+        <%= render 'components/cabinet_form/portion_fields', f: portion_form %>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class='form-actions'>
+    <%= link_to_add_association 'Add Ingredient', 
+      f, 
+      :portions, 
+      partial: 'components/cabinet_form/portion_fields',
+      class: 'btn btn-outline-dark btn-sm', 
+      data: {
+        association_insertion_node: '.portions', 
+        association_insertion_method: :append 
+      } 
+    %>
+  </div>
+</div>

@@ -24,12 +24,12 @@
 
     <%# recipe ingredients %>
     <div class='row'>
-      <%= render partial: 'portion_table', locals: { f: f } %>
+      <%= render partial: 'components/portion_form/portion_table', locals: { f: f } %>
     </div>
 
     <%# recipe steps %>
     <div class='row'>
-      <%= render partial: 'step_table', locals: { f: f } %>
+      <%= render partial: 'components/step_form/step_table', locals: { f: f } %>
     </div>
     
     <%# add image %>

@@ -5,8 +5,8 @@
      data-action='click->recipes#favorite' >
   
   <% if current_user.favorites.include?(recipe) %>
-    <%= render partial: 'favorite' %>
+    <%= render partial: 'components/favoriting/favorite' %>
   <% else %>
-    <%= render partial: 'unfavorite' %>
+    <%= render partial: 'components/favoriting/unfavorite' %>
   <% end %>
 </div>
