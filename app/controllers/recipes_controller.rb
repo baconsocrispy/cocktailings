@@ -24,6 +24,8 @@ class RecipesController < ApplicationController
     user_ingredients = current_user.ingredients
     user_favorites = current_user.favorites
 
+    session[:search_results] = request.original_url
+
     if params[:sortOption]
       @recipes = Recipe.search_recipes(
                           params[:sortOption],
@@ -35,10 +37,12 @@ class RecipesController < ApplicationController
                         )
                         .alphabetical
                         .page(@page)
-      respond_to do |format|
-        format.html { render partial: 'recipe_cards', formats: [:html] }
-        format.turbo_stream
-      end
+      request.referer.include?('recipes/') ? 
+        (render :index, params.except(:sortOption, :ingredientIds, :categoryId, :searchTerm)) :
+        respond_to do |format|
+          format.html { render partial: 'recipe_cards', formats: [:html] }
+          format.turbo_stream
+        end
     end
   end
 

@@ -33,7 +33,7 @@ class Recipe < ApplicationRecord
     user_favorites
     )
     category_ids = Category.all.map(&:id) if category_ids == ''
-    ingredient_ids = [*ingredient_ids].map(&:to_i) unless ingredient_ids.nil? 
+    ingredient_ids = [*ingredient_ids].map(&:to_i) unless ingredient_ids.nil?
     
     case sort_option
     when '', 'All Recipes'
