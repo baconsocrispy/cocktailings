@@ -1,6 +1,12 @@
 <div class="container-fluid mt-2 mx-3">
   
-  <div id="recipes" class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-2">
+  <div 
+    id="recipes" 
+    class="row row-cols-lg-5 row-cols-md-4 row-cols-sm-3 g-2" 
+    data-controller='recipes'
+    data-action='load->recipes#updateRecipeCount'
+    data-value=<%= @recipe_count %>
+  >
     <% @recipes.each do |recipe| %>
       <%= render partial: "recipe_card", locals: { recipe: recipe } %>
     <% end %>

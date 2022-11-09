@@ -9,12 +9,17 @@
   <%# sorting / new recipe / stats bar %>
   <div class="d-flex flex-row-reverse">
     <div class='me-3 mt-2'>
-      <%= select_tag 'Sort', options_for_select(SORT_OPTIONS), 
-                            include_blank: 'Sort Options', 
-                            class: 'sort-options', 
-                            data: { controller: 'filtering', 
-                                    action: 'filtering#filterRecipes',
-                                    url: recipes_path } %>
+      <%= select_tag 'Sort', 
+        options_for_select(SORT_OPTIONS), 
+        include_blank: 'Sort Options', 
+        class: 'sort-options', 
+        data: { controller: 'filtering', 
+                action: 'filtering#filterRecipes',
+                url: recipes_path } 
+      %>
+    </div>
+    <div id='recipe-count' class='text-light me-3 mt-2'>
+      Total Recipes: <%= @recipe_count %>
     </div>
   </div>
 

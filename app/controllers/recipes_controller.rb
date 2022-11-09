@@ -20,6 +20,7 @@ class RecipesController < ApplicationController
   def index
     @page = params[:page] || 1
     @recipes = Recipe.alphabetical.page(@page)
+    @recipe_count = @recipes.total_count
 
     user_ingredients = current_user.ingredients
     user_favorites = current_user.favorites
@@ -37,6 +38,7 @@ class RecipesController < ApplicationController
                         )
                         .alphabetical
                         .page(@page)
+      @recipe_count = @recipes.total_count
       request.referer.include?('recipes/') ? 
         (render :index, params.except(:sortOption, :ingredientIds, :categoryId, :searchTerm)) :
         respond_to do |format|

@@ -4,6 +4,9 @@ export default class extends Controller {
   connect() {
     console.log("Recipes Controller Loaded");
 
+    // updates recipe count based on results
+    $('#recipe-count').html('Total Recipes: ' + $('#recipes').data('value'));
+
     // display file-name when img uploaded to recipe form
     $('#add-image-btn').on('change', function() {
       var file_name = $('#add-image-btn')[0].files[0].name;
