@@ -29,14 +29,16 @@
       >
         All
       </li>
-
+      
       <%# displays category options %>
       <% Category.all.each do |c| %>
         <li role='button' class='mx-3 mt-1 list-group-item text-end'>
           <div 
             class='category-option' 
+            data-controller='filtering'
             data-value='<%= c.id %>' 
             data-action='click->filtering#filterRecipes'
+            data-isSelected='false'
           >
             <%= c.name.pluralize %>
           </div>
