@@ -15,22 +15,6 @@ class RecipesController < ApplicationController
     end
   end
 
-  # GET /recipes/favorites
-  def favorites
-    @favorites = current_user.favorites
-    respond_to do |format|
-      format.html { render :favorites_index }
-    end
-  end
-
-  def search
-    @recipes = Recipe.search(params[:search][:query]).alphabetical.page(@page)
-    respond_to do |format|
-      format.html { render partial: 'recipe_cards', formats: [:html] }
-      format.turbo_stream
-    end
-  end
-
   # GET /recipes or /recipes.json
   # All filtering / search logic handled in the index action
   def index
@@ -38,6 +22,7 @@ class RecipesController < ApplicationController
     @recipes = Recipe.alphabetical.page(@page)
 
     user_ingredients = current_user.ingredients
+    user_favorites = current_user.favorites
 
     if params[:sortOption]
       @recipes = Recipe.search_recipes(
@@ -45,7 +30,8 @@ class RecipesController < ApplicationController
                           params[:categoryId],
                           params[:ingredientIds],
                           params[:searchTerm],
-                          user_ingredients
+                          user_ingredients,
+                          user_favorites
                         )
                         .alphabetical
                         .page(@page)

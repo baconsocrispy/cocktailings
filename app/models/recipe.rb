@@ -24,23 +24,42 @@ class Recipe < ApplicationRecord
 
   # -------------- RECIPE SEARCH / FILTERING LOGIC --------------- #
 
-  def self.search_recipes(sort_option, category_ids, ingredient_ids=nil, search_term='', user_ingredients)
+  def self.search_recipes(
+    sort_option, 
+    category_ids, 
+    ingredient_ids=nil, 
+    search_term='', 
+    user_ingredients, 
+    user_favorites
+    )
     category_ids = Category.all.map(&:id) if category_ids == ''
     ingredient_ids = [*ingredient_ids].map(&:to_i) unless ingredient_ids.nil? 
     
     case sort_option
     when '', 'All Recipes'
       ingredient_ids ? 
-        match_ingredients(category_ids, ingredient_ids).search(search_term) :
-        by_category(category_ids).search(search_term)
+        match_ingredients(category_ids, ingredient_ids)
+          .search(search_term) :
+        by_category(category_ids)
+          .search(search_term)
     when 'Any Ingredient'
       ingredient_ids ?
-        match_any_subset(category_ids, user_ingredients, ingredient_ids).search(search_term) :
-        by_category_and_ingredient(category_ids, user_ingredients).search(search_term)
+        match_any_subset(category_ids, user_ingredients, ingredient_ids)
+          .search(search_term) :
+        by_category_and_ingredient(category_ids, user_ingredients)
+          .search(search_term)
     when 'All Ingredients'
       ingredient_ids ?
-        match_all_subset(category_ids, user_ingredients, ingredient_ids).search(search_term) :
-        user_has_all_ingredients(category_ids, user_ingredients).search(search_term)
+        match_all_subset(category_ids, user_ingredients, ingredient_ids)
+          .search(search_term) :
+        user_has_all_ingredients(category_ids, user_ingredients)
+          .search(search_term)
+    when 'Favorites'
+      ingredient_ids ?
+        user_favorites.match_ingredients(category_ids, ingredient_ids)
+          .search(search_term) :
+        user_favorites.by_category(category_ids)
+          .search(search_term)
     end
   end
 
