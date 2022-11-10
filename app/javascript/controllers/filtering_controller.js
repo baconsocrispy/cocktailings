@@ -38,7 +38,7 @@ function getUrl({ target }) {
 
 function getCategoryId({ target }) {
   var categoryId = $('.current-category').data('value');
-  if (target.classList.contains('category-option')) {
+  if (target.classList.contains('category-item')) {
     categoryId = target.getAttribute('data-value');
   }
   return categoryId;

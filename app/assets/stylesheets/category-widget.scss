@@ -1,36 +1,92 @@
-// increases category font-size on hover
-.category-option:hover {
-  font-size: larger;
-}
-
-// styling for full-width category container
-.category-menu-wrapper {
-  position: fixed;
+#categories-container {
+  position: relative;
   left: 0;
   right: 0;
-  top: 55px;
-  height: 30px;
+  // height: 30px;
   background-image: image-url('lime-mint.jpg');
   z-index: 5;
-  box-shadow: 0px 5px rgba(0, 0, 0, 0.4)
+  box-shadow: 0px 5px rgba(0, 0, 0, 0.4);
+  color: white;
+  white-space: nowrap;
+  overflow: auto;
 }
 
-// styling for the category menu/mask
-.category-menu {
-  position: fixed;
-  opacity: 0;
-  visibility: hidden;
-  top: 85px;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background-color: rgba(0, 0, 0, 0.5);
-  z-index: 4;
+#category-items {
+  height: 100%;
+  list-style: none;
+  padding: 0;
+  width: 95%;
+  float: left;
 }
 
-// makes category menu visible when toggled
-.category-toggle[aria-expanded='true'] ~ .category-menu {
-  opacity: 1;
-  visibility: visible;
+.category-item {
+  display: inline-block;
+  text-align: center;
+  height: 100%;
+  width: 150px;
+
+    &:hover {
+      background-color: rgba(239, 224, 165, 0.4);
+    }
 }
 
+#more-categories {
+  // width: 5%;
+  cursor: pointer;
+  display: inline-block;
+  float: right;
+  margin-right: 5px;
+  list-style: none;
+}
+
+#category-overflow {
+  position: absolute;
+  right: 5px;
+  display: none;
+  background-color: cornsilk;
+  color: rgb(1, 55, 1);
+  border-radius: 5px;
+}
+
+#category-overflow li {
+  display: block;
+  text-align: right;
+  margin-right: 5px;
+  width: auto;
+}
+
+// // increases category font-size on hover
+// .category-option:hover {
+//   font-size: larger;
+// }
+
+// // styling for full-width category container
+// .category-menu-wrapper {
+//   position: fixed;
+//   left: 0;
+//   right: 0;
+//   top: 55px;
+//   height: 30px;
+//   background-image: image-url('lime-mint.jpg');
+//   z-index: 5;
+//   box-shadow: 0px 5px rgba(0, 0, 0, 0.4)
+// }
+
+// // styling for the category menu/mask
+// .category-menu {
+//   position: fixed;
+//   opacity: 0;
+//   visibility: hidden;
+//   top: 85px;
+//   bottom: 0;
+//   left: 0;
+//   right: 0;
+//   background-color: rgba(0, 0, 0, 0.5);
+//   z-index: 4;
+// }
+
+// // makes category menu visible when toggled
+// .category-toggle[aria-expanded='true'] ~ .category-menu {
+//   opacity: 1;
+//   visibility: visible;
+// }
