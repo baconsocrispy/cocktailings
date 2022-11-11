@@ -1,9 +1,9 @@
 class Recipe < ApplicationRecord
-  include Toolable
   include Portionable
   
   has_one_attached :image
   has_and_belongs_to_many :users
+  has_and_belongs_to_many :tools
   has_and_belongs_to_many :categories
   has_many :ingredients, through: :portions
   has_many :steps, dependent: :destroy

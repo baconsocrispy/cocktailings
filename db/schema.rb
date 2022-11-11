@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_10_25_162917) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_11_205450) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_162917) do
     t.bigint "user_id"
     t.index ["name"], name: "index_cabinets_on_name"
     t.index ["user_id"], name: "index_cabinets_on_user_id"
+  end
+
+  create_table "cabinets_tools", force: :cascade do |t|
+    t.bigint "cabinet_id", null: false
+    t.bigint "tool_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["cabinet_id"], name: "index_cabinets_tools_on_cabinet_id"
+    t.index ["tool_id"], name: "index_cabinets_tools_on_tool_id"
   end
 
   create_table "cabinets_users", id: false, force: :cascade do |t|
@@ -126,6 +135,15 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_162917) do
     t.index ["name"], name: "index_recipes_on_name", unique: true
   end
 
+  create_table "recipes_tools", force: :cascade do |t|
+    t.bigint "recipe_id", null: false
+    t.bigint "tool_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["recipe_id"], name: "index_recipes_tools_on_recipe_id"
+    t.index ["tool_id"], name: "index_recipes_tools_on_tool_id"
+  end
+
   create_table "recipes_users", force: :cascade do |t|
     t.bigint "recipe_id"
     t.bigint "user_id"
@@ -150,9 +168,6 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_162917) do
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "toolable_type"
-    t.bigint "toolable_id"
-    t.index ["toolable_type", "toolable_id"], name: "index_tools_on_toolable"
   end
 
   create_table "users", force: :cascade do |t|
@@ -170,7 +185,11 @@ ActiveRecord::Schema[7.0].define(version: 2022_10_25_162917) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "cabinets_tools", "cabinets"
+  add_foreign_key "cabinets_tools", "tools"
   add_foreign_key "categories_recipes", "categories"
   add_foreign_key "categories_recipes", "recipes"
+  add_foreign_key "recipes_tools", "recipes"
+  add_foreign_key "recipes_tools", "tools"
   add_foreign_key "steps", "recipes"
 end

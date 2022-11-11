@@ -31,6 +31,17 @@
     <div class='row'>
       <%= render partial: 'components/step_form/step_table', locals: { f: f } %>
     </div>
+
+    <%# recipe tools %>
+   <div class='row'>
+      <div>
+        <%= f.collection_check_boxes :tool_ids, 
+                                     Tool.all.order(:tool_type), 
+                                     :id, 
+                                     :tool_type, 
+                                     include_hidden: false %>
+      </div>
+    </div>
     
     <%# add image %>
     <div class='row my-2'>

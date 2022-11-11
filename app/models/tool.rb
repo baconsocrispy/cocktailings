@@ -1,3 +1,4 @@
 class Tool < ApplicationRecord
-  belongs_to :toolable, :polymorphic => true
+  has_and_belongs_to_many :recipes
+  has_and_belongs_to_many :cabinets
 end
