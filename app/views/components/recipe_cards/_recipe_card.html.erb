@@ -1,26 +1,28 @@
-<div class='card-container'>
+<div 
+  class='card-container'
+  data-controller='recipes'
+  data-url='<%= recipe_path(recipe) %>'
+  data-action='click->recipes#showRecipe'
+>
+  <div class="card" data-value='<%= recipe.id %>'>
+
+    <%# favoriting widget %>
+    <%= render partial: 'components/favoriting/favoriting_widget', locals: { recipe: recipe } %>
   
-    <div class="card" data-value='<%= recipe.id %>'>
 
-      <%# favoriting widget %>
-      <%= render partial: 'components/favoriting/favoriting_widget', locals: { recipe: recipe } %>
-      
-      <a href='<%= recipe_path(recipe) %>'>
-        <%# if custom image not added, adds default image %>
-        <div class='card-img-container'>
-          <% if recipe.image.present? %>
-            <%= image_tag recipe.image, class: "card-img"  %>
-          <% else %>
-            <img src=<%= asset_path('default.webp') %> class="card-img">
-          <% end %>
-        </div>
-
-        <%# displays cocktail name and snippet of description %>
-        <div class="card-body">
-          <h5 class="card-title"><%= recipe.name %></h5>
-          <p class="card-text h-75 text-truncate"><%= recipe.description %></p>
-        </div>
-       </a>
+    <%# if custom image not added, adds default image %>
+    <div class='card-img-container'>
+      <% if recipe.image.present? %>
+        <%= image_tag recipe.image, class: "card-img"  %>
+      <% else %>
+        <img src=<%= asset_path('default.webp') %> class="card-img">
+      <% end %>
     </div>
- 
+
+    <%# displays cocktail name and snippet of description %>
+    <div class="card-body">
+      <h5 class="card-title"><%= recipe.name %></h5>
+      <p class="card-text h-75 text-truncate"><%= recipe.description %></p>
+    </div>
+  </div>
 </div>

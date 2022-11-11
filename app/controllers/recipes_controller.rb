@@ -25,8 +25,6 @@ class RecipesController < ApplicationController
     user_ingredients = current_user.ingredients
     user_favorites = current_user.favorites
 
-    session[:search_results] = request.original_url
-
     if params[:sortOption]
       @recipes = Recipe.search_recipes(
                           params[:sortOption],
@@ -39,17 +37,18 @@ class RecipesController < ApplicationController
                         .alphabetical
                         .page(@page)
       @recipe_count = @recipes.total_count
-      request.referer.include?('recipes/') ? 
-        (render :index, params.except(:sortOption, :ingredientIds, :categoryId, :searchTerm)) :
-        respond_to do |format|
-          format.html { render partial: 'components/recipe_cards/recipe_cards_container', formats: [:html] }
-          format.turbo_stream
-        end
+      respond_to do |format|
+        format.html { render partial: 'components/recipe_cards/recipe_cards_container', formats: [:html] }
+        format.turbo_stream
+      end
     end
   end
 
   # GET /recipes/1 or /recipes/1.json
   def show
+    respond_to do |format|
+      format.html { render partial: 'components/recipe_cards/recipe_cards_container' }
+    end
   end
 
   # GET /recipes/new

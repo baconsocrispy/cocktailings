@@ -14,8 +14,23 @@ export default class extends Controller {
     });
   }
 
+  showRecipe(e) {
+    const url = $(this.element).data('url');
+    console.log(url);
+
+    $.ajax({
+      beforeSend: function (xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')); },
+      type: 'GET',
+      dataType: 'html',
+      url: url,
+      success: function (response) {
+        $('.recipe-cards').html(response);
+      }
+    });
+  }
+
   favorite(e) {
-    var url = $(this.element).data('url');
+    const url = $(this.element).data('url');
     $.ajax({
       beforeSend: function (xhr) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')); },
       type: 'POST',

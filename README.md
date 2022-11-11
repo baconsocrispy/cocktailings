@@ -124,3 +124,10 @@ Help from:
 * https://betterprogramming.pub/devise-auth-setup-in-rails-7-44240aaed4be
 * Devise Docs: https://github.com/heartcombo/devise
 
+## PRIORITY NAVIGATION BAR FOR CATEGORIES
+
+Help from:
+
+* https://css-tricks.com/forums/topic/responsive-navigation-hide-move-itemss-to-dropdown-when-space-runs-out/
+* https://codepen.io/kvana/pen/ZbENqr
+

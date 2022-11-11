@@ -19,16 +19,12 @@ export default class extends Controller {
     $(document).ready(() => {
       var item_width = $('.category-item').width();
       var item_count = $('#category-items .category-item').length;
-      var icon_width = $('#more-categories').width();
 
       var nav_width_og = $('#categories-container').width();
       var nav_width = $('#categories-container').width();
 
       var isOverflowing = nav_width < (item_width * (item_count + 1));
-
-      console.log([nav_width, (item_width * (item_count + 1))]);
       
-
       if (isOverflowing) {
         $('#more-categories').appendTo('body');
         $('#more-categories').hide();
@@ -47,9 +43,6 @@ export default class extends Controller {
         nav_width = $('#categories-container').width();
         item_width = $('.category-item').width();
         item_count = $('#category-items .category-item').length;
-
-        console.log([nav_width, (item_width * (item_count + 1))]);
-        console.log(item_count);
 
         if (nav_width < (item_width * (item_count + 1))) {
           $('#category-items li').not('#more-categories').last().appendTo($('#category-overflow'));

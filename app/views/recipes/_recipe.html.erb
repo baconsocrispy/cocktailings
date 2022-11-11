@@ -1,19 +1,19 @@
-<div id="<%= dom_id recipe %>">
+<div id='recipe-container'>
 
   <%# cocktail name %>
-  <div class='row text-center'>
+  <div id='recipe-header' class=''>
     <h2><%= recipe.name %></h2>
   </div>
 
   <%# cocktail categories %>
-  <div class='row text-center'>
-    <h2><%= recipe.categories.map(&:name) %></h2>
+  <div id='recipe-categories' class=''>
+    <h2>Category: <%= recipe.categories.map(&:name).join(', ') %></h2>
   </div>
 
   <%# image display %>
-  <div class='row'>
-    <div class='d-flex justify-content-center'>
-      <div class="w-25 ml-0">
+  <div id='recipe-img-container' class=''>
+    <div class=''>
+      <div class="">
         <% if recipe.image.present? %>
           <%= image_tag recipe.image, class: "w-100"  %>
         <% end %>
@@ -22,20 +22,22 @@
   </div>
   
   <%# cocktail description (if any) %>
-  <% if recipe.description != "" %>
-    <div class='row'>
-      <div class='px-2'>
-        <h3>Description</h3>
-        <p><%= recipe.description %></p>   
+  <div id='recipe-description-container'>
+    <% if recipe.description != "" %>
+      <div class=''>
+        <div class=''>
+          <h3>Description</h3>
+          <p><%= recipe.description %></p>   
+        </div>
       </div>
-    </div>
-  <% end%> 
+    <% end%>
+  </div> 
   
   <%# ingredients display %>
-  <div class='row'>
-    <div class='col-3'>
+  <div class=''>
+    <div class=''>
       <h3>Ingredients</h3>
-      <ul class='list-unstyled'>
+      <ul class=''>
         <% recipe.portions.each do | portion | %>
           <li><%= portion.ingredient.display_name %> | <%= portion.amount %> <%= portion.unit %> </li>
         <% end%>
@@ -43,7 +45,7 @@
     </div>
 
     <%# recipe steps %>
-    <div class='col-9'>
+    <div class=''>
       <h3>Steps</h3>
       <ol>
         <% recipe.steps.each do |s| %>

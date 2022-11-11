@@ -7,12 +7,18 @@
     data-action='load->recipes#updateRecipeCount'
     data-value=<%= @recipe_count %>
   >
-    <% @recipes.each do |recipe| %>
-      <%= render partial: "components/recipe_cards/recipe_card", locals: { recipe: recipe } %>
+    <% if @recipe %>
+      <%= render partial: 'recipes/recipe', locals: { recipe: @recipe } %>
     <% end %>
 
-    <% if @recipes.empty? %>
-      <div class='text-light bg-dark'>No recipes found matching your criteria...</div>
+    <% if @recipes %>
+      <% @recipes.each do |recipe| %>
+        <%= render partial: "components/recipe_cards/recipe_card", locals: { recipe: recipe } %>
+      <% end %>
+
+      <% if @recipes.empty? %>
+        <div class='text-light bg-dark'>No recipes found matching your criteria...</div>
+      <% end %>
     <% end %>
   </div>
 </div>
