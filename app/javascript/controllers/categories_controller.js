@@ -19,36 +19,47 @@ export default class extends Controller {
     $(document).ready(() => {
       var item_width = $('.category-item').width();
       var item_count = $('#category-items .category-item').length;
+      var icon_width = $('#more-categories').width();
 
-      var nav_width_og = $('#category-items').width();
-      var nav_width = $('#category-items').width();
+      var nav_width_og = $('#categories-container').width();
+      var nav_width = $('#categories-container').width();
 
-      var isOverflowing = nav_width < (item_width * item_count);
+      var isOverflowing = nav_width < (item_width * (item_count + 1));
+
+      console.log([nav_width, (item_width * (item_count + 1))]);
       
 
-      // if (isOverflowing) {
-      //   $('#more-categories').appendTo('body');
-      //   $('#more-categories').hide();
-      // }
+      if (isOverflowing) {
+        $('#more-categories').appendTo('body');
+        $('#more-categories').hide();
+      }
 
       for (var i = 0; i < item_count; i++) {
         item_count = $('#category-items .category-item').length;
+        console.log(isOverflowing);
+
+        isOverflowing = nav_width < (item_width * (item_count + 1));
 
         if (isOverflowing) addCategoryToOverflow();
       }
 
       $(window).resize(() => {
-        nav_width = $('#category-items').width();
+        nav_width = $('#categories-container').width();
         item_width = $('.category-item').width();
         item_count = $('#category-items .category-item').length;
 
-        isOverflowing = nav_width < (item_width * item_count);
+        console.log([nav_width, (item_width * (item_count + 1))]);
+        console.log(item_count);
 
-        if (isOverflowing) addCategoryToOverflow();
+        if (nav_width < (item_width * (item_count + 1))) {
+          $('#category-items li').not('#more-categories').last().appendTo($('#category-overflow'));
+          $('#more-categories').appendTo($('#category-items'));
+          $('#more-categories').show();
+        }
 
-        if (nav_width > (item_width * item_count) + (item_width - 1)) {
+        if (nav_width > (item_width * (item_count + 1))) {
           $('#category-overflow li').last().appendTo($('#category-items'));
-          $('#more-categories').appendTo($('#categories-container'));
+          $('#more-categories').appendTo($('#category-items'));
         }
 
         if (nav_width == nav_width_og) {
@@ -63,6 +74,7 @@ export default class extends Controller {
     });
   }
 
+
   toggleCategoryMenu() {
     const menu = $('.category-toggle');
     let isMenuExpanded = menu.attr('aria-expanded') === 'true';
@@ -75,6 +87,6 @@ function addCategoryToOverflow() {
     .last()
     .appendTo($('#category-overflow'));
 
-  // $('#more-categories').appendTo($('#categories-container'));
-  // $('#more-categories').show();
+  $('#more-categories').appendTo($('#category-items'));
+  $('#more-categories').show();
 }
