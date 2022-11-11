@@ -5,6 +5,6 @@
   <% end %>
 
   <% if @recipes.page(@page.to_i + 1).out_of_range? %>
-    <div class='hidden' data-pagination-target='noRecords'>
+    <div class='hidden' data-pagination-target='noRecords'></div>
   <% end %>
 <% end %>

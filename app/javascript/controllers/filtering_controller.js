@@ -49,7 +49,6 @@ function getIngredientIds() {
   ...$('.cabinet-modifiers').val(),
   ...$('.cabinet-sugars').val(),
   ...$('.cabinet-garnishes').val()];
-  // if (ingredientIds.length === 0) return null;
   return ingredientIds.filter(n => n);
 }
 

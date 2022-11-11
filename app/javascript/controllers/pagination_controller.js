@@ -78,14 +78,15 @@ function getIngredientIds() {
   ...$('.cabinet-modifiers').val(),
   ...$('.cabinet-sugars').val(),
   ...$('.cabinet-garnishes').val()];
-  return ingredientIds;
+  return ingredientIds.filter(n => n);
 }
 
 // if there are ingredientIds, appends them as an array to searchParams
 function appendIngredientIds(url) {
   var ingredientIds = getIngredientIds();
-  if (ingredientIds.length != 0) {
+  if (ingredientIds.length) {
     ingredientIds.map(i => url.searchParams.append('ingredientIds', i));
+    console.log(ingredientIds);
   }
   return url;
 }

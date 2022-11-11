@@ -14,5 +14,9 @@
     <% if @recipes.empty? %>
       <div class='text-light bg-dark'>No recipes found matching your criteria...</div>
     <% end %>
+
+    <% if @recipe_count < @recipes.default_per_page %>
+      <div class='hidden' data-pagination-target='noRecords'></div>
+    <% end %>
   </div>
 </div>
