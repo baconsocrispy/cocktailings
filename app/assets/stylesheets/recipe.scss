@@ -1,18 +1,40 @@
-// #recipe-container {
-//   border: 1px solid black;
-//   width: 100%;
-// }
+.modal-header {
+  height: 70px;
+  background-color: cornsilk;
+}
 
-// #recipe-header {
-//   text-align: center;
-//   color: rgb(1, 55, 1);
-// }
+#modal-img-container img {
+  height: 65px;
+  border-radius: 3px;
+}
 
-// #recipe-categories {
-//   text-align: center;
-//   color: rgb(1, 55, 1);
-// }
+#modal-header-recipe-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: rgb(1, 55, 1);
+  margin-left: 10px;
+}
 
-// #recipe-img-container {
-//   width: 25%;
-// }
+#modal-header-recipe-categories {
+  color: rgb(1, 55, 1);
+  margin-left: 10px;
+}
+
+#recipe-details-container {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.recipe-details-header {
+  font-size: 1em;
+  font-weight: bold;
+  color:rgb(1, 55, 1);
+}
+
+.recipe-details-list {
+  list-style: none;
+  color:rgb(1, 55, 1);
+  font-size: 1em;
+}
+
+

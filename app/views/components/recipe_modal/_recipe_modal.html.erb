@@ -1,8 +1,29 @@
 <div id=recipe-modal class='modal fade' role='dialog'>
   <div class='modal-dialog modal-lg'>
     <div class='modal-content'>
-      <div class='modal-header'>
-        <button id='modal-close' type='button' class='close' data-dismiss='modal'>&times;</button>
+      <div class='modal-header d-flex flex-row'>
+
+        <%# image display %>
+        <div id='modal-img-container'>
+          <% if recipe.image.present? %>
+            <%= image_tag recipe.image, class: ""  %>
+          <% end %>
+        </div>
+
+        <div id='modal-header-recipe-name'><%= recipe.name %></div>
+
+        <div id='modal-header-recipe-categories' class='text-right'>
+          Category: <%= recipe.categories.map(&:name).join(', ') %>
+        </div>
+
+        <button 
+          id='modal-close' 
+          type='button' 
+          class='btn-close' 
+          data-bs-dismiss='modal' 
+          aria-label='Close'
+        ></button>
+
       </div>
       <div>
         <%= render partial: 'recipes/recipe', locals: { recipe: @recipe } %>
