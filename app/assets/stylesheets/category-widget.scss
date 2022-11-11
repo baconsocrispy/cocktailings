@@ -2,38 +2,34 @@
   position: relative;
   left: 0;
   right: 0;
-  // height: 30px;
   background-image: image-url('lime-mint.jpg');
   z-index: 5;
   box-shadow: 0px 5px rgba(0, 0, 0, 0.4);
   color: white;
   white-space: nowrap;
-  overflow: auto;
 }
 
 #category-items {
   height: 100%;
   list-style: none;
   padding: 0;
-  width: 95%;
-  float: left;
 }
 
 .category-item {
   display: inline-block;
   text-align: center;
   height: 100%;
-  width: 150px;
+  width: 120px;
 
     &:hover {
       background-color: rgba(239, 224, 165, 0.4);
+      cursor: pointer;
     }
 }
 
 #more-categories {
-  // width: 5%;
   cursor: pointer;
-  display: inline-block;
+  display: none;
   float: right;
   margin-right: 5px;
   list-style: none;
