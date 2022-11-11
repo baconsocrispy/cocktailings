@@ -37,18 +37,16 @@ class RecipesController < ApplicationController
                         .alphabetical
                         .page(@page)
       @recipe_count = @recipes.total_count
-      respond_to do |format|
-        format.html { render partial: 'components/recipe_cards/recipe_cards_container', formats: [:html] }
-        format.turbo_stream
-      end
+
+        respond_to do |format|
+          format.html { render partial: 'components/recipe_cards/recipe_cards_container', formats: [:html] }
+          format.turbo_stream
+        end
     end
   end
 
   # GET /recipes/1 or /recipes/1.json
   def show
-    respond_to do |format|
-      format.html { render partial: 'components/recipe_cards/recipe_cards_container' }
-    end
   end
 
   # GET /recipes/new
