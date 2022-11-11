@@ -47,6 +47,9 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1 or /recipes/1.json
   def show
+    respond_to do |format|
+      format.js
+    end
   end
 
   # GET /recipes/new

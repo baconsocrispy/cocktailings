@@ -14,6 +14,14 @@ export default class extends Controller {
     });
   }
 
+  showRecipe() {
+    const url = $(this.element).data('url');
+    $.ajax({
+      type: 'GET',
+      url: url,
+    });
+  }
+
   favorite(e) {
     const url = $(this.element).data('url');
     $.ajax({
