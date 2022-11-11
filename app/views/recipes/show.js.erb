@@ -1,2 +1,3 @@
 $('#recipe-modal-container').html("<%= j render 'components/recipe_modal/recipe_modal', recipe: @recipe %>");
 $('#recipe-modal').modal('show');
+$('#modal-close').on('click', () => $('#recipe-modal').modal('hide'))
