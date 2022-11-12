@@ -17,6 +17,13 @@
   <body>
     <%= render 'layouts/comps/navbar' %>
 
+    <%# collapsible category bar %>
+    <% if @home %>
+      <div id='sticky-category-bar'>
+        <%= render partial: 'components/categories/categories_expanded' %>
+      </div>
+    <% end %>
+
     <% if notice %>
       <p class='alert alert-success'><%= notice %></p>
     <% end %>

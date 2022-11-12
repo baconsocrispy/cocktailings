@@ -24,8 +24,8 @@ class RecipesController < ApplicationController
     @recipes = Recipe.alphabetical.page(@page)
     @recipe_count = @recipes.total_count
 
-    user_ingredients = current_user.ingredients
-    user_favorites = current_user.favorites
+    user_ingredients = current_user.ingredients 
+    user_favorites = current_user.favorites 
 
     if params[:sortOption]
       @recipes = Recipe.search_recipes(

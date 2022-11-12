@@ -4,35 +4,36 @@
   data-controller='categories'
 >
   <ul id='category-items' data-controller='filtering'>
-      <%# resets category to all categories %>
+    <%# resets category to all categories %>
+    <li 
+      role='button' 
+      class='category-item' 
+      data-value='<%= nil %>'
+      data-action='click->filtering#filterRecipes'
+    >
+      All Categories
+    </li>
+    
+    <%# displays category options %>
+    <% Category.all.each do |c| %>
       <li 
-        class='category-item' 
-        data-value='<%= nil %>'
+        role='button' class='category-item' 
+        data-controller='filtering'
+        data-value='<%= c.id %>' 
         data-action='click->filtering#filterRecipes'
+        data-isSelected='false'
       >
-        All
-   
-      
-      <%# displays category options %>
-      <% Category.all.each do |c| %>
-        <li 
-          class='category-item' 
-          data-controller='filtering'
-          data-value='<%= c.id %>' 
-          data-action='click->filtering#filterRecipes'
-          data-isSelected='false'
-        >
-            <%= c.name.pluralize %>
-
-      <% end %>
-      <li id='more-categories'>
-        <i class="fa-solid fa-bars"></i>
+          <%= c.name.pluralize %>
       </li>
-    </ul>
-
-    <ul id='category-overflow'></ul>
-
-    <%# hidden field to capture currently-selected category id %>
-    <div class='current-category hidden' data-value='<%= nil %>'></div>
+    <% end %>
+  </ul>
+  
+  <div id='more-categories'>
+      <i class="fa-solid fa-bars"></i>
   </div>
+  
+  <ul id='category-overflow'></ul>
+
+  <%# hidden field to capture currently-selected category id %>
+  <div class='current-category hidden' data-value='<%= nil %>'></div>
 </div>

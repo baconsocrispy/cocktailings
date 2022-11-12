@@ -1,3 +1,8 @@
+#sticky-category-bar {
+  position: sticky;
+  top: 55px;
+  z-index: 6;
+}
 #categories-container {
   position: relative;
   left: 0;
