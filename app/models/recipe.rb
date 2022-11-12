@@ -29,14 +29,14 @@ class Recipe < ApplicationRecord
     category_ids, 
     ingredient_ids=nil, 
     search_term='', 
-    user_ingredients, 
-    user_favorites
+    user
     )
+
     category_ids = Category.all.map(&:id) if category_ids == ''
     ingredient_ids = [*ingredient_ids].map(&:to_i) unless ingredient_ids.nil?
     
     case sort_option
-    when '', 'All Recipes'
+    when 'All Recipes'
       ingredient_ids ? 
         match_ingredients(category_ids, ingredient_ids)
           .search(search_term) :
@@ -44,21 +44,27 @@ class Recipe < ApplicationRecord
           .search(search_term)
     when 'I Have Any Ingredient'
       ingredient_ids ?
-        match_any_subset(category_ids, user_ingredients, ingredient_ids)
+        match_any_subset(category_ids, user.ingredients, ingredient_ids)
           .search(search_term) :
-        by_category_and_ingredient(category_ids, user_ingredients)
+        by_category_and_ingredient(category_ids, user.ingredients)
           .search(search_term)
     when 'I Have All Ingredients'
       ingredient_ids ?
-        match_all_subset(category_ids, user_ingredients, ingredient_ids)
+        match_all_subset(category_ids, user.ingredients, ingredient_ids)
           .search(search_term) :
-        user_has_all_ingredients(category_ids, user_ingredients)
+        user_has_all_ingredients(category_ids, user.ingredients)
           .search(search_term)
     when 'Favorites'
       ingredient_ids ?
-        user_favorites.match_ingredients(category_ids, ingredient_ids)
+        user.favorites.match_ingredients(category_ids, ingredient_ids)
           .search(search_term) :
-        user_favorites.by_category(category_ids)
+        user.favorites.by_category(category_ids)
+          .search(search_term)
+    when 'My Recipes'
+      ingredient_ids ?
+        user.recipes.match_ingredients(category_ids, ingredient_ids)
+          .search(search_term) :
+        user.recipes.by_category(category_ids)
           .search(search_term)
     end
   end
@@ -73,12 +79,12 @@ class Recipe < ApplicationRecord
 
   # returns the set of recipes from all recipes that can be
   # made from any of the ingredients in the array
-  def self.match_ingredients(category_ids, user_ingredients)
-    user_ingredients = '{' + user_ingredients.join(', ') + '}'
+  def self.match_ingredients(category_ids, ingredient_ids)
+    ingredient_ids = '{' + ingredient_ids.join(', ') + '}'
     by_category(category_ids)
       .joins(:ingredients)
       .group(:id)
-      .having('array_agg(ingredients.id) @> ?', user_ingredients)
+      .having('array_agg(ingredients.id) @> ?', ingredient_ids)
   end
 
   # returns all recipes that match ANY of the user's ingredients and then 

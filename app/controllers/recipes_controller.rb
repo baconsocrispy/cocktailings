@@ -24,8 +24,7 @@ class RecipesController < ApplicationController
     @recipes = Recipe.alphabetical.page(@page)
     @recipe_count = @recipes.total_count
 
-    user_ingredients = current_user.ingredients 
-    user_favorites = current_user.favorites
+    user = current_user
 
     if params[:sortOption]
       @recipes = Recipe.search_recipes(
@@ -33,8 +32,7 @@ class RecipesController < ApplicationController
                           params[:categoryId],
                           params[:ingredientIds],
                           params[:searchTerm],
-                          user_ingredients,
-                          user_favorites,
+                          user
                         )
                         .alphabetical
                         .page(@page)
