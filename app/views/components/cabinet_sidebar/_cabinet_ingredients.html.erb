@@ -1,0 +1,30 @@
+<%# select widgets for each category of ingredient %>
+<% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
+  <div class='row mt-2'>
+    <div class='mx-4'>
+      <div>
+        <h6 class='fw-bold'><%= ingredient_type.pluralize %></h6>
+      </div>
+      <div>
+        <%= collection_select :ingredient, 
+              :display_name, 
+              cabinet.ingredients.where(:type => ingredient_type), 
+              :id, 
+              :display_name,
+              { prompt: '-- None Selected --' }, 
+              html_options = { 
+                size: 5, 
+                multiple: true,
+                data: { 
+                  controller: 'filtering', 
+                  action: 'filtering#filterRecipes',
+                  url: recipes_path 
+                },
+                class: 'cabinet-ingredients 
+                        cabinet-' + ingredient_type.downcase.pluralize 
+              } 
+          %>
+      </div>
+    </div>
+  </div>
+<% end %>

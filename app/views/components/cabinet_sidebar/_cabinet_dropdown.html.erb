@@ -1,0 +1,32 @@
+<%# cabinet-menu dropdown %>
+<div class='cabinet-menu-container'>
+  <ul 
+    class='cabinet-menu bg-light'
+    data-action='click->cabinets#toggleCabinetMenu'
+  >
+    <div class='list-group-item'>-- Please Select --</div>
+    <% current_user.cabinets.each do |cabinet| %>
+      <li 
+        role='button' 
+        class='cabinet-option list-group-item' 
+        value='<%= cabinet.id %>'
+        data-url='<%= cabinet_url(cabinet) %>'
+      >
+        <%= cabinet.name %>
+      </li>
+    <% end %>
+    <li 
+      role='button' 
+      class='cabinet-option list-group-item' 
+      value='<%= 1 %>'
+      data-url='<%= cabinet_url(cabinet) %>' 
+    >
+      Fully-Stocked Cabinet
+    </li>
+    <li
+      class='list-group-item' 
+    >
+      <a href='<%= new_cabinet_url %>'>*New Liquor Cabinet*</a>
+    </li>
+  </ul>
+</div>

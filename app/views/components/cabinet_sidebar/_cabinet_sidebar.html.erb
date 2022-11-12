@@ -1,0 +1,20 @@
+<% fully_stocked_cabinet = Cabinet.find_by(name: 'Fully-Stocked Cabinet')%>
+<% cabinet = current_user.default_cabinet ? 
+      current_user.default_cab : fully_stocked_cabinet %>
+
+<%# current liquor cabinet %>
+<div class='row'>
+
+  <%# cabinet header %>
+  <div class='d-flex flex-row justify-content-center'>
+    <%= render partial: 'components/cabinet_sidebar/cabinet_header', 
+      locals: { cabinet: cabinet } %>
+ 
+    <%= render partial: 'components/cabinet_sidebar/cabinet_dropdown', 
+      locals: { cabinet: cabinet } 
+    %>
+  </div>
+</div>
+
+<%= render partial: 'components/cabinet_sidebar/cabinet_ingredients', 
+  locals: { cabinet: cabinet } %>

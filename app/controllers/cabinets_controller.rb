@@ -12,7 +12,7 @@ class CabinetsController < ApplicationController
     if params[:update_id]
       current_user.update!(default_cabinet: params[:update_id])
       @cabinet = Cabinet.find(params[:update_id])
-      render partial: 'components/liquor_cabinet_display/liquor_cabinet_display', locals: { cabinet: @cabinet }
+      render partial: 'components/cabinet_sidebar/cabinet_sidebar', locals: { cabinet: @cabinet }
     end
   end
 
