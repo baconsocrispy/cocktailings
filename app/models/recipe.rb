@@ -42,13 +42,13 @@ class Recipe < ApplicationRecord
           .search(search_term) :
         by_category(category_ids)
           .search(search_term)
-    when 'Any Ingredient'
+    when 'I Have Any Ingredient'
       ingredient_ids ?
         match_any_subset(category_ids, user_ingredients, ingredient_ids)
           .search(search_term) :
         by_category_and_ingredient(category_ids, user_ingredients)
           .search(search_term)
-    when 'All Ingredients'
+    when 'I Have All Ingredients'
       ingredient_ids ?
         match_all_subset(category_ids, user_ingredients, ingredient_ids)
           .search(search_term) :

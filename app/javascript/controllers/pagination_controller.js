@@ -97,11 +97,18 @@ function getCategoryId() {
   return categoryId;
 }
 
+function getSortOption() {
+  const selectedOption = document.querySelector(".sorting-option[data-isSelected='true']");
+  return selectedOption.innerHTML;
+}
+
 // configures url searchParams and returns the url
 function getUrl(urlValue, pageValue) {
+  const sortingOption = getSortOption();
   var url = new URL(urlValue);
+  
   url.searchParams.set('page', pageValue);
-  url.searchParams.append('sortOption', $('#sort-options').val());
+  url.searchParams.append('sortOption', sortingOption);
   url.searchParams.append('categoryId', getCategoryId());
   url.searchParams.append('searchTerm', $('#search-field').val());
   url = appendIngredientIds(url);

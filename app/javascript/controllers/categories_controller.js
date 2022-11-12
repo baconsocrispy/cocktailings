@@ -32,7 +32,6 @@ export default class extends Controller {
 
       for (var i = 0; i < item_count; i++) {
         item_count = $('#category-items .category-item').length;
-        console.log(isOverflowing);
 
         isOverflowing = nav_width < (item_width * (item_count + 1));
 

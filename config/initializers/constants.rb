@@ -1,1 +1,1 @@
-SORT_OPTIONS = ['All Recipes', 'Any Ingredient', 'All Ingredients', 'Favorites']
+SORT_OPTIONS = ['All Recipes', 'My Recipes', 'Favorites', 'I Have Any Ingredient', 'I Have All Ingredients']

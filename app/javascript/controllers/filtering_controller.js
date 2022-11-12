@@ -36,6 +36,12 @@ function getUrl({ target }) {
   return url;
 }
 
+function getSortOption() {
+  const selectedOption = document.querySelector(".sorting-option[data-isSelected='true']");
+  console.log(selectedOption.innerHTML);
+  return selectedOption.innerHTML;
+}
+
 function getCategoryId({ target }) {
   var categoryId = $('.current-category').data('value');
   if (target.classList.contains('category-item')) {
@@ -63,7 +69,7 @@ function updateCurrentCategory(id = null) {
 
 function getParams(event) {
   const searchTerm = $('#search-field').val();
-  const sortOption = $('#sort-options').val();
+  const sortOption = getSortOption;
   const ingredientIds = getIngredientIds();
   const categoryId = getCategoryId(event);
 
