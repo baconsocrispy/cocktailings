@@ -29,7 +29,7 @@ export default class extends Controller {
 
 // ----------- HELPERS ------------
 function getUrl({ target }) {
-  var url = $('.sort-options').data('url');
+  var url = $('#sort-options').data('url');
   if (target.id === 'search-btn') {
     url = target.getAttribute('data-url');
   }
@@ -63,7 +63,7 @@ function updateCurrentCategory(id = null) {
 
 function getParams(event) {
   const searchTerm = $('#search-field').val();
-  const sortOption = $('.sort-options').val();
+  const sortOption = $('#sort-options').val();
   const ingredientIds = getIngredientIds();
   const categoryId = getCategoryId(event);
 

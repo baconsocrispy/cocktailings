@@ -1,0 +1,19 @@
+.navbar {
+  background-color: rgb(1, 55, 1);
+}
+
+.navbar-brand {
+  color: cornsilk;
+  font-family: 'durerregular';
+
+  &:hover {
+    color: rgb(111, 2, 2);
+  }
+}
+.nav-link {
+  color: cornsilk;
+
+  &:hover {
+    color: rgb(111, 2, 2);
+  }
+}
