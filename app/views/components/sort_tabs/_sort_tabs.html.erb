@@ -1,0 +1,27 @@
+<div 
+  id='sorting-tabs-container' 
+  class='col-10 offset-2'
+  data-controller='filtering'
+>
+  <% SORT_OPTIONS.each do |option| %>
+    <div 
+      class='sorting-tab'
+      data-url='<%= recipes_path %>'
+      data-action='click->filtering#filterRecipes'
+    >
+      <% if option == 'All Recipes' %>
+        <div 
+          class='sorting-option'
+          value='<%= option %>'
+          data-isSelected='<%= true %>'
+        ><%= option %></div>
+      <% else %>
+        <div 
+          class='sorting-option'
+          value='<%= option %>'
+          data-isSelected='<%= false %>'
+        ><%= option %></div>
+      <% end %>
+    </div>
+  <% end %>
+</div>

@@ -1,0 +1,33 @@
+#sorting-tabs-container {
+  display: flex;
+  justify-content: start;
+  padding-left: 40px;
+}
+
+.row-padding {
+  display: block;
+}
+
+.sorting-tab {
+  display: inline-block;
+  color: rgb(1, 55, 1);
+
+  border: 1px solid rgb(1, 55, 1);
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+
+  width: 180px;
+  text-align: center;
+
+  &:hover {
+    background-color: rgba(1, 55, 1, 0.7);
+    color: cornsilk;
+    cursor: pointer;
+  }
+}
+
+.sorting-option[data-isSelected='true'] {
+  background-color: rgb(1, 55, 1);
+  color: cornsilk;
+}
