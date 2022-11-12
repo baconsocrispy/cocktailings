@@ -18,7 +18,9 @@ class RecipesController < ApplicationController
   # GET /recipes or /recipes.json
   # All filtering / search logic handled in the index action
   def index
+    @home = true
     @page = params[:page] || 1
+    
     @recipes = Recipe.alphabetical.page(@page)
     @recipe_count = @recipes.total_count
 
