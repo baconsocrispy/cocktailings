@@ -11,6 +11,7 @@
         class='cabinet-option list-group-item' 
         value='<%= cabinet.id %>'
         data-url='<%= cabinet_url(cabinet) %>'
+        data-action='click->cabinets#changeCabinet'
       >
         <%= cabinet.name %>
       </li>
@@ -19,7 +20,8 @@
       role='button' 
       class='cabinet-option list-group-item' 
       value='<%= 1 %>'
-      data-url='<%= cabinet_url(cabinet) %>' 
+      data-url='<%= cabinet_url(cabinet) %>'
+      data-action='click->cabinets#changeCabinet' 
     >
       Fully-Stocked Cabinet
     </li>

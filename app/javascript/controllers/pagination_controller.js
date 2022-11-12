@@ -1,4 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
+import { configureUrl } from "./helpers";
 
 export default class extends Controller {
 
@@ -18,7 +19,6 @@ export default class extends Controller {
 
   // adds the scroll event listener and sets fetching flag to false
   connect() {
-    console.log("Pagination Controller Loaded");
     document.addEventListener('scroll', this.scroll);
     this.fetching = false;
   }
@@ -34,7 +34,6 @@ export default class extends Controller {
   // at once
   scroll() {
     if (this.pageEnd && !this.fetching && !this.hasNoRecordsTarget && $.active == 0) {
-      console.log(this);
       this.loadRecords(); 
     }
   }
@@ -42,7 +41,7 @@ export default class extends Controller {
   // record fetching function
   async loadRecords() {
     // get pre-configured url from helper method
-    const url = getUrl(this.urlValue, this.pageValue);
+    const url = configureUrl(this.urlValue, this.pageValue);
     
     // sets fetching flag to true
     this.fetching = true;
@@ -67,50 +66,4 @@ export default class extends Controller {
     const { scrollHeight, scrollTop, clientHeight } = document.documentElement;
     return scrollHeight - scrollTop - clientHeight < 10; // can adjust to desired limit
   }
-}
-
-//  -------------  HELPER FUNCTIONS ----------------
-
-// gets selected ingredient ids from liquor cabinet display
-// options and returns them in an array
-function getIngredientIds() {
-  var ingredientIds = [...$('.cabinet-spirits').val(),
-  ...$('.cabinet-modifiers').val(),
-  ...$('.cabinet-sugars').val(),
-  ...$('.cabinet-garnishes').val()];
-  return ingredientIds.filter(n => n);
-}
-
-// if there are ingredientIds, appends them as an array to searchParams
-function appendIngredientIds(url) {
-  var ingredientIds = getIngredientIds();
-  if (ingredientIds.length) {
-    ingredientIds.map(i => url.searchParams.append('ingredientIds', i));
-    console.log(ingredientIds);
-  }
-  return url;
-}
-
-// gets categoryId from the hidden current-category div
-function getCategoryId() {
-  var categoryId = $('.current-category').data('value');
-  return categoryId;
-}
-
-function getSortOption() {
-  const selectedOption = document.querySelector(".sorting-option[data-isSelected='true']");
-  return selectedOption.innerHTML;
-}
-
-// configures url searchParams and returns the url
-function getUrl(urlValue, pageValue) {
-  const sortingOption = getSortOption();
-  var url = new URL(urlValue);
-  
-  url.searchParams.set('page', pageValue);
-  url.searchParams.append('sortOption', sortingOption);
-  url.searchParams.append('categoryId', getCategoryId());
-  url.searchParams.append('searchTerm', $('#search-field').val());
-  url = appendIngredientIds(url);
-  return url.toString();
 }

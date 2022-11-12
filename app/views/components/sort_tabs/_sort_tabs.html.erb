@@ -6,22 +6,17 @@
   <% SORT_OPTIONS.each do |option| %>
     <div 
       class='sorting-tab'
-      data-url='<%= recipes_path %>'
       data-action='click->filtering#filterRecipes'
     >
-      <% if option == 'All Recipes' %>
-        <div 
-          class='sorting-option'
-          value='<%= option %>'
+      <div 
+        class='sorting-option'
+        value='<%= option %>'
+        <% if option == 'All Recipes' %>
           data-isSelected='<%= true %>'
-        ><%= option %></div>
-      <% else %>
-        <div 
-          class='sorting-option'
-          value='<%= option %>'
+        <% else %>
           data-isSelected='<%= false %>'
-        ><%= option %></div>
-      <% end %>
+        <% end %>
+      ><%= option %></div>
     </div>
   <% end %>
 </div>

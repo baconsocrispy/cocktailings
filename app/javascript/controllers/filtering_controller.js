@@ -1,23 +1,20 @@
 import { Controller } from "@hotwired/stimulus";
+import { getParams, resetPageValue } from './helpers';
 
 export default class extends Controller {
   connect() {
-    // lets me know controller is functioning properly
-    console.log("Filtering Controller Loaded");
   }
 
-  // filters/searches recipes when user chooses a sort option, 
-  // selects ingredients, clicks on a category or enters a search term
+  // primary search / filtering handler
   filterRecipes(event) {
     event.preventDefault();
 
-    const url = getUrl(event);
     const params = getParams(event);
 
     $.ajax({
       type: 'GET',
       dataType: 'html',
-      url: url,
+      url: '/recipes',
       data: params,
       success: function (response) {
         $('.recipe-cards').html(response);
@@ -25,60 +22,4 @@ export default class extends Controller {
       }
     });
   }
-}
-
-// ----------- HELPERS ------------
-function getUrl({ target }) {
-  var url = $('#sort-options').data('url');
-  if (target.id === 'search-btn') {
-    url = target.getAttribute('data-url');
-  }
-  return url;
-}
-
-function getSortOption() {
-  const selectedOption = document.querySelector(".sorting-option[data-isSelected='true']");
-  console.log(selectedOption.innerHTML);
-  return selectedOption.innerHTML;
-}
-
-function getCategoryId({ target }) {
-  var categoryId = $('.current-category').data('value');
-  if (target.classList.contains('category-item')) {
-    categoryId = target.getAttribute('data-value');
-  }
-  return categoryId;
-}
-
-function getIngredientIds() {
-  var ingredientIds = [...$('.cabinet-spirits').val(),
-  ...$('.cabinet-modifiers').val(),
-  ...$('.cabinet-sugars').val(),
-  ...$('.cabinet-garnishes').val()];
-  return ingredientIds.filter(n => n);
-}
-
-function resetPageValue() {
-  var recipeCards = document.querySelector('.recipe-cards');
-  recipeCards.setAttribute('data-pagination-page-value', 2);
-}
-
-function updateCurrentCategory(id = null) {
-  $('.current-category').data('value', id);
-}
-
-function getParams(event) {
-  const searchTerm = $('#search-field').val();
-  const sortOption = getSortOption;
-  const ingredientIds = getIngredientIds();
-  const categoryId = getCategoryId(event);
-
-  updateCurrentCategory(categoryId);
-
-  return {
-    'sortOption': sortOption,
-    'ingredientIds': ingredientIds,
-    'categoryId': categoryId,
-    'searchTerm': searchTerm
-  };
 }
