@@ -14,15 +14,12 @@
 }
 
 #category-items {
-  height: 100%;
   list-style: none;
-  padding: 0;
 }
 
 .category-item {
   display: inline-block;
   text-align: center;
-  height: 100%;
   width: 110px;
 
     &:hover {

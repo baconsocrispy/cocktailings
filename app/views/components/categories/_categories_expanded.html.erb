@@ -10,9 +10,7 @@
       class='category-item' 
       data-value='<%= nil %>'
       data-action='click->filtering#filterRecipes'
-    >
-      All Categories
-    </li>
+    >All Categories</li>
     
     <%# displays category options %>
     <% Category.all.each do |c| %>
@@ -22,9 +20,7 @@
         data-value='<%= c.id %>' 
         data-action='click->filtering#filterRecipes'
         data-isSelected='false'
-      >
-          <%= c.name.pluralize %>
-      </li>
+      ><%= c.name.pluralize %></li>
     <% end %>
   </ul>
   

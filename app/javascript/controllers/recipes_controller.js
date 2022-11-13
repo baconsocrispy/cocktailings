@@ -2,8 +2,6 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   connect() {
-    console.log("Recipes Controller Loaded");
-
     // updates recipe count based on results
     $('#recipe-count').html('Total Recipes: ' + $('#recipes').data('value'));
 

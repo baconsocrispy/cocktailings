@@ -2,8 +2,6 @@ import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
   connect() {
-    console.log("Categories Controller Loaded");
-
     // toggles the selected category check-mark
     $('.category-option').on('click', ({ target }) => {
       if ($('#category-check')) {

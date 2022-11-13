@@ -19,10 +19,15 @@
 
     <%# collapsible category bar %>
     <% if @home %>
-      <div id='sticky-category-bar'>
+      <div id='sticky-category-bar' class='mb-0'>
         <%= render partial: 'components/categories/categories_expanded' %>
       </div>
     <% end %>
+
+    <%# sorting / stats bar %>
+  <div class="d-flex flex-row-reverse border h-100">
+    <%= render partial: 'components/recipe_count/recipe_count', locals: { recipe_count: @recipe_count } %>
+  </div>
 
     <% if notice %>
       <p class='alert alert-success'><%= notice %></p>
