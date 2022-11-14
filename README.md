@@ -114,7 +114,7 @@ I'm using the devise gem to handle user authentication in the app. There are
 complications with Turbo in Rails 7 that prevent flash messages from displaying 
 properly. I found excellent help from the article by Nick Francisci below. 
 
-INSTALL /CONFIGURE LATEST DEVISE GEM
+INSTALL / CONFIGURE LATEST DEVISE GEM
 
 `bundle add devise`
 
@@ -130,4 +130,9 @@ Help from:
 
 * https://css-tricks.com/forums/topic/responsive-navigation-hide-move-itemss-to-dropdown-when-space-runs-out/
 * https://codepen.io/kvana/pen/ZbENqr
+
+## HEROKU DEPLOYMENT
+
+At first javascript was not working. Fixed it by setting `config.assets.compile = true`
+in the production.rb file. 
 
