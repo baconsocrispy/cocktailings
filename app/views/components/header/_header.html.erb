@@ -1,0 +1,13 @@
+<%= render 'components/navbar/navbar' %>
+
+<%# collapsible category bar %>
+<% if @home %>
+  <div id='sticky-category-bar' class='mb-0'>
+    <%= render partial: 'components/categories/categories_expanded' %>
+  </div>
+
+  <%# sorting / stats bar %>
+  <div class="d-flex flex-row-reverse">
+    <%= render partial: 'components/recipe_count/recipe_count', locals: { recipe_count: @recipe_count } %>
+  </div>
+<% end %>
