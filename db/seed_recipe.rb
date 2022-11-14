@@ -56,7 +56,7 @@ def make_name(words)
   name_words.count == 2 ? 
     name = name_words.join(separators[rand(0...separators.length)]) :
     name = name_words.join(' ')
-  return name.titleize
+  return name.downcase
 end
 
 # grabs a desired number of words at random from a text, cleans them

@@ -29,11 +29,10 @@
       <%# search field and search button %>
       <%= render partial: 'components/search_form/search_form', locals: { home: @home } %>
       
+      <%# conditional log-out button %>
       <div class="mx-2">
-        <%= button_to('Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-dark') %>
+        <%= button_to('Log Out', destroy_user_session_path, method: :delete, class: 'btn btn-sm btn-dark') if user_signed_in? %>
       </div>
-
-      
     </div>
   </div>
 </nav>

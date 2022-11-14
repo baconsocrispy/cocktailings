@@ -10,10 +10,14 @@
           <% end %>
         </div>
 
-        <div id='modal-header-recipe-name'><%= recipe.name %></div>
+        <div id='modal-header-recipe-name'><%= recipe.name.titleize %></div>
 
         <div id='modal-header-recipe-categories' class='text-right'>
           Category: <%= recipe.categories.map(&:name).join(', ') %>
+        </div>
+
+        <div>
+          <button><%= link_to 'Edit', edit_recipe_url(recipe) %></button>
         </div>
 
         <button 

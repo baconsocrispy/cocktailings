@@ -29,12 +29,8 @@ class Recipe < ApplicationRecord
     category_ids, 
     ingredient_ids=nil, 
     search_term='', 
-    user
-    )
+    user)
 
-    category_ids = Category.all.map(&:id) if category_ids == ''
-    ingredient_ids = [*ingredient_ids].map(&:to_i) unless ingredient_ids.nil?
-    
     case sort_option
     when 'All Recipes'
       ingredient_ids ? 
