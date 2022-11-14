@@ -22,7 +22,7 @@ export function getCategoryId(e) {
 // gets all the currently selected ingredient ids
 // from the cabinet sidebar and cleans any empty 
 // strings from the result
-export function getIngredientIds() {
+function getIngredientIds() {
   const ingredientIds = [...$('.cabinet-spirits').val(),
   ...$('.cabinet-modifiers').val(),
   ...$('.cabinet-sugars').val(),
@@ -31,7 +31,7 @@ export function getIngredientIds() {
 }
 
 // if there are ingredientIds, appends them as an array to searchParams
-export function appendIngredientIds(url) {
+function appendIngredientIds(url) {
   var ingredientIds = getIngredientIds();
   if (ingredientIds.length) {
     ingredientIds.map(i => url.searchParams.append('ingredientIds', i));
@@ -79,6 +79,6 @@ export function resetPageValue() {
 }
 
 // updates the value of the hidden current-category element
-export function updateCurrentCategory(id = null) {
+function updateCurrentCategory(id = null) {
   $('.current-category').data('value', id);
 }

@@ -6,11 +6,13 @@
   <% SORT_OPTIONS.each do |option| %>
     <div 
       class='sorting-tab'
-      data-action='click->filtering#filterRecipes'
+      data-action='click->filtering#filterRecipes '
     >
       <div 
         class='sorting-option'
         value='<%= option %>'
+        data-controller='tabs'
+        data-action='click->tabs#updateSortOption'
         <% if option == 'All Recipes' %>
           data-isSelected='<%= true %>'
         <% else %>
