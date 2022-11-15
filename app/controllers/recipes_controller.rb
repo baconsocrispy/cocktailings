@@ -77,6 +77,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       begin 
         @recipe.save!
+        @recipe.users << current_user
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       rescue ActiveRecord::RecordNotUnique => e

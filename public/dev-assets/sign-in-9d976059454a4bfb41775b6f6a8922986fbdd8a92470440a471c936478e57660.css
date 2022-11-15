@@ -1,0 +1,48 @@
+/* line 1, app/assets/stylesheets/sign-in.scss */
+.sign-in-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+/* line 7, app/assets/stylesheets/sign-in.scss */
+.sign-in-content {
+  width: 50%;
+}
+
+/* line 11, app/assets/stylesheets/sign-in.scss */
+.sign-in-header {
+  color: #013701;
+  font-size: 2em;
+  font-family: 'durerregular';
+  font-weight: bold;
+}
+
+/* line 18, app/assets/stylesheets/sign-in.scss */
+.sign-in-form-container {
+  width: 50%;
+}
+
+/* line 22, app/assets/stylesheets/sign-in.scss */
+.sign-in-btn {
+  margin-top: 10px;
+  border: 1px solid #013701;
+  color: #013701;
+}
+
+/* line 27, app/assets/stylesheets/sign-in.scss */
+.sign-in-btn:hover {
+  background-color: #013701;
+  color: cornsilk;
+}
+
+/* line 33, app/assets/stylesheets/sign-in.scss */
+.shared-links {
+  display: flex;
+  margin-top: 10px;
+}
+
+/* line 37, app/assets/stylesheets/sign-in.scss */
+.shared-links a {
+  margin-right: 10px;
+}

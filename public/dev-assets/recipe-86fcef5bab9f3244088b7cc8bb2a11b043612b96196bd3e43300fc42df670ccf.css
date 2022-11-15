@@ -1,0 +1,45 @@
+/* line 1, app/assets/stylesheets/recipe.scss */
+.modal-header {
+  height: 70px;
+  background-color: cornsilk;
+}
+
+/* line 6, app/assets/stylesheets/recipe.scss */
+#modal-img-container img {
+  height: 65px;
+  border-radius: 3px;
+}
+
+/* line 11, app/assets/stylesheets/recipe.scss */
+#modal-header-recipe-name {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #013701;
+  margin-left: 10px;
+}
+
+/* line 18, app/assets/stylesheets/recipe.scss */
+#modal-header-recipe-categories {
+  color: #013701;
+  margin-left: 10px;
+}
+
+/* line 23, app/assets/stylesheets/recipe.scss */
+#recipe-details-container {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+/* line 28, app/assets/stylesheets/recipe.scss */
+.recipe-details-header {
+  font-size: 1em;
+  font-weight: bold;
+  color: #013701;
+}
+
+/* line 34, app/assets/stylesheets/recipe.scss */
+.recipe-details-list {
+  list-style: none;
+  color: #013701;
+  font-size: 1em;
+}

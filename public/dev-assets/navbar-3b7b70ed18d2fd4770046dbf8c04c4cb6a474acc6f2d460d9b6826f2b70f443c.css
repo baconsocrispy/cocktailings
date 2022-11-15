@@ -1,0 +1,25 @@
+/* line 1, app/assets/stylesheets/navbar.scss */
+.navbar {
+  background-color: #013701;
+}
+
+/* line 5, app/assets/stylesheets/navbar.scss */
+.navbar-brand {
+  color: cornsilk;
+  font-family: 'durerregular';
+}
+
+/* line 9, app/assets/stylesheets/navbar.scss */
+.navbar-brand:hover {
+  color: #6f0202;
+}
+
+/* line 13, app/assets/stylesheets/navbar.scss */
+.nav-link {
+  color: cornsilk;
+}
+
+/* line 16, app/assets/stylesheets/navbar.scss */
+.nav-link:hover {
+  color: #6f0202;
+}

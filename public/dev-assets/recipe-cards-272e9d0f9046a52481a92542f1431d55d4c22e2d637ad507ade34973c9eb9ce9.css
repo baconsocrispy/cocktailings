@@ -1,0 +1,15 @@
+/* line 1, app/assets/stylesheets/recipe-cards.scss */
+.card-container {
+  cursor: pointer;
+}
+
+/* line 5, app/assets/stylesheets/recipe-cards.scss */
+.card-title {
+  color: cornsilk;
+  font-family: 'durerregular';
+}
+
+/* line 10, app/assets/stylesheets/recipe-cards.scss */
+.card-body {
+  background-color: #013701;
+}

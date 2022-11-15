@@ -1,0 +1,15 @@
+/* line 1, app/assets/stylesheets/site.scss */
+* {
+  box-sizing: border-box;
+}
+
+/* line 5, app/assets/stylesheets/site.scss */
+body {
+  background-color: cornsilk;
+}
+
+/* line 10, app/assets/stylesheets/site.scss */
+a {
+  text-decoration: none;
+  color: #013701;
+}
