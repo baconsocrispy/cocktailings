@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus";
-import { getParams, resetPageValue } from './helpers';
+import { getParams, resetValues } from './helpers';
 
 export default class extends Controller {
   connect() {
@@ -18,7 +18,7 @@ export default class extends Controller {
       data: params,
       success: function (response) {
         $('.recipe-cards').html(response);
-        resetPageValue();
+        resetValues();
       }
     });
   }

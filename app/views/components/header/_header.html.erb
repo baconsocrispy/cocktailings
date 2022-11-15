@@ -9,5 +9,7 @@
   <%# sorting / stats bar %>
   <div class="d-flex flex-row-reverse">
     <%= render partial: 'components/recipe_count/recipe_count', locals: { recipe_count: @recipe_count } %>
+
+    <%= render partial: 'components/search_terms/search_terms' %>
   </div>
 <% end %>

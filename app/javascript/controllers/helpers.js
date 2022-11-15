@@ -19,6 +19,16 @@ export function getCategoryId(e) {
   return categoryId;
 }
 
+function addSearchFieldToTerms(searchField) {
+  
+} 
+
+function getSearchTerms() {
+  const searchField = $('#search-field');
+  if (searchField == '') return searchField;
+
+}
+
 // gets all the currently selected ingredient ids
 // from the cabinet sidebar and cleans any empty 
 // strings from the result
@@ -73,12 +83,24 @@ export function getParams(event) {
 
 // resets page value to 2 when results are refreshed
 // so that pagination will continue to flow properly
-export function resetPageValue() {
+function resetPageValue() {
   var recipeCards = document.querySelector('.recipe-cards');
   recipeCards.setAttribute('data-pagination-page-value', 2);
 }
 
+// resets the search bar to an empty string
+function resetSearchField() {
+  $('#search-field').val('');
+}
+
+export function resetValues() {
+  resetPageValue();
+  resetSearchField();
+}
+
 // updates the value of the hidden current-category element
+// CAN PROBABLY GET THIS VALUE WITHOUT A FUNCTION
 function updateCurrentCategory(id = null) {
   $('.current-category').data('value', id);
 }
+
