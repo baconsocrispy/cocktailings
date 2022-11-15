@@ -1,10 +1,11 @@
 <% if @home %>
   <%= simple_form_for :search, url: recipes_path, method: 'GET', html: { class: 'd-flex' } do |form | %>
-    <%= form.input_field :query, placeholder: 'Search Cocktails', id: 'search-field' %>                     
+    <%= form.input_field :query, placeholder: 'Search Cocktails', id: 'search-field' %>
+    <%= form.hidden_field :current_seach, value: '', id: 'current-search' %>
     <%= form.submit 'Search', id: 'search-btn', 
                               class: 'btn btn-sm btn-light ms-2', 
-                              data: { controller: 'filtering',
-                                      action: 'click->filtering#filterRecipes',
+                              data: { controller: 'search filtering',
+                                      action: 'click->search#resetSearchValue click->filtering#filterRecipes'
                                     }
     %>
   <% end %>

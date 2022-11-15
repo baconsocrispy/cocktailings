@@ -1,0 +1,32 @@
+#stats-container {
+  display: flex;
+  justify-content: end;
+  margin-bottom: 5px;
+}
+
+#recipe-count {
+  display: inline-block;
+  color: rgb(1, 55, 1);
+  margin-right: 10px;
+}
+
+#search-term-container {
+  display: none;
+  color: rgb(1, 55, 1);
+  font-style: italic;
+}
+
+#search-term-container[data-hidden='false'] {
+  display: inline-block;
+}
+
+#search-term {
+  background-color: rgb(1, 55, 1);
+  color: cornsilk;
+  padding: 3px;
+  border-radius: 3px;
+}
+
+.remove-item {
+  cursor: pointer;
+}

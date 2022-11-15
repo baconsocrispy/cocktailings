@@ -1,3 +1,18 @@
-<div id='search-terms' class='me-4'>
+<div 
+  class='me-4' 
+  id='search-term-container' 
+  data-controller='search filtering'
+  data-hidden='<%= true %>'
+>
   <span>Searching for: </span>
+
+  <span>
+    <span id='search-term'></span>
+    <span 
+      class='remove-item' 
+      data-action='click->search#resetSearchValue click->filtering#filterRecipes'
+    >
+      x
+    </span>
+  </span>
 </div>

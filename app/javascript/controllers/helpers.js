@@ -19,16 +19,6 @@ export function getCategoryId(e) {
   return categoryId;
 }
 
-function addSearchFieldToTerms(searchField) {
-  
-} 
-
-function getSearchTerms() {
-  const searchField = $('#search-field');
-  if (searchField == '') return searchField;
-
-}
-
 // gets all the currently selected ingredient ids
 // from the cabinet sidebar and cleans any empty 
 // strings from the result
@@ -58,7 +48,7 @@ export function configureUrl(urlValue, pageValue) {
   url.searchParams.set('page', pageValue);
   url.searchParams.append('sortOption', sortingOption);
   url.searchParams.append('categoryId', getCategoryId());
-  url.searchParams.append('searchTerm', $('#search-field').val());
+  url.searchParams.append('searchTerm', $('#current-search').val());
   url = appendIngredientIds(url);
   return url.toString();
 }
@@ -66,7 +56,7 @@ export function configureUrl(urlValue, pageValue) {
 // gathers all currently selected search options
 // and returns tham as an object 
 export function getParams(event) {
-  const searchTerm = $('#search-field').val();
+  const searchTerm = $('#current-search').val();
   const sortOption = getSortOption;
   const ingredientIds = getIngredientIds();
   const categoryId = getCategoryId(event);
@@ -88,14 +78,9 @@ function resetPageValue() {
   recipeCards.setAttribute('data-pagination-page-value', 2);
 }
 
-// resets the search bar to an empty string
-function resetSearchField() {
-  $('#search-field').val('');
-}
-
 export function resetValues() {
   resetPageValue();
-  resetSearchField();
+  $('#search-field').val('');
 }
 
 // updates the value of the hidden current-category element
