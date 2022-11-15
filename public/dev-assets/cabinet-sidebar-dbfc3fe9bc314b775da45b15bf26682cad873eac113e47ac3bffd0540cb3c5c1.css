@@ -1,0 +1,59 @@
+/* line 1, app/assets/stylesheets/cabinet-sidebar.scss */
+.liquor-cabinet-display {
+  flex: 0 0 230px;
+  position: fixed;
+  height: 100%;
+  color: #013701;
+}
+
+/* line 9, app/assets/stylesheets/cabinet-sidebar.scss */
+#cabinet-sidebar-header {
+  font-family: 'durerregular';
+}
+
+/* line 13, app/assets/stylesheets/cabinet-sidebar.scss */
+.cabinet-ingredients {
+  max-width: 150px;
+  min-width: 150px;
+  border-radius: 5px;
+  background: none;
+  color: #013701;
+}
+
+/* line 21, app/assets/stylesheets/cabinet-sidebar.scss */
+.cabinet-menu-container {
+  position: absolute;
+  width: 200px;
+  top: 30px;
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* line 29, app/assets/stylesheets/cabinet-sidebar.scss */
+.cabinet-menu {
+  border-radius: 5px;
+}
+
+/* line 31, app/assets/stylesheets/cabinet-sidebar.scss */
+.cabinet-menu div {
+  cursor: default;
+}
+
+/* line 36, app/assets/stylesheets/cabinet-sidebar.scss */
+.cabinet-menu li:hover {
+  color: lightgreen;
+}
+
+/* line 43, app/assets/stylesheets/cabinet-sidebar.scss */
+.toggle-cabinet-menu[aria-expanded='true'] ~ .cabinet-menu-container {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1000;
+}
+
+@media (max-width: 690px) {
+  /* line 50, app/assets/stylesheets/cabinet-sidebar.scss */
+  .liquor-cabinet-display {
+    display: none;
+  }
+}

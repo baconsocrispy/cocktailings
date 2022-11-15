@@ -136,3 +136,8 @@ Help from:
 At first javascript was not working. Fixed it by setting `config.assets.compile = true`
 in the production.rb file. 
 
+I had to run rails assets:precompile on initial setup. This caused my
+asset auto-compiling to stop working in the development environment. I
+fixed the issue by running `rails assets:clobber` which cleared any 
+precompiling and restarted the hot-reloading of assets in the browser. 
+

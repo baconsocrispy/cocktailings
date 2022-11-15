@@ -1,0 +1,36 @@
+/* line 1, app/assets/stylesheets/sorting-tabs.scss */
+#sorting-tabs-container {
+  display: flex;
+  justify-content: start;
+  padding-left: 40px;
+}
+
+/* line 7, app/assets/stylesheets/sorting-tabs.scss */
+.row-padding {
+  display: block;
+}
+
+/* line 11, app/assets/stylesheets/sorting-tabs.scss */
+.sorting-tab {
+  display: inline-block;
+  color: #013701;
+  border: 1px solid #013701;
+  border-bottom: none;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  width: 180px;
+  text-align: center;
+}
+
+/* line 23, app/assets/stylesheets/sorting-tabs.scss */
+.sorting-tab:hover {
+  background-color: rgba(1, 55, 1, 0.7);
+  color: cornsilk;
+  cursor: pointer;
+}
+
+/* line 30, app/assets/stylesheets/sorting-tabs.scss */
+.sorting-option[data-isSelected='true'] {
+  background-color: #013701;
+  color: cornsilk;
+}

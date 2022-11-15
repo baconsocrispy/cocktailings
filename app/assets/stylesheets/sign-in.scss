@@ -1,0 +1,41 @@
+.sign-in-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
+
+.sign-in-content {
+  width: 50%;
+}
+
+.sign-in-header {
+  color: rgb(1, 55, 1);
+  font-size: 2em;
+  font-family: 'durerregular';
+  font-weight: bold;
+}
+
+.sign-in-form-container {
+  width: 50%;
+}
+
+#sign-up-btn,
+#sign-in-btn {
+  margin-top: 10px;
+  border: 1px solid rgb(1, 55, 1);
+  color: rgb(1, 55, 1);
+
+  &:hover {
+    background-color: rgb(1, 55, 1);
+    color: cornsilk;
+  }
+}
+
+.shared-links {
+  display: flex;
+  margin-top: 10px;
+
+  a {
+    margin-right: 10px;
+  }
+}

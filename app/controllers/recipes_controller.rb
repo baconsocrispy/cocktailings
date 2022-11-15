@@ -26,11 +26,18 @@ class RecipesController < ApplicationController
 
     user = current_user
 
+    category_ids = params[:categoryId] != '' ? 
+      params[:categoryId] : Category.all.map(&:id)
+
+    ingredient_ids = params[:ingredientIds] ? 
+      [*params[:ingredientIds]].map(&:to_i) : nil
+    
+
     if params[:sortOption]
       @recipes = Recipe.search_recipes(
                           params[:sortOption],
-                          params[:categoryId],
-                          params[:ingredientIds],
+                          category_ids,
+                          ingredient_ids,
                           params[:searchTerm],
                           user
                         )
@@ -49,6 +56,7 @@ class RecipesController < ApplicationController
   def show
     respond_to do |format|
       format.js
+      format.html
     end
   end
 
@@ -69,6 +77,7 @@ class RecipesController < ApplicationController
     respond_to do |format|
       begin 
         @recipe.save!
+        @recipe.users << current_user
         format.html { redirect_to recipe_url(@recipe), notice: "Recipe was successfully created." }
         format.json { render :show, status: :created, location: @recipe }
       rescue ActiveRecord::RecordNotUnique => e

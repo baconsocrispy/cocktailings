@@ -1,0 +1,63 @@
+/* line 1, app/assets/stylesheets/categories.scss */
+#sticky-category-bar {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 55px;
+  z-index: 6;
+}
+
+/* line 6, app/assets/stylesheets/categories.scss */
+#categories-container {
+  position: relative;
+  left: 0;
+  right: 0;
+  background-color: #6f0202;
+  z-index: 5;
+  color: cornsilk;
+  white-space: nowrap;
+}
+
+/* line 16, app/assets/stylesheets/categories.scss */
+#category-items {
+  list-style: none;
+}
+
+/* line 20, app/assets/stylesheets/categories.scss */
+.category-item {
+  display: inline-block;
+  text-align: center;
+  width: 110px;
+}
+
+/* line 25, app/assets/stylesheets/categories.scss */
+.category-item:hover {
+  background-color: rgba(239, 224, 165, 0.4);
+  cursor: pointer;
+}
+
+/* line 31, app/assets/stylesheets/categories.scss */
+#more-categories {
+  cursor: pointer;
+  display: none;
+  float: right;
+  margin-right: 5px;
+  list-style: none;
+}
+
+/* line 39, app/assets/stylesheets/categories.scss */
+#category-overflow {
+  position: absolute;
+  right: 5px;
+  display: none;
+  background-color: cornsilk;
+  color: #013701;
+  border-radius: 5px;
+}
+
+/* line 48, app/assets/stylesheets/categories.scss */
+#category-overflow li {
+  display: block;
+  text-align: right;
+  margin-right: 5px;
+  width: auto;
+}
