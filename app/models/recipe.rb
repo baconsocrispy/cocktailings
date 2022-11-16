@@ -15,6 +15,7 @@ class Recipe < ApplicationRecord
   scope :by_category, -> (category_ids) { joins(:categories).where(categories: { id: category_ids })}
   scope :by_ingredient, -> (ingredient_ids) { joins(:ingredients).where(ingredients: { id: ingredient_ids })}
   scope :by_category_and_ingredient, -> (category_ids, ingredient_ids) { by_category(category_ids).by_ingredient(ingredient_ids).distinct }
+  scope :search2, -> (query) { where('recipes.name ILIKE ?', "%#{ query }%").or(where('ingredients.display_name ILIKE ?', "%#{ query }%")) }
 
   accepts_nested_attributes_for :steps, allow_destroy: true
   accepts_nested_attributes_for :categories_recipes, allow_destroy: false
@@ -67,8 +68,8 @@ class Recipe < ApplicationRecord
 
   def self.search(query)
     joins(:ingredients).scoping do
-      where('recipes.name ILIKE ?', "%#{ query }%")
-      .or(where('ingredients.display_name ILIKE ?', "%#{ query }%"))
+      where('ingredients.display_name ILIKE ?', "%#{ query }%")
+      .or(where('recipes.name ILIKE ?', "%#{ query }%"))
       .distinct
     end
   end
