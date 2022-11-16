@@ -64,6 +64,10 @@ export default class extends Controller {
     });
   }
 
+  updateCategory({ target }) {
+    $('.category-item').each((_, category) => category.setAttribute('data-isSelected', false));
+    target.setAttribute('data-isSelected', true);
+  }
 
   toggleCategoryMenu() {
     const menu = $('.category-toggle');

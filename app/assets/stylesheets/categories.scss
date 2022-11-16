@@ -28,6 +28,10 @@
     }
 }
 
+.category-item[data-isSelected='true'] {
+  background-color: rgba(239, 224, 165, 0.4);
+}
+
 #more-categories {
   cursor: pointer;
   display: none;

@@ -1,25 +1,25 @@
 <%# priority navigation bar %>
 <div 
   id='categories-container' 
-  data-controller='categories'
+  data-controller='categories filtering'
 >
-  <ul id='category-items' data-controller='filtering'>
+  <ul id='category-items'>
     <%# resets category to all categories %>
     <li 
       role='button' 
       class='category-item' 
       data-value='<%= nil %>'
-      data-action='click->filtering#filterRecipes'
+      data-action='click->categories#updateCategory click->filtering#filterRecipes'
+      data-isSelected='<%= true %>'
     >All Categories</li>
     
     <%# displays category options %>
     <% Category.all.each do |c| %>
       <li 
         role='button' class='category-item' 
-        data-controller='filtering'
         data-value='<%= c.id %>' 
-        data-action='click->filtering#filterRecipes'
-        data-isSelected='false'
+        data-action='click->categories#updateCategory click->filtering#filterRecipes'
+        data-isSelected='<%= false %>'
       ><%= c.name.pluralize %></li>
     <% end %>
   </ul>

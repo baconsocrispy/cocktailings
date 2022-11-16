@@ -1,22 +1,14 @@
 // gets the currently selected tab value
-export function getSortOption() {
+function getSortOption() {
   const selectedOption = document.querySelector(".sorting-option[data-isSelected='true']");
   return selectedOption.innerHTML;
 }
 
 // gets category from hidden current-category div
 // or directly from a clicked category
-export function getCategoryId(e) {
-  var categoryId = $('.current-category').data('value');
-
-  // handler for pagination
-  if (!e) return categoryId;
-
-  // handler for when category directly clicked on
-  if (e.target.classList.contains('category-item')) {
-    categoryId = e.target.getAttribute('data-value');
-  }
-  return categoryId;
+function getCategoryId() {
+  const selectedCategory = document.querySelector(".category-item[data-isSelected='true']");
+  return selectedCategory.getAttribute('data-value');
 }
 
 // gets all the currently selected ingredient ids
@@ -61,8 +53,6 @@ export function getParams(event) {
   const ingredientIds = getIngredientIds();
   const categoryId = getCategoryId(event);
 
-  updateCurrentCategory(categoryId);
-
   return {
     'sortOption': sortOption,
     'ingredientIds': ingredientIds,
@@ -82,10 +72,3 @@ export function resetValues() {
   resetPageValue();
   $('#search-field').val('');
 }
-
-// updates the value of the hidden current-category element
-// CAN PROBABLY GET THIS VALUE WITHOUT A FUNCTION
-function updateCurrentCategory(id = null) {
-  $('.current-category').data('value', id);
-}
-
