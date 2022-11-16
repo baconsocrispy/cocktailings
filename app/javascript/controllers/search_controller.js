@@ -1,7 +1,8 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  resetSearchValue() {
+  resetSearchValue(e) {
+    e.preventDefault();
     const searchTerm = $('#search-field').val();
 
     $('#current-search').val(searchTerm);
