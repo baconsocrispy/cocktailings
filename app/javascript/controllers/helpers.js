@@ -68,7 +68,28 @@ function resetPageValue() {
   recipeCards.setAttribute('data-pagination-page-value', 2);
 }
 
-export function resetValues() {
+function resetCategory() {
+  $('.category-item').each((_, category) => category.setAttribute('data-isSelected', false));
+  $('#all-categories').attr('data-isSelected', true);
+}
+
+function resetIngredients() {
+  $('.cabinet-ingredients option').prop('selected', false);
+}
+
+function resetSortOption() {
+  $('.sorting-option').attr('data-isSelected', false);
+  $('.sorting-option')[0].setAttribute('data-isSelected', true);
+}
+
+
+export function reset() {
+  resetCategory();
+  resetIngredients();
+  resetSortOption();
+}
+
+export function resetPage() {
   resetPageValue();
   $('#search-field').val('');
 }

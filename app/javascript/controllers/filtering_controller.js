@@ -1,15 +1,10 @@
 import { Controller } from "@hotwired/stimulus";
-import { getParams, resetValues } from './helpers';
+import { getParams, reset, resetPage } from './helpers';
 
 export default class extends Controller {
-  connect() {
-  }
-
   // primary search / filtering handler
-  filterRecipes(event) {
-    event.preventDefault();
-
-    const params = getParams(event);
+  filterRecipes() {
+    const params = getParams();
 
     $.ajax({
       type: 'GET',
@@ -18,8 +13,13 @@ export default class extends Controller {
       data: params,
       success: function (response) {
         $('.recipe-cards').html(response);
-        resetValues();
+        resetPage();
       }
     });
+  }
+
+  resetFilters() {
+    reset();
+    this.filterRecipes();
   }
 }

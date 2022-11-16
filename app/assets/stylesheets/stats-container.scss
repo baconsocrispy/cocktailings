@@ -30,3 +30,19 @@
 .remove-item {
   cursor: pointer;
 }
+
+.reset-container {
+  display: inline-block;
+
+  #reset-btn {
+    background: none;
+    border: 1px solid rgb(1, 55, 1);
+    border-radius: 5px;
+    color: rgb(1, 55, 1);
+
+      &:hover {
+        background-color: rgb(1, 55, 1);
+        color: cornsilk;
+      }
+  }
+}

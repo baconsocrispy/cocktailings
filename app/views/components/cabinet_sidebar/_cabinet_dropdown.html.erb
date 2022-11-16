@@ -10,8 +10,11 @@
         role='button' 
         class='cabinet-option list-group-item' 
         value='<%= cabinet.id %>'
+        data-controller='cabinets search filtering'
         data-url='<%= cabinet_url(cabinet) %>'
-        data-action='click->cabinets#changeCabinet'
+        data-action='click->cabinets#changeCabinet 
+                     click->search#resetSearchValue 
+                     click->filtering#resetFilters'
       >
         <%= cabinet.name %>
       </li>
@@ -20,8 +23,11 @@
       role='button' 
       class='cabinet-option list-group-item' 
       value='<%= 1 %>'
+      data-controller='cabinets search filtering'
       data-url='<%= cabinet_url(cabinet) %>'
-      data-action='click->cabinets#changeCabinet' 
+      data-action='click->cabinets#changeCabinet 
+                   click->search#resetSearchValue 
+                   click->filtering#resetFilters' 
     >
       Fully-Stocked Cabinet
     </li>

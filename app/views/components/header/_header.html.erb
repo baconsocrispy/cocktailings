@@ -8,6 +8,17 @@
 
   <%# sorting / stats bar %>
   <div id='stats-container'>
+
+    <div class='reset-container'>
+      <button 
+        type='button'
+        id='reset-btn' 
+        class='reset-filters'
+        data-controller='search filtering'
+        data-action='click->search#resetSearchValue click->filtering#resetFilters'
+      >
+        Reset Filters
+      </button></div>
     <%= render partial: 'components/search_terms/search_terms' %>
     
     <%= render partial: 'components/recipe_count/recipe_count', locals: { recipe_count: @recipe_count } %>
