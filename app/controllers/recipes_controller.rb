@@ -24,22 +24,10 @@ class RecipesController < ApplicationController
     @recipes = Recipe.alphabetical.page(@page)
     @recipe_count = @recipes.total_count
 
-    user = current_user
-
-    category_ids = params[:categoryId] != '' ? 
-      params[:categoryId] : Category.all.map(&:id)
-
-    ingredient_ids = params[:ingredientIds] ? 
-      [*params[:ingredientIds]].map(&:to_i) : nil
-    
-
-    if params[:sortOption]
+    if params[:search]
       @recipes = Recipe.search_recipes(
-                          params[:sortOption],
-                          category_ids,
-                          ingredient_ids,
-                          params[:searchTerm],
-                          user
+                          params[:search],
+                          current_user
                         )
                         .alphabetical
                         .page(@page)

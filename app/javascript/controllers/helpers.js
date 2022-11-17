@@ -1,3 +1,26 @@
+// configures url params for pagination feature and returns
+// url as a string
+export function configureUrl(urlValue, pageValue) {
+  const params = getParams(pageValue);
+  var url = new URL(urlValue);
+  url.search = new URLSearchParams($.param(params));
+  return url;
+}
+
+// gathers all currently selected search options
+// and returns tham as an object 
+export function getParams(pageValue = null) {
+  return {
+    'page': pageValue,
+    'search': {
+      'sortOption': getSortOption(),
+      'ingredientIds': getIngredientIds(),
+      'categoryIds': getCategoryId(),
+      'searchTerm': $('#current-search').val()
+    }
+  };
+}
+
 // gets the currently selected tab value
 function getSortOption() {
   const selectedOption = document.querySelector(".sorting-option[data-isSelected='true']");
@@ -7,8 +30,12 @@ function getSortOption() {
 // gets category from hidden current-category div
 // or directly from a clicked category
 function getCategoryId() {
-  const selectedCategory = document.querySelector(".category-item[data-isSelected='true']");
-  return selectedCategory.getAttribute('data-value');
+  const selectedCategory = 
+    document
+      .querySelector(".category-item[data-isSelected='true']")
+      .getAttribute('data-value');
+
+  return [selectedCategory].filter(n => n); 
 }
 
 // gets all the currently selected ingredient ids
@@ -22,43 +49,17 @@ function getIngredientIds() {
   return ingredientIds.filter(n => n);
 }
 
-// if there are ingredientIds, appends them as an array to searchParams
-function appendIngredientIds(url) {
-  var ingredientIds = getIngredientIds();
-  if (ingredientIds.length) {
-    ingredientIds.map(i => url.searchParams.append('ingredientIds', i));
-  }
-  return url;
+
+// ----------  RESET HELPERS ------------------
+export function reset() {
+  resetCategory();
+  resetIngredients();
+  resetSortOption();
 }
 
-// configures url params for pagination feature and returns
-// url as a string
-export function configureUrl(urlValue, pageValue) {
-  const sortingOption = getSortOption();
-  var url = new URL(urlValue);
-
-  url.searchParams.set('page', pageValue);
-  url.searchParams.append('sortOption', sortingOption);
-  url.searchParams.append('categoryId', getCategoryId());
-  url.searchParams.append('searchTerm', $('#current-search').val());
-  url = appendIngredientIds(url);
-  return url.toString();
-}
-
-// gathers all currently selected search options
-// and returns tham as an object 
-export function getParams(event) {
-  const searchTerm = $('#current-search').val();
-  const sortOption = getSortOption;
-  const ingredientIds = getIngredientIds();
-  const categoryId = getCategoryId(event);
-
-  return {
-    'sortOption': sortOption,
-    'ingredientIds': ingredientIds,
-    'categoryId': categoryId,
-    'searchTerm': searchTerm
-  };
+export function resetPage() {
+  resetPageValue();
+  $('#search-field').val('');
 }
 
 // resets page value to 2 when results are refreshed
@@ -83,13 +84,3 @@ function resetSortOption() {
 }
 
 
-export function reset() {
-  resetCategory();
-  resetIngredients();
-  resetSortOption();
-}
-
-export function resetPage() {
-  resetPageValue();
-  $('#search-field').val('');
-}

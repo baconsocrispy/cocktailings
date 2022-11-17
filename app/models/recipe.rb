@@ -25,12 +25,11 @@ class Recipe < ApplicationRecord
 
   # -------------- RECIPE SEARCH / FILTERING LOGIC --------------- #
 
-  def self.search_recipes(
-    sort_option, 
-    category_ids, 
-    ingredient_ids=nil, 
-    search_term='', 
-    user)
+  def self.search_recipes(search_params, user)
+    sort_option = search_params[:sortOption]
+    category_ids = search_params[:categoryIds] ? search_params[:categoryIds] : Category.all.map(&:id)
+    ingredient_ids = search_params[:ingredientIds]
+    search_term = search_params[:searchTerm]
 
     case sort_option
     when 'All Recipes'

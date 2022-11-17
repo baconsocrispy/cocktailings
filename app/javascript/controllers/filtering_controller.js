@@ -2,7 +2,6 @@ import { Controller } from "@hotwired/stimulus";
 import { getParams, reset, resetPage } from './helpers';
 
 export default class extends Controller {
-  // primary search / filtering handler
   filterRecipes() {
     const params = getParams();
 
