@@ -1,31 +1,7 @@
   <div id='show-content-container' class='container'>
-
-    <div class='row text-center'>
-      <div id='recipe-show-header'>
-        <h2><%= @recipe.name.titleize %></h2>
-      </div>
-    </div>
-
     <div class='row'>
       <div id='recipe-show-container'>
         <%= render @recipe %>
-      </div>
-    </div>
-
-    <div class='row'>
-      <div class='d-flex justify-content-center'>
-        <span class='mx-2'><%= link_to "Edit this recipe", edit_recipe_path(@recipe), class: 'btn btn-sm btn-outline-secondary' %></span>
-        <span class='mx-2'><%= link_to "Back to recipes", recipes_path, class: 'btn btn-sm btn-outline-secondary' %></span>
-      </div>
-    </div>
-
-    <div class='row my-2'>
-      <div class='d-flex justify-content-center'>
-        <%= button_to "Destroy this recipe", 
-          @recipe, 
-          method: :delete, 
-          class: 'btn btn-sm btn-dark', 
-          data: { turbo: false } %>
       </div>
     </div>
 </div>

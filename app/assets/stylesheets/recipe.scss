@@ -1,3 +1,14 @@
 #recipe-show-header {
+  display: flex;
+  flex-wrap: nowrap;
   color: rgb(1, 55, 1);
+  
+}
+
+.edit-btn {
+  margin-left: 5px;
+}
+
+.recipe-image {
+  width: 400px;
 }

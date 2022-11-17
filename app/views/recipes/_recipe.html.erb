@@ -1,49 +1,76 @@
 <div id='recipe-details-container'>
-  <div class='row flex-nowrap'>
-    <div class='col-4'>
+  <div class='row'>
 
-      <%# ingredients list %>
-      <div class='recipe-details-container'>
-        <div class='recipe-details-header'>Ingredients</div>
-        <ul class='recipe-details-list'>
-          <% recipe.portions.each do | portion | %>
-            <li class='recipe-details-list-item'><%= portion.ingredient.display_name %> <%= portion.amount %> <%= portion.unit %> </li>
-          <% end%>
-        </ul>
+    <div class='col-auto'>
+      <div>
+        <% if recipe.image.present? %>
+          <%= image_tag recipe.image, class: "recipe-image"  %>
+        <% end %>
       </div>
-
-      <%# tools display %>
-      <% unless recipe.tools.empty? %>
-        <div class='recipe-details-container'>
-          <div class='recipe-details-header'>Tools</div>
-          <ul class='recipe-details-list'>
-            <% recipe.tools.each do | tool | %>
-              <li><%= tool.tool_type %></li>
-            <% end%>
-          </ul>
-        </div>
-      <% end %>
     </div>
-    
+
+
     <div class='col'>
-      <%# recipe steps %>
-      <div class='recipe-details-container'>
-        <div class='recipe-details-header'>Steps</div>
-        <ol class=''>
-          <% recipe.steps.each do |s| %>
-            <li><%= s.name %></li>
-            <p><%= s.description %></p>
-          <% end %>
-        </ol>
+      
+      <div id='recipe-show-header'>
+        <div class='show-header'>
+          <h2 class='show-header'><%= @recipe.name.titleize %></h2>
+        </div>
+        <div class='edit-btn'>
+          <a href='<%= edit_recipe_path(@recipe) %>'>
+            <i class="fa-solid fa-pencil"></i>
+          </a>
+        </div>
       </div>
 
-      <%# cocktail description (if any) %>
-      <div class='recipe-details-container'>
-        <% if recipe.description != "" %>
-          <div class='recipe-details-header'>Description</div>
-          <p><%= recipe.description %></p>   
-        <% end%>
-      </div> 
+
+      <div class='row'>
+        <div class='col-4'>
+
+          <%# ingredients list %>
+          <div class='recipe-details-container'>
+            <div class='recipe-details-header'>Ingredients</div>
+            <ul class='recipe-details-list'>
+              <% recipe.portions.each do | portion | %>
+                <li class='recipe-details-list-item'><%= portion.ingredient.display_name %> <%= portion.amount %> <%= portion.unit %> </li>
+              <% end%>
+            </ul>
+          </div>
+
+          <%# tools display %>
+          <% unless recipe.tools.empty? %>
+            <div class='recipe-details-container'>
+              <div class='recipe-details-header'>Tools</div>
+              <ul class='recipe-details-list'>
+                <% recipe.tools.each do | tool | %>
+                  <li><%= tool.tool_type %></li>
+                <% end%>
+              </ul>
+            </div>
+          <% end %>
+        </div>
+        
+        <div class='col'>
+          <%# recipe steps %>
+          <div class='recipe-details-container'>
+            <div class='recipe-details-header'>Steps</div>
+            <ol class=''>
+              <% recipe.steps.each do |s| %>
+                <li><%= s.name %></li>
+                <p><%= s.description %></p>
+              <% end %>
+            </ol>
+          </div>
+
+          <%# cocktail description (if any) %>
+          <div class='recipe-details-container'>
+            <% if recipe.description != "" %>
+              <div class='recipe-details-header'>Description</div>
+              <p><%= recipe.description %></p>   
+            <% end%>
+          </div> 
+        </div>
+      </div>
     </div>
   </div>
 </div>

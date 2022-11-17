@@ -1,0 +1,43 @@
+<div class='modal-header'>
+  <div class='left'>
+    <%# image display %>
+    <div id='modal-img-container'>
+      <% if recipe.image.present? %>
+        <%= image_tag recipe.image, class: ""  %>
+      <% end %>
+    </div>
+
+    <%# recipe name %>
+    <div id='modal-header-recipe-name'>
+      <a href='<%= recipe_path(recipe) %>'><%= recipe.name.titleize %></a>
+    </div>
+
+    <%# favoriting widget %>
+    <div class='modal-favorite-container'>
+      <%= render partial: 'components/favoriting/favoriting_widget', locals: { recipe: recipe } %>
+    </div>
+  </div>
+
+  <div class='right'>
+    <%# categories %>
+    <div id='modal-header-recipe-categories'>
+      Category: <%= recipe.categories.map(&:name).join(', ') %>
+    </div>
+
+    <%# edit button %>
+    <div class='modal-btn-container'>
+      <button class='modal-edit-btn'><%= link_to 'Edit', edit_recipe_url(recipe) %></button>
+    </div>
+
+    <%# close button %>
+    <div class='modal-close-btn'>
+      <button 
+        id='modal-close' 
+        type='button' 
+        class='btn-close' 
+        data-bs-dismiss='modal' 
+        aria-label='Close'
+      ></button>
+    </div>
+  </div>
+</div>

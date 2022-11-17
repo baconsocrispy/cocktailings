@@ -15,4 +15,14 @@
       <span><%= link_to "Back to recipes", recipes_path, class: 'btn btn-sm btn-outline-secondary' %></span>
     <div>
   </div>
+
+   <div class='row my-2'>
+      <div class='d-flex justify-content-center'>
+        <%= button_to "Destroy this recipe", 
+          @recipe, 
+          method: :delete, 
+          class: 'btn btn-sm btn-dark', 
+          data: { turbo: false } %>
+      </div>
+    </div>
 </div>
