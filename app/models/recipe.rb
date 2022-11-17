@@ -20,7 +20,7 @@ class Recipe < ApplicationRecord
   scope :alphabetical, -> { order(:name) }
 
   # filtering scopes
-  scope :search, lambda{ |search_term| self.joins(:ingredients).where('ingredients.display_name ILIKE ?', "%#{ search_term }%").or(where('recipes.name ILIKE ?', "%#{ search_term }%")).distinct if search_term.present?}
+  scope :search, lambda{ |search_term| self.where('name ILIKE ?', "%#{ search_term }%").distinct if search_term.present? }
   scope :by_category, lambda{ |category_ids| self.joins(:categories).where(categories: { id: category_ids }) if category_ids.present? }
   scope :by_all_ingredients, lambda{ |ingredient_ids| self.joins(:ingredients).group(:id).having('array_agg(ingredients.id) @> ?', ingredient_ids) if ingredient_ids.present? }
   scope :by_any_ingredient, lambda{ |ingredient_ids| self.joins(:ingredients).where(ingredients: { id: ingredient_ids }).distinct }
