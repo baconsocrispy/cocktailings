@@ -12,7 +12,7 @@ class Recipe < ApplicationRecord
 
   # add most_recent, popular (favorited?/viewed?), highest_rated, difficulty
   scope :alphabetical, -> { order(:name) }
-  scope :by_category, -> (category_ids) { joins(:categories).where(categories: { id: category_ids })}
+  scope :by_category, lambda{ |category_ids| self.joins(:categories).where(categories: { id: category_ids }) if category_ids.present? }
   scope :by_ingredient, -> (ingredient_ids) { joins(:ingredients).where(ingredients: { id: ingredient_ids })}
   scope :by_category_and_ingredient, -> (category_ids, ingredient_ids) { by_category(category_ids).by_ingredient(ingredient_ids).distinct }
   scope :search2, -> (query) { where('recipes.name ILIKE ?', "%#{ query }%").or(where('ingredients.display_name ILIKE ?', "%#{ query }%")) }
@@ -27,7 +27,7 @@ class Recipe < ApplicationRecord
 
   def self.search_recipes(search_params, user)
     sort_option = search_params[:sortOption]
-    category_ids = search_params[:categoryIds] ? search_params[:categoryIds] : Category.all.map(&:id)
+    category_ids = search_params[:categoryIds]
     ingredient_ids = search_params[:ingredientIds]
     search_term = search_params[:searchTerm]
 
