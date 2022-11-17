@@ -114,19 +114,28 @@ class RecipesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def recipe_params
       # need to explicitly include :id for :steps/:portions for :_destroy to work
-      params.require(:recipe).permit(:name, :description, :image, category_ids: [],
-                                     steps_attributes: [:id,
-                                                        :ingredient_id,
-                                                        :name,
-                                                        :description,
-                                                        :_destroy
-                                                        ],
-                                     portions_attributes: [:id,
-                                                           :ingredient_id,
-                                                           :amount,
-                                                           :unit,
-                                                           :portionable_type,
-                                                           :portionable_id,
-                                                           :_destroy])                      
+      params.require(:recipe).permit(
+        :name, 
+        :description, 
+        :image, 
+        category_ids: [], 
+        tool_ids: [],                           
+        steps_attributes: [
+          :id,
+          :ingredient_id,
+          :name,
+          :description,
+          :_destroy
+        ],
+        portions_attributes: [
+          :id,
+          :ingredient_id,
+          :amount,
+          :unit,
+          :portionable_type,
+          :portionable_id,
+          :_destroy
+        ]
+      )                      
     end
 end

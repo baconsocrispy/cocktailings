@@ -10,6 +10,7 @@ require 'csv'
 require Rails.root.join('db', 'seed_ingredient.rb')
 require Rails.root.join('db', 'fully_stocked_cabinet.rb')
 require Rails.root.join('db', 'seed_categories.rb')
+require Rails.root.join('db', 'seed_tools.rb')
 require Rails.root.join('db', 'seed_recipe.rb')
 
 # populates ingredients table from ingredients csv
@@ -21,6 +22,9 @@ create_or_reset_fully_stocked_cabinet
 
 # populates categories table
 seed_categories
+
+# populates tools table
+seed_tools
 
 # seeds arbitrary number of recipes with text pulled at random
 # from a txt file to create a name of a max word length
