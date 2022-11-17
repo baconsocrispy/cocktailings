@@ -5,6 +5,8 @@
       <div>
         <% if recipe.image.present? %>
           <%= image_tag recipe.image, class: "recipe-image"  %>
+        <% else %>
+          <img src=<%= asset_path('default.webp') %> class='recipe-image'>
         <% end %>
       </div>
     </div>

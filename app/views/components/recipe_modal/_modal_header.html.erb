@@ -3,7 +3,9 @@
     <%# image display %>
     <div id='modal-img-container'>
       <% if recipe.image.present? %>
-        <%= image_tag recipe.image, class: ""  %>
+        <%= image_tag recipe.image %>
+      <% else %>
+        <img src=<%= asset_path('default.webp') %>>
       <% end %>
     </div>
 
