@@ -1,5 +1,5 @@
 <tr class='nested-fields ingredients-row' data-controller='ingredients'>
-  <td class='optional-checkbox'><%= f.check_box :optional, label: false %></td>
+
   <td class='ingredients-dropdown'>
     <%# creates select drop-down for ingredient association objects %>
     <%= f.association :ingredient, 
@@ -13,7 +13,7 @@
 
   <td class='unit-select'><%= f.input :unit, label: false, collection: ['', 'oz.', 'tbsp', 'tsp', 'qt', 'g' ] %></td>
 
-  
+  <td class='optional-checkbox'><%= f.check_box :optional, label: false %></td>
 
   <%# coccoon gem helper to destroy object %>
   <td><%= link_to_remove_association '⨯', f %></td>

@@ -16,10 +16,23 @@
       <% else %>
          <img id='image-preview' src='#' alt='image-preview' data-image='<%= false %>' />
       <% end %>
-    </div>
-    <div class='row form-content'>
 
-      
+      <%# add image %>
+
+      <div class='text-center'>
+        <%# wrapping file_field in a label to style the attach button %>
+        <label class='btn btn-sm btn-outline-dark'>
+          <span id='add-image-label'>
+            <%= @recipe.image.present? ? 'Edit Image' : 'Add Image' %>
+          </span>
+          <span class='d-none' data-controller='form'>
+            <%= f.file_field :image, id: 'add-image-btn', input_html: { data: { action: 'change->form#addImagePreview' }} %>
+          </span>
+        </label>
+      </div>
+    </div>
+
+    <div class='row form-content'>
       <div class='col-auto'>
         <%# recipe ingredients %>
         <%= render partial: 'components/portion_form/portion_table', locals: { f: f } %>
@@ -71,21 +84,6 @@
       </div>
     </div>
         
-    <%# add image %>
-    <div class='row my-2'>
-      <div class='text-center'>
-
-        <%# wrapping file_field in a label to style the attach button %>
-        <label class='btn btn-sm btn-outline-dark'>
-          <span id='add-image-label'>
-            <%= @recipe.image.present? ? 'Edit Image' : 'Add Image' %>
-          </span>
-          <span class='d-none' data-controller='form'>
-            <%= f.file_field :image, id: 'add-image-btn', input_html: { data: { action: 'change->form#addImagePreview' }} %>
-          </span>
-        </label>
-      </div>
-    </div>
 
     <%# form buttons %>
     <div class='form-buttons'>

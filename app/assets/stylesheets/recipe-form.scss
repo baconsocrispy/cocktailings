@@ -57,6 +57,7 @@
 
 #recipe_description {
   width: 300px;
+  margin-bottom: 20px;
 }
 
 #recipe_name {
@@ -74,6 +75,7 @@
 #image-preview {
   display: none;
   margin: auto;
+  margin-bottom: 20px;
 }
 
 #image-preview[data-image='true'] {

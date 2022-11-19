@@ -1,13 +1,24 @@
-<div id='cabinet-form' class='w-50 fs-6 fw-bold'>
+<div id='cabinet-form' data-controller='form'>
   <%= simple_form_for(@cabinet) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
     
+    <div class='row form-header-container'>
+      <h1 class='form-header'>
+        <%= @edit ? @cabinet.name : 'New Liquor Cabinet' %>
+      </h1>
+
+      <%= f.input :name, label: false, placeholder: 'Name Your Liquor Cabinet', required: true %>
+      <%= f.hidden_field :user_id, value: current_user.id  %>
+
+      <div class='text-danger fst-italic'><%= flash[:error] %></div>
+    </div>
+
     <div class='row'>
-      <div class="form-inputs">
-        <%= f.hidden_field :user_id, value: current_user.id  %>
-        <%= f.input :name, label: 'Name Your Liquor Cabinet' %>
-      </div>
+      <div class='col'></div>
+      <div class='col'></div>
+      <div class='col'></div>
+      <div class='col'></div>
     </div>
 
     <div class='row'>

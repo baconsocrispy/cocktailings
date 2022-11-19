@@ -31,5 +31,12 @@ export default class extends Controller {
     let isMenuExpanded = menu.attr('aria-expanded') === 'true';
     menu.attr('aria-expanded', !isMenuExpanded);
   }
+
+  // opens/closes cabinet menu when '+' icon is clicked
+  toggleCabinetNavMenu() {
+    const menu = $('.nav-list-container');
+    let isMenuExpanded = menu.attr('aria-expanded') === 'true';
+    menu.attr('aria-expanded', !isMenuExpanded);
+  }
 }
 

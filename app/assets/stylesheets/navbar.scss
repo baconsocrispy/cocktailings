@@ -19,3 +19,31 @@
     color: rgb(1, 55, 1)
   }
 }
+
+.nav-list-container {
+  display: none;
+  position: absolute;
+  background-color: teal;
+}
+
+#nav-cabinet-list {
+  list-style: none;
+  border: 1px solid rgb(1, 55, 1);
+  padding: 5px;
+  
+  li {
+    display: block;
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  a {
+    color: cornsilk;
+  }
+}
+
+.nav-list-container[aria-expanded='true'] {
+  display: block;
+}

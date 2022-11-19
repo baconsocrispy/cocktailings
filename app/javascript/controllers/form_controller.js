@@ -24,6 +24,11 @@ export default class extends Controller {
       $('.form-header').html(target.value);
       if (target.value == '') $('.form-header').html('New Recipe');
     });
+
+    $('#cabinet_name').on('keyup', ({ target }) => {
+      $('.form-header').html(target.value);
+      if (target.value == '') $('.form-header').html('New Liquor Cabinet');
+    });
   }
 
   deleteRecipe(e) {

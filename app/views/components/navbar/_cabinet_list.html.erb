@@ -1,0 +1,10 @@
+
+<div class='nav-list-container'>
+  <ul id='nav-cabinet-list'aria-expanded='<%= false %>'>
+    <% current_user.cabinets.each do |c| %>
+      <li><a href='<%= cabinet_path(c) %>'><%= c.name %></a></li>
+    <% end %>
+
+    <li><a href='<%= new_cabinet_path %>'>*New Cabinet*</a></li>
+  </ul>
+</div>
