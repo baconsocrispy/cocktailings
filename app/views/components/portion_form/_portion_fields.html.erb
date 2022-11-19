@@ -1,5 +1,6 @@
-<tr class='nested-fields' data-controller='ingredients'>
-  <td>
+<tr class='nested-fields ingredients-row' data-controller='ingredients'>
+  <td class='optional-checkbox'><%= f.check_box :optional, label: false %></td>
+  <td class='ingredients-dropdown'>
     <%# creates select drop-down for ingredient association objects %>
     <%= f.association :ingredient, 
                       collection: Ingredient.all.order(:display_name), 
@@ -8,10 +9,12 @@
                       value_method: :id %>
   </td>
 
-  <td><%= f.input :amount, label: false, input_html: { min: '0.1', step: '0.1' } %></td>
+  <td class='amount-select'><%= f.input :amount, label: false, input_html: { min: '0.1', step: '0.1' } %></td>
 
-  <td><%= f.input :unit, label: false, collection: ['', 'oz.', 'tbsp', 'tsp', 'qt', 'g' ] %></td>
+  <td class='unit-select'><%= f.input :unit, label: false, collection: ['', 'oz.', 'tbsp', 'tsp', 'qt', 'g' ] %></td>
+
+  
 
   <%# coccoon gem helper to destroy object %>
-  <td><%= link_to_remove_association 'Delete', f, class: 'btn btn-dark btn-sm' %></td>
+  <td><%= link_to_remove_association '⨯', f %></td>
 </tr>

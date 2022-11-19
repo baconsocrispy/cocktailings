@@ -1,68 +1,107 @@
- <div id='recipe-form' data-controller='recipes' class='w-50 fs-6 fw-bold'> 
-  <%# recipe form using simple_form/cocoon gems %>
+ <div id='recipe-form' data-controller='recipes form'> 
   <%= simple_form_for @recipe do |f| %>
     <%= f.error_notification %>
 
-    <%# recipe inputs %>
+    <div class='row form-header-container'>
+      <h1 class='form-header'>
+        <%= @edit ? @recipe.name : 'New Recipe' %>
+      </h1>
+      <%= f.input :name, label: false, placeholder: 'Recipe Name', required: true %>
+      <div class='text-danger fst-italic'><%= flash[:error] %></div>
+    </div>
+
     <div class='row'>
-      <div class='form-inputs'>
-        <%= f.input :name, required: true, input_html: {class: 'w-50'} %>
-        <%= f.input :description, input_html: {class: 'w-100'} %>
+      <% if @recipe.image.present? %>
+        <%= image_tag @recipe.image, id: 'image-preview', data: { image: true } %>
+      <% else %>
+         <img id='image-preview' src='#' alt='image-preview' data-image='<%= false %>' />
+      <% end %>
+    </div>
+    <div class='row form-content'>
+
+      
+      <div class='col-auto'>
+        <%# recipe ingredients %>
+        <%= render partial: 'components/portion_form/portion_table', locals: { f: f } %>
+
+        <%# recipe steps %>
+        <%= render partial: 'components/step_form/step_table', locals: { f: f } %>
+      </div>
+
+      <div class='col-auto'>
+        <%# recipe categories %>
+        <div class='form-checkbox-container'>
+          <label for='categories-checkboxes' class='form-label'>Categories</label>
+          <div class='form-checkboxes'>
+            
+            <%= f.collection_check_boxes :category_ids, 
+              Category.all.order(:name), 
+              :id, 
+              :name,
+              html_options: { id: 'categories-checkoxes' },
+              include_hidden: false do |c|
+            %>
+              <%= c.label(class: 'checkbox-label') { c.check_box + ' ' + c.text } %>
+            <% end %>
+          </div>
+        </div>
+
+        <%# recipe tools %>
+        <div class='form-checkbox-container'>
+          <label for='tools-checkboxes' class='form-label'>Tools</label>
+          <div class='form-checkboxes'> 
+            <%= f.collection_check_boxes :tool_ids, 
+              Tool.all.order(:tool_type), 
+              :id, 
+              :tool_type,
+              html_options: { id: 'tools-checkboxes' }, 
+              include_hidden: false do |t|
+            %>
+              <%= t.label(class: 'checkbox-label') { t.check_box + ' ' + t.text } %>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
 
-    <%# recipe categories %>
+    <%# recipe description %>
     <div class='row'>
-      <div>
-        <%= f.collection_check_boxes :category_ids, 
-                                     Category.all.order(:name), 
-                                     :id, 
-                                     :name, 
-                                     include_hidden: false %>
+      <div class='recipe-description'>
+        <%= f.input :description, label: 'Recipe Description', label: false, placeholder: 'Recipe Description' %>
       </div>
     </div>
-
-    <%# recipe ingredients %>
-    <div class='row'>
-      <%= render partial: 'components/portion_form/portion_table', locals: { f: f } %>
-    </div>
-
-    <%# recipe steps %>
-    <div class='row'>
-      <%= render partial: 'components/step_form/step_table', locals: { f: f } %>
-    </div>
-
-    <%# recipe tools %>
-   <div class='row'>
-      <div>
-        <%= f.collection_check_boxes :tool_ids, 
-                                     Tool.all.order(:tool_type), 
-                                     :id, 
-                                     :tool_type, 
-                                     include_hidden: false %>
-      </div>
-    </div>
-    
+        
     <%# add image %>
     <div class='row my-2'>
       <div class='text-center'>
 
         <%# wrapping file_field in a label to style the attach button %>
         <label class='btn btn-sm btn-outline-dark'>
-          <%= @recipe.id ? 'Edit Image' : 'Add Image' %>
-          <span class='d-none'><%= f.file_field :image, id: 'add-image-btn' %></span>
+          <span id='add-image-label'>
+            <%= @recipe.image.present? ? 'Edit Image' : 'Add Image' %>
+          </span>
+          <span class='d-none' data-controller='form'>
+            <%= f.file_field :image, id: 'add-image-btn', input_html: { data: { action: 'change->form#addImagePreview' }} %>
+          </span>
         </label>
-
-        <%# image filename inserted via jquery after upload%>
-        <p id='img-file-name' class='fst-italic fw-normal mt-2 text-danger'></p>
       </div>
     </div>
 
-    <%# form submit %>
-    <div class='row'>
-      <div class='text-center'>
-        <%= f.button :submit, class: 'btn-sm btn-success' %>
+    <%# form buttons %>
+    <div class='form-buttons'>
+      <div class='form-btn-container'>
+        <%= f.button :submit, id: 'submit-btn', data: { turbo: false }, _method: 'update'  %>
       </div>
-    </div> 
+
+      <% if @edit %>
+        <div class='form-btn-container'>
+          <div>
+            <%# <button role='button' class='form-btn' data-action='click->form#deleteRecipe'>Delete Recipe</button> %>
+
+          </div>
+        </div>
+      <% end %>
+    </div>
+
   <% end %>
 </div>

@@ -10,8 +10,8 @@
     </div>
 
     <%# recipe name %>
-    <div id='modal-header-recipe-name'>
-      <a href='<%= recipe_path(recipe) %>'><%= recipe.name.titleize %></a>
+    <div id='modal-header-recipe-name' data-action='click->modal#closeModal'>
+      <a href='<%= recipe_path(recipe) %>' ><%= recipe.name.titleize %></a>
     </div>
 
     <%# favoriting widget %>
@@ -37,7 +37,7 @@
         id='modal-close' 
         type='button' 
         class='btn-close' 
-        data-bs-dismiss='modal' 
+        data-bs-dismiss='modal'
         aria-label='Close'
       ></button>
     </div>

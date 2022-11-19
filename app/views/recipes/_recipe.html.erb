@@ -3,6 +3,8 @@
 
     <div class='col-auto'>
       <div>
+        <%= render partial: 'components/favoriting/favoriting_widget', locals: { recipe: recipe } %>
+        
         <% if recipe.image.present? %>
           <%= image_tag recipe.image, class: "recipe-image"  %>
         <% else %>

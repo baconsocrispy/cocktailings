@@ -1,12 +1,14 @@
-<div>  
-  <table class='table'>
+<div class='form-table-container'>
+  <label class='form-label'>Add Ingredients</label>  
+  <table class='ingredients-table'>
     <thead>
-    <tr>
-      <th>Ingredients</th>
-      <th>Amount</th>
-      <th>Units</th>
-      <th></th>
-    </tr>
+      <tr>
+        <td>Opt'l?</td>
+        <td>Ingredients</td>
+        <td>Amount</td>
+        <td>Units</td>
+        <td></td>
+      </tr>
     </thead>
     <tbody class='portions'>
       <%= f.simple_fields_for :portions do |portion_form| %>
@@ -16,12 +18,11 @@
   </table>
 
   <%# dynamically adds new portion fields via Cocoon gem %>
-  <div class='form-actions'>
-    <%= link_to_add_association 'Add Ingredient', 
+  <div class='form-actions text-end pe-4'>
+    <%= link_to_add_association '+', 
       f, 
       :portions, 
-      partial: 'components/portion_form/portion_fields', 
-      class: 'btn btn-outline-dark btn-sm', 
+      partial: 'components/portion_form/portion_fields',
       data: {
         association_insertion_node: '.portions', 
         association_insertion_method: :append

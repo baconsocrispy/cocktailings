@@ -1,0 +1,107 @@
+.form-header-container {
+  color: rgb(1, 55, 1);
+  margin-bottom: 20px;
+}
+
+.form-header {
+ text-align: center;
+}
+
+.form-checkbox-container {
+  margin-bottom: 20px;
+  padding: 5px;
+}
+
+.form-table-container {
+  padding: 5px;
+  margin-bottom: 20px;
+  margin-left: 20px;
+}
+
+.form-checkboxes {
+  color:rgb(1, 55, 1);
+  max-width: 300px;
+}
+
+.checkbox-label {
+  display: inline-block;
+}
+
+#recipe_description {
+  margin: auto;
+}
+
+.ingredients-table {
+  border-spacing: 5px 0px;
+  border-collapse: separate;
+  color:rgb(1, 55, 1);
+}
+
+.optional-checkbox {
+  padding-left: 5%;
+}
+
+.recipe-steps-table {
+  width: 100%;
+}
+
+.recipe-step {
+  display: flex;
+  width: 100%;
+}
+
+.step-description {
+  flex-grow: 1;
+  margin: 0px 5px;
+}
+
+#recipe_description {
+  width: 300px;
+}
+
+#recipe_name {
+  width: 200px;
+  margin: auto;
+  border-radius: 0%;
+}
+
+.form-label {
+  color:rgb(1, 55, 1);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+#image-preview {
+  display: none;
+  margin: auto;
+}
+
+#image-preview[data-image='true'] {
+  display: block;
+  width: 150px;
+}
+
+#submit-btn,
+.form-btn {
+  color: rgb(1, 55, 1);
+  background: none;
+  border: 1px solid rgb(1, 55, 1);
+  margin: 0px 20px;
+  padding: 5px;
+  border-radius: 0%;
+
+  &:hover {
+    background-color: rgb(1, 55, 1);
+    color: cornsilk;
+  }
+}
+
+.form-buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.form-btn-container {
+  display: inline-block;
+  text-align: center;
+}

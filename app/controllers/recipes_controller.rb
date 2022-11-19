@@ -16,7 +16,6 @@ class RecipesController < ApplicationController
   end
 
   # GET /recipes or /recipes.json
-  # All filtering / search logic handled in the index action
   def index
     @home = true
     @page = params[:page] || 1
@@ -57,6 +56,7 @@ class RecipesController < ApplicationController
 
   # GET /recipes/1/edit
   def edit
+    @edit = true
   end
 
   # POST /recipes or /recipes.json
@@ -134,6 +134,7 @@ class RecipesController < ApplicationController
           :unit,
           :portionable_type,
           :portionable_id,
+          :optional,
           :_destroy
         ]
       )                      

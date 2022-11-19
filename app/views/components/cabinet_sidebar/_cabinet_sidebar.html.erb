@@ -1,6 +1,6 @@
 <% fully_stocked_cabinet = Cabinet.find_by(name: 'Fully-Stocked Cabinet')%>
 <% cabinet = current_user.default_cabinet ? 
-      current_user.default_cab : fully_stocked_cabinet %>
+      Cabinet.find(current_user.default_cabinet) : fully_stocked_cabinet %>
 
 <%# current liquor cabinet %>
 <div class='row'>

@@ -1,12 +1,6 @@
-<div>
-  <table class='table'>
-    <thead>
-    <tr>
-      <th>Step Name</th>
-      <th>Description</th>
-      <th></th>
-    </tr>
-    </thead>
+<div class='form-table-container'>
+  <label class='form-label'>Add Recipe Steps</label>
+  <table class='recipe-steps-table'>
     <tbody class='steps'>
       <%= f.simple_fields_for :steps do |step_form| %>
         <%= render 'components/step_form/step_fields', f: step_form %>
@@ -15,12 +9,11 @@
   </table>
 
   <%# dynamically adds new step fields via Cocoon gem %>
-  <div class='form-actions'>
-    <%= link_to_add_association 'Add Step', 
+  <div class='form-actions text-end pe-4'>
+    <%= link_to_add_association '+', 
       f, 
       :steps, 
       partial: 'components/step_form/step_fields',
-      class: 'btn btn-outline-dark btn-sm', 
       data: {
         association_insertion_node: '.steps', 
         association_insertion_method: :append 
