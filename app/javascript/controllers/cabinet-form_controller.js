@@ -4,9 +4,10 @@ export default class extends Controller {
   appendIngredient() {
     const tr = $('.portions .nested-fields').remove();
     const type = tr.data('ingredient-type');
+    console.log(tr);
+
     tr.appendTo(`#${ type.toLowerCase() }-ingredients`);
     console.log(tr.children().children());
-    
   }
 
   updateType({ target }) {
@@ -17,7 +18,7 @@ export default class extends Controller {
       data: { 'ingredientId': target.value },
       success: ({ ingredientType }) => {
         target
-          .closest('tr')
+          .closest('.nested-fields')
           .setAttribute('data-ingredient-type', ingredientType);
       }
     });

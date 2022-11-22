@@ -1,29 +1,26 @@
-<tr class='nested-fields' data-controller='ingredients' data-ingredient-type=''>
-
-
-  <td>
+<div class='nested-fields ingredient-form' data-controller='ingredients' data-ingredient-type=''>
+  <div class='ingredient-input'>
     <%# creates select drop-down for ingredient association objects %>
     <%= f.association :ingredient, 
                       collection: Ingredient.all.order(:display_name), 
                       label: false,
                       label_method: :display_name, 
                       value_method: :id,
+                      prompt: 'Select an ingredient',
                       input_html: {
+                        placeholder: 'Select an ingredient',
                         class: 'ingredient-name',
                         data: { 
                           action: 'change->cabinet-form#updateType',
                           url: new_cabinet_path
                         }
                       } %>
-  </td>
+  </div>
 
-  <td class='ingredient-amount'>
-    <%= f.input :amount, label: false, input_html: { min: '0.1', step: '0.1' } %>
-    <%= f.input :unit, label: false, collection: ['', 'Oz.', 'L', 'mL', 'tbsp', 'tsp'], input_html: { class: 'ingredient-unit'} %>
-  </td>
+  <div class='ingredient-input'><%= f.input :amount, label: false, placeholder: 'Amount', input_html: { min: '0.1', step: '0.1', class: 'ingredient-amount' } %></div>
+
+  <div class='ingredient-input'><%= f.input :unit, label: false, collection: ['', 'Oz.', 'L', 'mL', 'tbsp', 'tsp'], prompt: 'Units', input_html: { class: 'ingredient-unit'} %></div>
 
   <%# coccoon gem helper to destroy object %>
-  <td><%= link_to_remove_association 'x', f, input_html: { class: 'remove-ingredient-btn'} %></td>
-
-  <td class='ingredient-type' data-value=''></td>
-</tr>
+  <div class='remove-ingredient'><%= link_to_remove_association 'x', f, input_html: { class: 'remove-ingredient-btn'} %></div>
+</div>
