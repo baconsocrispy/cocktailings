@@ -3,18 +3,60 @@
   <div class='container'>
   
     <%# cabinet name %>
-    <div class='row text-center'>
-      <h2><%= cabinet.name %></h2>
+    <div class='recipe-show-header cabinet-header'>
+      <div class='show-header'>
+        <h2 class='cabinet-name'>
+          <% if @show %>
+            <%= cabinet.name %>
+          <% else %>
+            <a href='<%= cabinet_path(cabinet) %>'>
+              <%= cabinet.name %>
+            </a>
+          <% end %>
+        </h2>
+      </div>
+      <div class='edit-btn'>
+        <% if @cabinet %>
+          <a href='<%= edit_cabinet_path(@cabinet) %>'>
+            <i class="fa-solid fa-pencil"></i>
+          </a>
+        <% end %>
+      </div>
     </div>
+    
+    <%# ingredient columns %>
+    <div class='row cabinet-display'>
+      <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
+        <div class='col'>
+          <h5 class='ingredient-header'>
+            <%= ingredient_type.pluralize %>
+          </h5>
 
-    <%# cabinet contents %>
-    <div class='row border'>
-      <h3>Contents</h3>
-      <ul class='list-unstyled'>
-        <% cabinet.portions.each do | portion | %>
-          <li><%= portion.ingredient.display_name %> | <%= portion.amount %> <%= portion.unit %> </li>
-        <% end%>
-      </ul>
+          <div class='ingredient-container'>
+            <% cabinet.portions.each do |portion| %>
+              <% if portion.ingredient.class.to_s === ingredient_type %>
+                <div class='cabinet-display-item'>
+                  <%= [portion.ingredient.display_name, portion.amount, portion.unit].join(' ') %>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+
+      <%# tools column %>
+      <div class='col'>
+        <h5 class='ingredient-header'>Tools</h5>
+        <div class='ingredient-container'>
+          <% unless cabinet.tools.empty? %>
+            <% cabinet.tools.each do | tool | %>
+              <div class='cabinet-display-item'>
+                <%= tool.tool_type %>
+              </div>
+            <% end%>
+          <% end %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

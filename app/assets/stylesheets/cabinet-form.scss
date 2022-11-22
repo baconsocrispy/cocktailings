@@ -4,6 +4,19 @@
   border-radius: 0%;
 }
 
+.cabinet-header {
+  color:rgb(1, 51, 1);
+  margin-bottom: 50px;
+}
+
+.cabinet-display {
+  margin-top: 20px;
+}
+
+.cabinet-display-item {
+  color:rgb(1, 51, 1);
+}
+
 #ingredient-form {
   margin-top: 50px;
 }
@@ -57,4 +70,8 @@
 .remove-btn {
   display: none;
   margin-left: 5px;
+}
+
+.cabinet-container {
+  margin-bottom: 30px;
 }

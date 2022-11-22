@@ -2,13 +2,7 @@
 
 <%= render @cabinet %>
 
-<div class='row'>
-  <div class='d-flex justify-content-center'>
-    <span class='mx-2'><%= link_to "Edit this cabinet", edit_cabinet_path(@cabinet), class: 'btn btn-sm btn-outline-secondary' %></span>
-  </div>
-</div>
-
-<div class='row my-2'>
+<div class='row my-5'>
   <div class='d-flex justify-content-center'>
     <%= button_to "Delete", @cabinet, method: :delete, class: 'btn btn-sm btn-dark' %>
   </div>

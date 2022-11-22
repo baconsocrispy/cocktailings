@@ -9,6 +9,10 @@ class CabinetsController < ApplicationController
 
   # GET /cabinets/1 or /cabinets/1.json
   def show
+    @show = true
+    # updates user's default cabinet when 
+    # switching liquor cabinets in the sidebar and
+    # re-renders the sidebar with new cabinet
     if params[:update_id]
       current_user.update!(default_cabinet: params[:update_id])
       @cabinet = Cabinet.find(params[:update_id])
@@ -86,6 +90,7 @@ class CabinetsController < ApplicationController
       params.require(:cabinet).permit(:name, 
                                       :locked, 
                                       :user_id, 
+                                      tool_ids: [],
                                       portions_attributes: [:id,
                                                             :ingredient_id,
                                                             :amount,

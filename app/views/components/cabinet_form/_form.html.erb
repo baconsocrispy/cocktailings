@@ -42,6 +42,22 @@
       <%= render partial: 'components/cabinet_form/portion_table', locals: { f: f } %>
     </div>
 
+    <%# tools %>
+    <div class='form-checkbox-container'>
+      <label for='tools-checkboxes' class='form-label'>Tools</label>
+      <div class='form-checkboxes'> 
+        <%= f.collection_check_boxes :tool_ids, 
+          Tool.all.order(:tool_type), 
+          :id, 
+          :tool_type,
+          html_options: { id: 'tools-checkboxes' }, 
+          include_hidden: false do |t|
+        %>
+          <%= t.label(class: 'checkbox-label') { t.check_box + ' ' + t.text } %>
+        <% end %>
+      </div>
+    </div>
+
     <div class='row text-center'>
       <div class="">
         <%= f.button :submit, id: 'submit-btn' %>
