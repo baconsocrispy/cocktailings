@@ -5,7 +5,7 @@
 }
 
 #ingredient-form {
-  margin-top: 200px;
+  margin-top: 50px;
 }
 
 .add-ingredients {
@@ -36,13 +36,24 @@
   max-width: 75px;
 }
 
-.ingredient-tbody {
-  select,
-  input {
-    background-color: cornsilk;
-    border: none;
-    color: rgb(1, 51, 1);
-  }
-
+.ingredient-header {
+  color: rgb(1, 51, 1);
 }
 
+.ingredient-container {
+  border-top: 1px solid rgb(1, 51, 1);
+ 
+  .ingredient-form {
+    display: flex;
+    justify-content: start;
+    width: 100%;
+  }
+
+  .ingredient-display {
+    color:rgb(1, 51, 1);
+  }
+}
+
+.remove-btn {
+  display: none;
+}

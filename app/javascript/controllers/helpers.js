@@ -84,3 +84,34 @@ function resetSortOption() {
 }
 
 
+// ----------  FORM HELPERS ------------------
+
+export function formatIngredientDisplay(ingredient_form) {
+  const ingredient = $(ingredient_form)
+    .find('.ingredient-name')
+    .hide()
+    .children(':selected')
+    .html();
+
+  const amount = $(ingredient_form)
+    .find('.ingredient-amount')
+    .hide()
+    .val();
+
+  const unit = $(ingredient_form)
+    .find('.ingredient-unit')
+    .hide()
+    .children(':selected')
+    .val();
+  
+    const remove = $(ingredient_form)
+      .find('.remove-btn')
+      .show();
+
+  $(ingredient_form)
+    .find('.ingredient-display')
+    .html([ingredient, amount, unit].join(' '))
+    .show();
+}
+
+

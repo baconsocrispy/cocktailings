@@ -1,4 +1,5 @@
 <div class='nested-fields ingredient-form' data-controller='ingredients' data-ingredient-type=''>
+  <div class='ingredient-display'></div>
   <div class='ingredient-input'>
     <%# creates select drop-down for ingredient association objects %>
     <%= f.association :ingredient, 
@@ -22,5 +23,5 @@
   <div class='ingredient-input'><%= f.input :unit, label: false, collection: ['', 'Oz.', 'L', 'mL', 'tbsp', 'tsp'], prompt: 'Units', input_html: { class: 'ingredient-unit'} %></div>
 
   <%# coccoon gem helper to destroy object %>
-  <div class='remove-ingredient'><%= link_to_remove_association 'x', f, input_html: { class: 'remove-ingredient-btn'} %></div>
+  <div class='remove-btn'><%= link_to_remove_association 'x', f, input_html: { class: ''} %></div>
 </div>

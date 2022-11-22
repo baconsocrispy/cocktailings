@@ -1,13 +1,14 @@
 import { Controller } from "@hotwired/stimulus";
+import { formatIngredientDisplay } from "./helpers";
 
 export default class extends Controller {
   appendIngredient() {
-    const tr = $('.portions .nested-fields').remove();
-    const type = tr.data('ingredient-type');
-    console.log(tr);
+    const ingredient_form = $('.portions .nested-fields').remove();
+    const type = ingredient_form.data('ingredient-type');
 
-    tr.appendTo(`#${ type.toLowerCase() }-ingredients`);
-    console.log(tr.children().children());
+    ingredient_form.appendTo(`#${ type.toLowerCase() }-ingredients`);
+
+    formatIngredientDisplay(ingredient_form);
   }
 
   updateType({ target }) {
@@ -24,3 +25,4 @@ export default class extends Controller {
     });
   }
 }
+
