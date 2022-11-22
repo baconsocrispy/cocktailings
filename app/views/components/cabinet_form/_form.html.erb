@@ -25,6 +25,14 @@
           <div 
             id='<%= ingredient_type.downcase %>-ingredients' 
             class='ingredient-container'>
+
+            <% if @edit %>
+              <%= f.simple_fields_for :portions do |portion_form| %>
+                <% if portion_form.object.ingredient.class.to_s === ingredient_type %>
+                  <%= render 'components/cabinet_form/edit_fields', f: portion_form %>
+                <% end %>
+              <% end %>
+            <% end %>
           </div>
         </div>
       <% end %>

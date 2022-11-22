@@ -32,6 +32,9 @@ class CabinetsController < ApplicationController
 
   # GET /cabinets/1/edit
   def edit
+    set_cabinet
+    @cabinet.portions.build
+    @edit = true
   end
 
   # POST /cabinets or /cabinets.json

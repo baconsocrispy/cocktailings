@@ -5,7 +5,9 @@
 
   <div class='portions ingredient-form-container'>
     <%= f.simple_fields_for :portions do |portion_form| %>
-      <%= render 'components/cabinet_form/portion_fields', f: portion_form %>
+      <% if portion_form.object.id.nil? %>
+        <%= render 'components/cabinet_form/portion_fields', f: portion_form %>
+      <% end %>
     <% end %>
   </div>
 

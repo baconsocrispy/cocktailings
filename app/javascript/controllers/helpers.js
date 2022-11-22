@@ -87,20 +87,19 @@ function resetSortOption() {
 // ----------  FORM HELPERS ------------------
 
 export function formatIngredientDisplay(ingredient_form) {
+  $(ingredient_form).find('.ingredient-input').hide();
+
   const ingredient = $(ingredient_form)
     .find('.ingredient-name')
-    .hide()
     .children(':selected')
     .html();
 
   const amount = $(ingredient_form)
     .find('.ingredient-amount')
-    .hide()
     .val();
 
   const unit = $(ingredient_form)
     .find('.ingredient-unit')
-    .hide()
     .children(':selected')
     .val();
   
