@@ -1,4 +1,6 @@
 class Recipe < ApplicationRecord
+  before_validation :generate_slug
+
   include Portionable
   
   has_one_attached :image
@@ -15,6 +17,7 @@ class Recipe < ApplicationRecord
   accepts_nested_attributes_for :portions, allow_destroy: true, reject_if: proc { |att| att['ingredient_id'].blank? }
 
   validates :name, presence: true
+  validates :slug, uniqueness: true, presence: true
 
   # ordering scopes
   scope :alphabetical, -> { order(:name) }
@@ -25,6 +28,14 @@ class Recipe < ApplicationRecord
   scope :by_all_ingredients, lambda{ |ingredient_ids| self.joins(:ingredients).group(:id).having('array_agg(ingredients.id) @> ?', ingredient_ids) if ingredient_ids.present? }
   scope :by_any_ingredient, lambda{ |ingredient_ids| self.joins(:ingredients).where(ingredients: { id: ingredient_ids }).distinct }
   scope :user_has_all_ingredients, lambda{ |user_ingredients| self.joins(:ingredients).group(:id).having('array_agg(ingredients.id) <@ ?', user_ingredients) if user_ingredients.present? }
+
+  def to_param
+    slug
+  end
+
+  def generate_slug
+    self.slug ||= name.parameterize
+  end
 
   def self.search_recipes(search_params, user)
     sort_option = search_params[:sortOption]

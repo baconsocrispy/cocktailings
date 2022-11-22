@@ -82,7 +82,7 @@ class CabinetsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_cabinet
-      @cabinet = Cabinet.find(params[:id])
+      @cabinet = Cabinet.find_by_slug!(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
