@@ -1,4 +1,4 @@
-<div id='cabinet-form' data-controller='form'>
+<div id='cabinet-form' data-controller='form cabinet-form'>
   <%= simple_form_for(@cabinet) do |f| %>
     <%= f.error_notification %>
     <%= f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? %>
@@ -14,11 +14,21 @@
       <div class='text-danger fst-italic'><%= flash[:error] %></div>
     </div>
 
+   
     <div class='row'>
-      <div class='col'></div>
-      <div class='col'></div>
-      <div class='col'></div>
-      <div class='col'></div>
+      <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
+        <div class='col-auto'>
+          <h5><%= ingredient_type.pluralize %></h5>
+          <table class='ingredient-table'>
+            <thead>
+              <th><%= ingredient_type %></th>
+              <th>Amount</th>
+              <th></th>
+            </thead>
+            <tbody id='<%= ingredient_type.downcase %>-ingredients' class='ingredient-tbody'></tbody>
+          </table>
+        </div>
+      <% end %>
     </div>
 
     <div class='row'>

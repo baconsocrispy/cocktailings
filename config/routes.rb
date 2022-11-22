@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :cabinets
+  resources :cabinets do 
+    post :new, on: :member
+  end
   resources :ingredients
 
   resources :recipes do

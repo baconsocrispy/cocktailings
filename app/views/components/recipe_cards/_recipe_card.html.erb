@@ -5,7 +5,7 @@
   data-action='click->recipes#showRecipe'
 >
   
-    <div class="card" data-value='<%= recipe.id %>'>
+    <div class="card border-0" data-value='<%= recipe.id %>'>
 
       <%# favoriting widget %>
       <%= render partial: 'components/favoriting/favoriting_widget', locals: { recipe: recipe } %>

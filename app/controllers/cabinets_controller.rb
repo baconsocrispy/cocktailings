@@ -18,6 +18,14 @@ class CabinetsController < ApplicationController
 
   # GET /cabinets/new
   def new
+    # obtains ingredient type and returns it in a json for new cabinet form
+    if params[:ingredientId]
+      @ingredientType = Ingredient.find(params[:ingredientId]).type
+      respond_to do |format|
+        format.json { render json: { ingredientType: @ingredientType }}
+      end
+    end
+
     @cabinet = Cabinet.new
     @cabinet.portions.build
   end

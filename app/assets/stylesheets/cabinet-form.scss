@@ -3,3 +3,32 @@
   margin: auto;
   border-radius: 0%;
 }
+
+.ingredient-table {
+  table-layout: auto;
+
+  thead {
+    border-bottom: 1px solid rgb(1, 51, 1);
+  }
+
+  th, td {
+    width: auto;
+    min-width: 100px;
+  }
+
+  .ingredient-amount {
+    display: flex;
+    max-width: 30px;
+  }
+}
+
+.ingredient-tbody {
+  select,
+  input {
+    background-color: cornsilk;
+    border: none;
+    color: rgb(1, 51, 1);
+  }
+
+}
+

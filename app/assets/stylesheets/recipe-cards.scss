@@ -1,12 +1,14 @@
 .card-container {
   cursor: pointer;
+  border: none;
 }
 
 .card-title {
-  color: cornsilk;
+  color: rgb(1, 51, 1);
+  background-color: none;
   font-family: 'durerregular';
 }
 
 .card-body {
-  background-color: rgb(1, 55, 1);
+  background: cornsilk;
 }
