@@ -29,6 +29,8 @@ class RecipesController < ApplicationController
                           current_user
                         )
                         .alphabetical
+                        .with_attached_image
+                        .all
                         .page(@page)
       @recipe_count = @recipes.total_count
 
