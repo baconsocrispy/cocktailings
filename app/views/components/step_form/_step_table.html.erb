@@ -1,8 +1,8 @@
 <div class='form-table-container'>
   <label class='form-label'>Add Recipe Steps</label>
   <table class='recipe-steps-table'>
-    <tbody class='steps'>
-      <%= f.simple_fields_for :steps do |step_form| %>
+    <tbody class='steps' data-controller='drag' data-drag-url='/recipes/:id/move_step'>
+      <%= f.simple_fields_for :steps, f.object.steps.order(position: :asc) do |step_form| %>
         <%= render 'components/step_form/step_fields', f: step_form %>
       <% end %>
     </tbody>

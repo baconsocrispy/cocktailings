@@ -73,7 +73,7 @@
           <div class='recipe-details-container'>
             <div class='recipe-details-header'>Steps</div>
             <ol class=''>
-              <% recipe.steps.each do |s| %>
+              <% recipe.steps.order(position: :asc).each do |s| %>
                 <li><%= s.name %></li>
                 <p><%= s.description %></p>
               <% end %>

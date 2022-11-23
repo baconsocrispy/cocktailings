@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :recipes do
     post :favorite, on: :member
     get :favorites, on: :collection
+    patch :move_step, on: :member
   end
 
   # authentication routes

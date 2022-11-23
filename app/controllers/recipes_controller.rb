@@ -15,6 +15,12 @@ class RecipesController < ApplicationController
     end
   end
 
+  def move_step
+    if set_step
+      @step.insert_at(params[:position].to_i)
+    end
+  end
+
   # GET /recipes or /recipes.json
   def index
     @home = true
@@ -112,6 +118,10 @@ class RecipesController < ApplicationController
   end
 
   private
+    def set_step
+      @step = Step.find(params[:id])
+    end
+
     # Use callbacks to share common setup or constraints between actions.
     def set_recipe
       @recipe = Recipe.find_by_slug!(params[:id])
@@ -131,6 +141,7 @@ class RecipesController < ApplicationController
           :ingredient_id,
           :name,
           :description,
+          :position,
           :_destroy
         ],
         portions_attributes: [
