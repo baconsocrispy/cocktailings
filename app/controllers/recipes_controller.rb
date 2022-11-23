@@ -20,7 +20,11 @@ class RecipesController < ApplicationController
     @home = true
     @page = params[:page] || 1
     
-    @recipes = Recipe.alphabetical.page(@page)
+    @recipes = Recipe.with_attached_image
+                .all
+                .alphabetical
+                .page(@page)
+                
     @recipe_count = @recipes.total_count
 
     if params[:search]

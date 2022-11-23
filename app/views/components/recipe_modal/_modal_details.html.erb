@@ -7,7 +7,14 @@
         <div class='recipe-details-header'>Ingredients</div>
         <ul class='recipe-details-list'>
           <% recipe.portions.each do | portion | %>
-            <li class='recipe-details-list-item'><%= portion.ingredient.display_name %> <%= portion.amount %> <%= portion.unit %> </li>
+            <li class='recipe-details-list-item'>
+              <% if Cabinet.find(current_user.default_cabinet).ingredients.include?(portion.ingredient) %>
+                <span>&check;</span>
+              <% else %>
+                <span>˟</span>
+              <% end %>
+              <%= [ portion.ingredient.display_name, portion.amount, portion.unit ].join(' ') %>
+            </li>
           <% end%>
         </ul>
       </div>
@@ -18,7 +25,14 @@
           <div class='recipe-details-header'>Tools</div>
           <ul class='recipe-details-list'>
             <% recipe.tools.each do | tool | %>
-              <li><%= tool.tool_type %></li>
+              <li>
+                <% if Cabinet.find(current_user.default_cabinet).tools.include?(tool) %>
+                  <span>&check;</span>
+                <% else %>
+                  <span>˟</span>
+                <% end %>
+                <%= tool.tool_type %>
+              </li>
             <% end%>
           </ul>
         </div>
