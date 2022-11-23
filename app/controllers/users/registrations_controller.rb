@@ -10,11 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # POST /resource
-  def create
-    super do |user|
-      user.update!(default_cabinet: Cabinet.find_by(name: 'Fully-Stocked Cabinet').id)
-    end
-  end
+  # def create
+  #  super
+  # end
 
   # GET /resource/edit
   # def edit
@@ -56,6 +54,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # The path used after sign up.
   # def after_sign_up_path_for(resource)
   #   super(resource)
+ 
   # end
 
   # The path used after sign up for inactive accounts.
