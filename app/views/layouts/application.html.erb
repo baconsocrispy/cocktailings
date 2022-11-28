@@ -15,18 +15,19 @@
   </head>
 
   <body>
+    <div id='site-container'>
+      <%= render 'components/header/header' %>
 
-    <%= render 'components/header/header' %>
+      <% if notice %>
+        <p class='alert alert-success'><%= notice %></p>
+      <% end %>
+      <% if alert %>
+        <p class='alert alert-danger'><%= alert %></p>
+      <% end %>
+      
+      <%= yield %>
 
-    <% if notice %>
-      <p class='alert alert-success'><%= notice %></p>
-    <% end %>
-    <% if alert %>
-      <p class='alert alert-danger'><%= alert %></p>
-    <% end %>
-    
-    <%= yield %>
-
-    <%= render '/components/footer/footer' %>
+      <%= render '/components/footer/footer' %>
+    </div>
   </body>
 </html>

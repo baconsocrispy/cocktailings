@@ -1,0 +1,47 @@
+#mobile-sort-menu-container {
+  display: none;
+  position: fixed;
+  top: 4em;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-color: white;
+  z-index: 101;
+
+  #mobile-sort-menu {
+    margin-top: 2em;
+    text-align: center;
+  }
+
+  .mobile-menu-header {
+    border-bottom: 1px solid black;
+    font-weight: bold;
+  }
+
+  .mobile-menu-close-btn {
+    position: absolute;
+    right: 20px;
+    color: black;
+    font-size: x-large;
+ 
+  }
+
+  ul {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    display: block;
+    width: 100%;
+    font-size: x-large;
+  }
+}
+
+@media (min-width: 391px) {
+  #mobile-sort-menu-container {
+    display: none;
+  }
+}

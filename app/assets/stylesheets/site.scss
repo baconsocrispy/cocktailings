@@ -18,3 +18,19 @@ a {
     width: 100vw;
   }
 }
+
+@media (max-width: 391px) {
+  body {
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    padding: 0;
+    background-color: white;
+  }
+
+
+  html {
+    margin: 0;
+    padding: 0;
+  }
+}

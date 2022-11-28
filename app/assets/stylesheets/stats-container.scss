@@ -46,3 +46,9 @@
       }
   }
 }
+
+@media (max-width: 391px) {
+  #stats-container {
+    display: none;
+  }
+}

@@ -53,3 +53,9 @@
     width: 100vw;
   }
 }
+
+@media (max-width: 391px) {
+  .navbar {
+   display: none;
+  }
+}

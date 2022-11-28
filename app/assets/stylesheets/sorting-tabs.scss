@@ -44,3 +44,9 @@
     }
   }
 }
+
+@media (max-width: 391px) {
+  #sorting-tabs-container {
+    display: none;
+  }
+}
