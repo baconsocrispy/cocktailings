@@ -9,6 +9,7 @@ export default class extends Controller {
       if (e.keyCode === 13) {
         e.preventDefault();
         this.filterRecipes();
+        alert('test');
       }
     }, false);
   }
