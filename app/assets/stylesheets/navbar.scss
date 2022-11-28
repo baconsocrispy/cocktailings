@@ -59,3 +59,10 @@
    display: none;
   }
 }
+
+@media (max-width: 391px) {
+  #search-btn {
+    visibility: hidden;
+    position: absolute;
+  }
+}

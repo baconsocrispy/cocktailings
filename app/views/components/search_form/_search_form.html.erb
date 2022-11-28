@@ -3,7 +3,7 @@
     <%= form.input_field :query, placeholder: 'Search Cocktails', id: 'search-field' %>
     <%= form.hidden_field :current_seach, value: '', id: 'current-search' %>
     <%= form.submit 'Search', id: 'search-btn', 
-                              class: 'd-none', 
+                              class: '', 
                               data: { controller: 'search filtering',
                                       action: 'click->search#resetSearchValue click->filtering#filterRecipes'
                                     }

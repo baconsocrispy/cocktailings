@@ -1,13 +1,13 @@
 import { Controller } from "@hotwired/stimulus";
 
 export default class extends Controller {
-  connect() {
-    $('#search-field').on('keyup', (e)=> {
-      if (e.keyCode === 13) {
-        e.preventDefault();
-      }
-    }, false);
-  }
+  // connect() {
+  //   $('#search-field').on('keyup', (e)=> {
+  //     if (e.keyCode === 13) {
+  //       e.preventDefault();
+  //     }
+  //   }, false);
+  // }
 
   resetSearchValue(e) {
     e.preventDefault();

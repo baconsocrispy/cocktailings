@@ -2,17 +2,17 @@ import { Controller } from "@hotwired/stimulus";
 import { getParams, reset, resetPage } from './helpers';
 
 export default class extends Controller {
-  connect() {
-    $('#search-field').on('keyup', (e) => {
-      console.log('test');
+  // connect() {
+  //   $('#search-field').on('keyup', (e) => {
+  //     console.log('test');
 
-      if (e.keyCode === 13) {
-        e.preventDefault();
-        this.filterRecipes();
-        alert('test');
-      }
-    }, false);
-  }
+  //     if (e.keyCode === 13) {
+  //       e.preventDefault();
+  //       this.filterRecipes();
+  //       alert('test');
+  //     }
+  //   }, false);
+  // }
 
   filterRecipes() {
     const params = getParams();
