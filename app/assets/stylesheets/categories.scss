@@ -3,6 +3,7 @@
   top: 55px;
   z-index: 6;
 }
+
 #categories-container {
   position: relative;
   left: 0;
@@ -54,6 +55,12 @@
   text-align: right;
   margin-right: 5px;
   width: auto;
+}
+
+@media (max-width: 821px) {
+  #sticky-category-bar {
+    display: none;
+  }
 }
 
 // // increases category font-size on hover

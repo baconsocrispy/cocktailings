@@ -12,3 +12,15 @@
 .card-body {
   background: cornsilk;
 }
+
+@media (max-width: 821px) {
+  .recipe-cards {
+    margin-left: 0px;
+    padding-left: 0px;
+    width: 100vw;
+  }
+
+  #recipes {
+    width: 100vw;
+  }
+}

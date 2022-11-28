@@ -47,3 +47,9 @@
 .nav-list-container[aria-expanded='true'] {
   display: block;
 }
+
+@media (max-width: 821px) {
+  .navbar {
+    width: 100vw;
+  }
+}

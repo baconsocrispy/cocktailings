@@ -12,3 +12,9 @@ a {
   text-decoration: none;
   color: rgb(1, 55, 1);
 }
+
+@media (max-width: 821px) {
+  body {
+    width: 100vw;
+  }
+}

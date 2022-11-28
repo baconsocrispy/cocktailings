@@ -31,3 +31,16 @@
   background-color: rgb(1, 55, 1);
   color: cornsilk;
 }
+
+@media (max-width: 821px) {
+  #sorting-tabs-container {
+    margin-left: 0px;
+    padding-left: 20px;
+    width: 100vw;
+
+    .sorting-tab {
+      width: auto;
+      padding: 0px 10px;
+    }
+  }
+}
