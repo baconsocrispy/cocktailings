@@ -141,3 +141,10 @@ asset auto-compiling to stop working in the development environment. I
 fixed the issue by running `rails assets:clobber` which cleared any 
 precompiling and restarted the hot-reloading of assets in the browser. 
 
+## DRAG AND DROP SORTABLE FORMS
+
+Help From:
+
+* https://www.youtube.com/watch?v=r884jAqAbHY
+
+
