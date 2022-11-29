@@ -6,9 +6,12 @@ export default class extends Controller {
     target.setAttribute('data-isSelected', true);
   }
 
-  toggleMobileSortMenu() {
-    var isOpen = $('#mobile-sort-menu-container').data('isOpen');
-    $('#mobile-sort-menu-container').data('isOpen', !isOpen);
+  updateMobileMenu({ target }) {
+    const targetMenu = target.getAttribute('data-target-menu');
+    var menu = $(".mobile-menu[data-target-menu='" + targetMenu + "']");
+
+    $('.mobile-menu').hide();
+    menu.show();
   }
 
   closeSortMenu() {

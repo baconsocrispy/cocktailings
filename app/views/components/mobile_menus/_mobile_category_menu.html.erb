@@ -1,0 +1,27 @@
+<div 
+  class='mobile-menu'
+  data-target-menu='mobile-category-menu'
+  data-isSelected='<%= false %>'
+  data-controller='categories filtering'
+>
+  <div class='mobile-menu-header'>
+    <span>Categories</span>
+  </div>
+
+  <ul>
+    <li 
+      class='category-item'
+      data-action='click->categories#updateCategory click->filtering#filterRecipes'
+      data-isSelected='<%= true %>'
+    >All Categories</li>
+
+    <% Category.all.each do |c| %>
+      <li 
+        class='category-item'
+        data-value='<%= c.id %>' 
+        data-action='click->categories#updateCategory click->filtering#filterRecipes'
+        data-isSelected='<%= false %>'
+      ><%= c.name.pluralize %></li>
+    <% end %>
+  </ul>
+</div>

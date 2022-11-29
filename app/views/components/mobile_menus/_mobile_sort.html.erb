@@ -1,7 +1,6 @@
 <div 
   id='mobile-sort-menu-container'
   data-controller='filtering tabs'
-  data-isOpen='<%= false %>'
 >
 
   <div 
@@ -11,29 +10,8 @@
     <i class="fa-solid fa-xmark"></i>
   </div>
 
-  <div id='mobile-sort-menu'>
-    <div class='mobile-menu-header'>
-      <span>Sort Options</span>
-    </div>
-    <ul id='mobile-sort-options-container'>
-      <% SORT_OPTIONS.each do |option| %>
-        <li 
-          class='mobile-sort-item'
-          data-action='click->filtering#filterRecipes '
-        >
-          <div 
-            class='sorting-option'
-            value='<%= option %>'
-            data-controller='tabs'
-            data-action='click->tabs#updateSortOption'
-            <% if option == 'All Recipes' %>
-              data-isSelected='<%= true %>'
-            <% else %>
-              data-isSelected='<%= false %>'
-            <% end %>
-          ><%= option %></div>
-        </li>
-    <% end %>
-    </ul>
-  </div>
+  <%= render 'components/mobile_menus/mobile_sort_menu' %>
+
+  <%= render 'components/mobile_menus/mobile_category_menu' %>
+  
 </div>

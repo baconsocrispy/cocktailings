@@ -1,13 +1,22 @@
 <div 
   id='filter-bar-mobile-container'
-  data-controller='tabs'
+  data-controller='tabs filtering'
 >
   <ul>
-    <li data-action='click->tabs#openSortMenu'>
+    <li
+      data-target-menu='mobile-sort-menu' 
+      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'>
       <i class="fa-solid fa-sort"></i>
       &nbsp;Sort
     </li>
-    <li><i class="fa-solid fa-filter"></i>&nbsp;Filters</li>
+    <li 
+      data-target-menu='mobile-category-menu'
+      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'>
+      <i class="fa-solid fa-filter"></i>
+      &nbsp;Category
+    </li>
     <li><i class="fa-solid fa-wine-bottle"></i>&nbsp;Cabinet</li>
+    <li
+      data-action='click->filtering#resetFilters'><i class="fa-solid fa-rotate-left"></i>&nbsp;Reset</li>
   </ul>
 </div>

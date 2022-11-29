@@ -8,7 +8,8 @@
   background-color: white;
   z-index: 101;
 
-  #mobile-sort-menu {
+  .mobile-menu {
+    display: none;
     margin-top: 2em;
     text-align: center;
   }
