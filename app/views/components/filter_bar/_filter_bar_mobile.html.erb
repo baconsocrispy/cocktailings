@@ -3,13 +3,16 @@
   data-controller='tabs search filtering'
 >
   <ul>
+    <%# sort options button %>
     <li
       data-target-menu='mobile-sort-menu' 
-      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'>
+      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
+    >
       <i class="fa-solid fa-sort"></i>
       &nbsp;Sort
     </li>
 
+    <%# category options button %>
     <li 
       data-target-menu='mobile-category-menu'
       data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
@@ -18,8 +21,16 @@
       &nbsp;Category
     </li>
 
-    <li><i class="fa-solid fa-wine-bottle"></i>&nbsp;Cabinet</li>
+    <%# current cabinet ingredients button %>
+    <li
+      data-target-menu='mobile-cabinet-menu'
+      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
+    >
+      <i class="fa-solid fa-wine-bottle"></i>
+      &nbsp;Cabinet
+    </li>
 
+    <%# reset filtering/search options %>
     <li
       data-action='click->search#resetSearchValue click->filtering#resetFilters'
     >

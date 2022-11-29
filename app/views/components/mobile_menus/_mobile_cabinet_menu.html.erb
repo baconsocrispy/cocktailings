@@ -1,5 +1,3 @@
-<%= current_cabinet = Cabinet.find(current_user.default_cabinet) || Cabinet.find_by(name: 'Fully-Stocked Cabinet') %>
-
 <div 
   class='mobile-menu'
   data-target-menu='mobile-cabinet-menu'
@@ -7,25 +5,34 @@
   data-controller='cabinets filtering'
 >
   <div class='mobile-menu-header'>
-    <span><%= Cabinet.find() %></span>
+    <span><%= current_cabinet.name %></span>
   </div>
-  <ul id='mobile-sort-options-container'>
-    <% SORT_OPTIONS.each do |option| %>
-      <li 
-        class='mobile-sort-item'
-        data-action='click->filtering#filterRecipes'
-      >
-        <div 
-          class='sorting-option'
-          value='<%= option %>'
-          data-action='click->tabs#updateSortOption'
-          <% if option == 'All Recipes' %>
-            data-isSelected='<%= true %>'
-          <% else %>
-            data-isSelected='<%= false %>'
-          <% end %>
-        ><%= option %></div>
-      </li>
+  <ul>
+    <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
+        <li>   
+          <div class='mobile-ingredient-header'>
+            <h6 class=''><%= ingredient_type.pluralize %></h6>
+          </div>
+          <%= collection_select :ingredient, 
+            :display_name, 
+            current_cabinet.ingredients.where(:type => ingredient_type), 
+            :id, 
+            :display_name,
+            { prompt: '-- None Selected --' }, 
+            html_options = { 
+              size: 5, 
+              multiple: true,
+              data: { 
+                controller: 'filtering', 
+                action: 'filtering#filterRecipes',
+                url: recipes_path 
+              },
+              class: 'cabinet-ingredients
+                      mobile-cabinet-ingredients 
+                      cabinet-' + ingredient_type.downcase.pluralize 
+            } 
+          %>
+        </li>
     <% end %>
   </ul>
 </div>

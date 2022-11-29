@@ -4,19 +4,21 @@
   position: fixed;
   height: 100%;
   color: rgb(1, 55, 1);
+
+  .cabinet-ingredients {
+    max-width: 150px;
+    min-width: 150px;
+    border-radius: 5px;
+    background: none;
+    color: rgb(1, 55, 1);
+  }
 }
 
 #cabinet-sidebar-header {
   font-family: 'durerregular';
 }
 
-.cabinet-ingredients {
-  max-width: 150px;
-  min-width: 150px;
-  border-radius: 5px;
-  background: none;
-  color: rgb(1, 55, 1);
-}
+
 
 .cabinet-menu-container {
   position: absolute;
@@ -49,5 +51,12 @@
 @media (max-width: 821px) {
   .liquor-cabinet-display {
     display: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .cabinet-ingredients {
+    width: 100%;
+    color: black;
   }
 }
