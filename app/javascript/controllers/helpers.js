@@ -55,6 +55,7 @@ export function reset() {
   resetCategory();
   resetIngredients();
   resetSortOption();
+  $('#search-field').val('');
 }
 
 export function resetPage() {
@@ -103,9 +104,9 @@ export function formatIngredientDisplay(ingredient_form) {
     .children(':selected')
     .val();
   
-    const remove = $(ingredient_form)
-      .find('.remove-btn')
-      .show();
+  const remove = $(ingredient_form)
+    .find('.remove-btn')
+    .show();
 
   $(ingredient_form)
     .find('.ingredient-display')
