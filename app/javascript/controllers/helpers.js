@@ -49,6 +49,10 @@ function getIngredientIds() {
   return ingredientIds.filter(n => n);
 }
 
+export function closeMobileKeyboard() {
+  
+}
+
 
 // ----------  RESET HELPERS ------------------
 export function reset() {

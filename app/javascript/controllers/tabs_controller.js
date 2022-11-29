@@ -17,9 +17,14 @@ export default class extends Controller {
   closeSortMenu() {
     $('body').css('position', 'absolute');
     $('#mobile-sort-menu-container').hide();
+    $('.mobile-change-cabinet-btn').hide();
+
   }
 
-  openSortMenu() {
+  openSortMenu({ target }) {
+    const targetMenu = target.getAttribute('data-target-menu');
+    if (targetMenu == 'mobile-cabinet-menu') $('.mobile-change-cabinet-btn').show();
+
     $('body').css('position', 'fixed');
     $('#mobile-sort-menu-container').show();
   }

@@ -20,12 +20,18 @@
     font-weight: bold;
   }
 
+  .mobile-change-cabinet-btn {
+    position: absolute;
+    display: none;
+    left: 20px;
+    top: 7px;
+  }
+
   .mobile-menu-close-btn {
     position: absolute;
     right: 20px;
     color: black;
     font-size: x-large;
- 
   }
 
   ul {
