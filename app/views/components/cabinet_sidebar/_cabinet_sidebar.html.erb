@@ -1,20 +1,16 @@
-<% fully_stocked_cabinet = Cabinet.find_by(name: 'Fully-Stocked Cabinet')%>
-<% cabinet = current_user.default_cabinet ? 
-      Cabinet.find(current_user.default_cabinet) : fully_stocked_cabinet %>
-
 <%# current liquor cabinet %>
 <div class='row'>
 
   <%# cabinet header %>
   <div class='d-flex flex-row justify-content-center'>
     <%= render partial: 'components/cabinet_sidebar/cabinet_header', 
-      locals: { cabinet: cabinet } %>
+      locals: { cabinet: current_cabinet } %>
  
     <%= render partial: 'components/cabinet_sidebar/cabinet_dropdown', 
-      locals: { cabinet: cabinet } 
+      locals: { cabinet: current_cabinet } 
     %>
   </div>
 </div>
 
 <%= render partial: 'components/cabinet_sidebar/cabinet_ingredients', 
-  locals: { cabinet: cabinet } %>
+  locals: { cabinet: current_cabinet } %>

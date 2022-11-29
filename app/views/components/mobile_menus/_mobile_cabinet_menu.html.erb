@@ -1,0 +1,31 @@
+<%= current_cabinet = Cabinet.find(current_user.default_cabinet) || Cabinet.find_by(name: 'Fully-Stocked Cabinet') %>
+
+<div 
+  class='mobile-menu'
+  data-target-menu='mobile-cabinet-menu'
+  data-isSelected='<%= false %>'
+  data-controller='cabinets filtering'
+>
+  <div class='mobile-menu-header'>
+    <span><%= Cabinet.find() %></span>
+  </div>
+  <ul id='mobile-sort-options-container'>
+    <% SORT_OPTIONS.each do |option| %>
+      <li 
+        class='mobile-sort-item'
+        data-action='click->filtering#filterRecipes'
+      >
+        <div 
+          class='sorting-option'
+          value='<%= option %>'
+          data-action='click->tabs#updateSortOption'
+          <% if option == 'All Recipes' %>
+            data-isSelected='<%= true %>'
+          <% else %>
+            data-isSelected='<%= false %>'
+          <% end %>
+        ><%= option %></div>
+      </li>
+    <% end %>
+  </ul>
+</div>
