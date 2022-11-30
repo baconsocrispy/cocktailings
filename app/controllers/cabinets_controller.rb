@@ -18,6 +18,10 @@ class CabinetsController < ApplicationController
       @cabinet = Cabinet.find(params[:update_id])
       render partial: 'components/cabinet_sidebar/cabinet_sidebar', locals: { cabinet: @cabinet }
     end
+
+    if params[:updateMobileMenu]
+      render partial: 'components/cabinet_sidebar/cabinet_ingredients'
+    end
   end
 
   # GET /cabinets/new
@@ -29,7 +33,6 @@ class CabinetsController < ApplicationController
         format.json { render json: { ingredientType: @ingredientType }}
       end
     end
-
     @cabinet = Cabinet.new
     @cabinet.portions.build
   end

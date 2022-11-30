@@ -25,15 +25,18 @@ export default class extends Controller {
     });
   }
 
-  async updateMobileCabinet({ target }) {
+  updateMobileCabinet({ target }) {
     const url = target.getAttribute('data-url');
-    const configuredUrl = new URL(url);
-    await fetch(configuredUrl, {
-      headers: {
-        Accept: 'text/vnd.turbo-stream.html',
-      },
-    }).then(r => r.text())
-      .then(html => Turbo.renderStreamMessage(html));
+    
+    $.ajax({
+      type: 'GET',
+      url: url,
+      dataType: 'html',
+      data: { 'updateMobileMenu': true },
+      success: (response) => {
+        $('#mobile-cabinet-menu').html(response);
+      }
+    });
     
     $('#mobile-change-cabinet').hide();
     $('#mobile-cabinet-menu').show();

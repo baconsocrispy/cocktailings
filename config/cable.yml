@@ -1,5 +1,8 @@
 development:
   adapter: async
+  # this was a suggested fix for turbo not working. saving in case it still is
+  # adapter: redis
+  # url: redis://localhost:6379/1
 
 test:
   adapter: test
