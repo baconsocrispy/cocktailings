@@ -12,21 +12,25 @@
     background: none;
     color: rgb(1, 55, 1);
   }
+
+  .cabinet-menu-container {
+    position: absolute;
+    width: 200px;
+    top: 30px;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  #cabinet-sidebar-header {
+    font-family: 'durerregular';
+  }
 }
 
-#cabinet-sidebar-header {
-  font-family: 'durerregular';
-}
 
 
 
-.cabinet-menu-container {
-  position: absolute;
-  width: 200px;
-  top: 30px;
-  opacity: 0;
-  visibility: hidden;
-}
+
+
 
 .cabinet-menu {
   border-radius: 5px;

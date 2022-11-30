@@ -25,6 +25,20 @@ export default class extends Controller {
     });
   }
 
+  async updateMobileCabinet({ target }) {
+    const url = target.getAttribute('data-url');
+    const configuredUrl = new URL(url);
+    await fetch(configuredUrl, {
+      headers: {
+        Accept: 'text/vnd.turbo-stream.html',
+      },
+    }).then(r => r.text())
+      .then(html => Turbo.renderStreamMessage(html));
+    
+    $('#mobile-change-cabinet').hide();
+    $('#mobile-cabinet-menu').show();
+  }
+
   // opens/closes cabinet menu when '+' icon is clicked
   toggleCabinetMenu() {
     const menu = $('.toggle-cabinet-menu');

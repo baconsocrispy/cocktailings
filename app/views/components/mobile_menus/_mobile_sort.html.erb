@@ -1,9 +1,13 @@
 <div 
   id='mobile-sort-menu-container'
-  data-controller='filtering tabs'
+  data-controller='tabs cabinets filtering'
 >
   <%# change cabinet button %>
-  <span class='mobile-change-cabinet-btn'>
+  <span 
+    class='mobile-change-cabinet-btn'
+    data-target-menu='mobile-change-cabinet'
+    data-action='click->tabs#updateMobileMenu'
+  >
     <i class="fa-solid fa-arrows-rotate"></i>
     &nbsp;Change
   </span>
@@ -21,5 +25,7 @@
   <%= render 'components/mobile_menus/mobile_category_menu' %>
 
   <%= render 'components/mobile_menus/mobile_cabinet_menu' %>
+
+  <%= render 'components/mobile_menus/mobile_change_cabinet' %>
   
 </div>

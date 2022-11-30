@@ -1,14 +1,18 @@
+<div class='mobile-menu-header'>
+  <span><%= current_cabinet.name %></span>
+</div>
+
 <%# select widgets for each category of ingredient %>
 <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
-  <div class='row mt-2'>
-    <div class='mx-4'>
+  <div>
+    <div>
       <div>
-        <h6 class='fw-bold'><%= ingredient_type.pluralize %></h6>
+        <h6><%= ingredient_type.pluralize %></h6>
       </div>
       <div>
         <%= collection_select :ingredient, 
               :display_name, 
-              cabinet.ingredients.where(:type => ingredient_type), 
+              current_cabinet.ingredients.where(:type => ingredient_type), 
               :id, 
               :display_name,
               { prompt: '-- None Selected --' }, 

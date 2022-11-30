@@ -1,38 +1,8 @@
-<div 
+<div
+  id='mobile-cabinet-menu'
   class='mobile-menu'
   data-target-menu='mobile-cabinet-menu'
-  data-isSelected='<%= false %>'
   data-controller='cabinets filtering'
 >
-  <div class='mobile-menu-header'>
-    <span><%= current_cabinet.name %></span>
-  </div>
-  <ul>
-    <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
-        <li>   
-          <div class='mobile-ingredient-header'>
-            <h6 class=''><%= ingredient_type.pluralize %></h6>
-          </div>
-          <%= collection_select :ingredient, 
-            :display_name, 
-            current_cabinet.ingredients.where(:type => ingredient_type), 
-            :id, 
-            :display_name,
-            { prompt: '-- None Selected --' }, 
-            html_options = { 
-              size: 5, 
-              multiple: true,
-              data: { 
-                controller: 'filtering', 
-                action: 'filtering#filterRecipes',
-                url: recipes_path 
-              },
-              class: 'cabinet-ingredients
-                      mobile-cabinet-ingredients 
-                      cabinet-' + ingredient_type.downcase.pluralize 
-            } 
-          %>
-        </li>
-    <% end %>
-  </ul>
+  <%= render 'components/cabinet_sidebar/cabinet_ingredients' %>
 </div>

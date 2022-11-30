@@ -16,7 +16,7 @@ export function getParams(pageValue = null) {
       'sortOption': getSortOption(),
       'ingredientIds': getIngredientIds(),
       'categoryIds': getCategoryId(),
-      'searchTerm': $('#current-search').val()
+      'searchTerm': $('.current-search').val()
     }
   };
 }
@@ -59,12 +59,12 @@ export function reset() {
   resetCategory();
   resetIngredients();
   resetSortOption();
-  $('#search-field').val('');
+  $('.search-field').val('');
 }
 
 export function resetPage() {
   resetPageValue();
-  $('#search-field').val('');
+  $('.search-field').val('');
 }
 
 // resets page value to 2 when results are refreshed

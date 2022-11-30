@@ -10,7 +10,8 @@ export default class extends Controller {
     const targetMenu = target.getAttribute('data-target-menu');
     var menu = $(".mobile-menu[data-target-menu='" + targetMenu + "']");
 
-    $('.mobile-menu').hide();
+    if (targetMenu != 'change-cabinet-menu') $('.mobile-menu').hide();
+    
     menu.show();
   }
 
@@ -18,7 +19,6 @@ export default class extends Controller {
     $('body').css('position', 'absolute');
     $('#mobile-sort-menu-container').hide();
     $('.mobile-change-cabinet-btn').hide();
-
   }
 
   openSortMenu({ target }) {

@@ -48,7 +48,7 @@ export function configureUrl(urlValue, pageValue) {
   url.searchParams.set('page', pageValue);
   url.searchParams.append('sortOption', sortingOption);
   url.searchParams.append('categoryId', getCategoryId());
-  url.searchParams.append('searchTerm', $('#search-field').val());
+  url.searchParams.append('searchTerm', $('.search-field').val());
   url = appendIngredientIds(url);
   return url.toString();
 }
@@ -56,7 +56,7 @@ export function configureUrl(urlValue, pageValue) {
 // gathers all currently selected search options
 // and returns tham as an object 
 export function getParams(event) {
-  const searchTerm = $('#search-field').val();
+  const searchTerm = $('.search-field').val();
   const sortOption = getSortOption;
   const ingredientIds = getIngredientIds();
   const categoryId = getCategoryId(event);

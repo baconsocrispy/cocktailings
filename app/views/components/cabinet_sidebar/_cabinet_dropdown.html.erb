@@ -1,7 +1,7 @@
 <%# cabinet-menu dropdown %>
 <div class='cabinet-menu-container'>
   <ul 
-    class='cabinet-menu bg-light'
+    class='cabinet-menu'
     data-action='click->cabinets#toggleCabinetMenu'
   >
     <div class='list-group-item'>-- Please Select --</div>
@@ -12,7 +12,8 @@
         value='<%= cabinet.id %>'
         data-controller='cabinets search filtering'
         data-url='<%= cabinet_url(cabinet) %>'
-        data-action='click->cabinets#changeCabinet 
+        data-action='click->cabinets#changeCabinet
+                     click->cabinets#updateMobileCabinet 
                      click->search#resetSearchValue 
                      click->filtering#resetFilters'
       >
@@ -22,10 +23,11 @@
     <li 
       role='button' 
       class='cabinet-option list-group-item' 
-      value='<%= 1 %>'
+      value='<%= fully_stocked_cabinet.id %>'
       data-controller='cabinets search filtering'
-      data-url='<%= cabinet_url(cabinet) %>'
+      data-url='<%= cabinet_url(fully_stocked_cabinet) %>'
       data-action='click->cabinets#changeCabinet 
+                   click->cabinets#updateMobileCabinet 
                    click->search#resetSearchValue 
                    click->filtering#resetFilters' 
     >
