@@ -9,9 +9,8 @@ export default class extends Controller {
   updateMobileMenu({ target }) {
     const targetMenu = target.getAttribute('data-target-menu');
     var menu = $(".mobile-menu[data-target-menu='" + targetMenu + "']");
-
-    if (targetMenu != 'change-cabinet-menu') $('.mobile-menu').hide();
-    
+    $('.mobile-menu').hide();
+    console.log(targetMenu);
     menu.show();
   }
 

@@ -1,4 +1,5 @@
-<nav id='mobile-nav-container'>
+<nav id='mobile-nav-container'
+  data-controller='tabs'>
   <ul>
     <li id='nav-logo-container-mobile'>
       <a class="" href="/">C</a>
@@ -6,8 +7,17 @@
     <li id='nav-search-container-mobile'>
       <%= render partial: 'components/search_form/search_form', locals: { home: @home, id: 'mobile-search' } %>
     </li>
-    <li id='nav-menu-container-mobile'>
-      <i class="fa-solid fa-bars"></i>
+    <li 
+      id='nav-menu-container-mobile'
+      data-target-menu='mobile-main-menu' 
+      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
+    >
+      <i 
+        class="fa-solid fa-bars"
+        <%# data-target-menu='mobile-main-menu' 
+        data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu' %>
+      >
+      </i>
     </li>
   </ul>
 </nav>
