@@ -5,20 +5,22 @@
     data-action='click->cabinets#toggleCabinetMenu'
   >
     <div class='list-group-item'>-- Please Select --</div>
-    <% current_user.cabinets.each do |cabinet| %>
-      <li 
-        role='button' 
-        class='cabinet-option list-group-item' 
-        value='<%= cabinet.id %>'
-        data-controller='cabinets search filtering'
-        data-url='<%= cabinet_url(cabinet) %>'
-        data-action='click->cabinets#changeCabinet
-                     click->cabinets#updateMobileCabinet 
-                     click->search#resetSearchValue 
-                     click->filtering#resetFilters'
-      >
-        <%= cabinet.name %>
-      </li>
+    <% if current_user %>
+      <% current_user.cabinets.each do |cabinet| %>
+        <li 
+          role='button' 
+          class='cabinet-option list-group-item' 
+          value='<%= cabinet.id %>'
+          data-controller='cabinets search filtering'
+          data-url='<%= cabinet_url(cabinet) %>'
+          data-action='click->cabinets#changeCabinet
+                      click->cabinets#updateMobileCabinet 
+                      click->search#resetSearchValue 
+                      click->filtering#resetFilters'
+        >
+          <%= cabinet.name %>
+        </li>
+      <% end %>
     <% end %>
     <li 
       role='button' 
