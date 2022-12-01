@@ -1,12 +1,4 @@
-<p style="color: green"><%= notice %></p>
-
-<div class="d-flex flex-row-reverse">
-  <div class='me-2 mt-2'>
-    <a class='text-decoration-none btn btn-sm btn-outline-dark' href='<%= new_cabinet_path %>'>Add Cabinet</a>
-  </div>
-</div>
-
-<div id="cabinets">
+<div id="cabinets" class='mobile-page'>
   <% @cabinets.each do |cabinet| %>
     <div class='cabinet-container'>
       <%= render cabinet %>

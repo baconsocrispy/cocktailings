@@ -1,9 +1,9 @@
-<p style="color: green"><%= notice %></p>
+<div class='mobile-page'>
+  <%= render @cabinet %>
 
-<%= render @cabinet %>
-
-<div class='row my-5'>
-  <div class='d-flex justify-content-center'>
-    <%= button_to "Delete", @cabinet, method: :delete, class: 'btn btn-sm btn-dark' %>
+  <div class='row my-5'>
+    <div class='d-flex justify-content-center'>
+      <%= button_to "Delete", @cabinet, method: :delete, class: 'btn btn-sm btn-dark' %>
+    </div>
   </div>
 </div>
