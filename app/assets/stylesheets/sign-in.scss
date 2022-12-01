@@ -39,3 +39,17 @@
     margin-right: 10px;
   }
 }
+
+@media (max-width: 600px) {
+  .sign-in-container {
+    margin-top: 4em;
+
+    .sign-in-content {
+      width: 100%;
+    }
+
+    .sign-in-form-container {
+      width: 100%;
+    }
+  }
+}
