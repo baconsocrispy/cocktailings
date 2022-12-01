@@ -10,7 +10,6 @@ export default class extends Controller {
     const targetMenu = target.getAttribute('data-target-menu');
     var menu = $(".mobile-menu[data-target-menu='" + targetMenu + "']");
     $('.mobile-menu').hide();
-    console.log(target);
     menu.show();
   }
 

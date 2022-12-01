@@ -13,10 +13,10 @@
           value='<%= cabinet.id %>'
           data-controller='cabinets search filtering'
           data-url='<%= cabinet_url(cabinet) %>'
-          data-action='click->cabinets#changeCabinet
-                      click->cabinets#updateMobileCabinet 
+          data-action='click->cabinets#changeCabinet 
                       click->search#resetSearchValue 
-                      click->filtering#resetFilters'
+                      click->filtering#resetFilters
+                      click->cabinets#updateMobileCabinet'
         >
           <%= cabinet.name %>
         </li>
@@ -29,9 +29,9 @@
       data-controller='cabinets search filtering'
       data-url='<%= cabinet_url(fully_stocked_cabinet) %>'
       data-action='click->cabinets#changeCabinet 
-                   click->cabinets#updateMobileCabinet 
                    click->search#resetSearchValue 
-                   click->filtering#resetFilters' 
+                   click->filtering#resetFilters
+                   click->cabinets#updateMobileCabinet' 
     >
       Fully-Stocked Cabinet
     </li>

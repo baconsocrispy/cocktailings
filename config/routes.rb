@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   devise_scope :user do 
     #reroutes users to sign-in after sign-out
     get "users", to: "users/sessions#new"
+    get 'users/sign_out', to: 'users/sessions#destroy'
   end
 
   # Defines the root path route ("/")

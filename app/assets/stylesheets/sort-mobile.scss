@@ -48,6 +48,18 @@
   }
 }
 
+.mobile-main-header {
+  text-align: start;
+  padding-left: 5px;
+  color: black;
+}
+
+.mobile-main-cabinet {
+  text-align: start;
+  padding-left: 25px;
+  color: black;
+}
+
 @media (min-width: 600px) {
   #mobile-sort-menu-container {
     display: none;

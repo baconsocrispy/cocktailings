@@ -1,60 +1,62 @@
-<div 
-  id='filter-bar-mobile-container'
-  data-controller='tabs search filtering'
->
-  <ul>
-    <%# sort options button %>
-    <li
-      data-target-menu='mobile-sort-menu' 
-      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu' 
-    >
-      <i 
+<% if @home %>
+  <div 
+    id='filter-bar-mobile-container'
+    data-controller='tabs search filtering'
+  >
+    <ul>
+      <%# sort options button %>
+      <li
         data-target-menu='mobile-sort-menu' 
         data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu' 
-        class="fa-solid fa-sort text-dark"
       >
-      </i>
-      &nbsp;Filter
-    </li>
+        <i 
+          data-target-menu='mobile-sort-menu' 
+          data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu' 
+          class="fa-solid fa-sort text-dark"
+        >
+        </i>
+        &nbsp;Filter
+      </li>
 
-    <%# category options button %>
-    <li 
-      data-target-menu='mobile-category-menu'
-      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
-    >
-      <i 
+      <%# category options button %>
+      <li 
         data-target-menu='mobile-category-menu'
         data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
-        class="fa-solid fa-filter"
       >
-      </i>
-      &nbsp;Category
-    </li>
+        <i 
+          data-target-menu='mobile-category-menu'
+          data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
+          class="fa-solid fa-filter"
+        >
+        </i>
+        &nbsp;Category
+      </li>
 
-    <%# current cabinet ingredients button %>
-    <li
-      data-target-menu='mobile-cabinet-menu'
-      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
-    >
-      <i 
+      <%# current cabinet ingredients button %>
+      <li
         data-target-menu='mobile-cabinet-menu'
         data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
-        class="fa-solid fa-wine-bottle"
       >
-      </i>
-      &nbsp;Cabinet
-    </li>
+        <i 
+          data-target-menu='mobile-cabinet-menu'
+          data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
+          class="fa-solid fa-wine-bottle"
+        >
+        </i>
+        &nbsp;Cabinet
+      </li>
 
-    <%# reset filtering/search options %>
-    <li
-      data-action='click->search#resetSearchValue click->filtering#resetFilters'
-    >
-      <i
-        data-action='click->search#resetSearchValue click->filtering#resetFilters' 
-        class="fa-solid fa-rotate-left"
+      <%# reset filtering/search options %>
+      <li
+        data-action='click->search#resetSearchValue click->filtering#resetFilters'
       >
-      </i>
-      &nbsp;Reset
-    </li>
-  </ul>
-</div>
+        <i
+          data-action='click->search#resetSearchValue click->filtering#resetFilters' 
+          class="fa-solid fa-rotate-left"
+        >
+        </i>
+        &nbsp;Reset
+      </li>
+    </ul>
+  </div>
+<% end %>
