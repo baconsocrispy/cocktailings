@@ -6,9 +6,14 @@
     <%# sort options button %>
     <li
       data-target-menu='mobile-sort-menu' 
-      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
+      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu' 
     >
-      <i class="fa-solid fa-sort"></i>
+      <i 
+        data-target-menu='mobile-sort-menu' 
+        data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu' 
+        class="fa-solid fa-sort text-dark"
+      >
+      </i>
       &nbsp;Filter
     </li>
 
@@ -17,7 +22,12 @@
       data-target-menu='mobile-category-menu'
       data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
     >
-      <i class="fa-solid fa-filter"></i>
+      <i 
+        data-target-menu='mobile-category-menu'
+        data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
+        class="fa-solid fa-filter"
+      >
+      </i>
       &nbsp;Category
     </li>
 
@@ -26,7 +36,12 @@
       data-target-menu='mobile-cabinet-menu'
       data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
     >
-      <i class="fa-solid fa-wine-bottle"></i>
+      <i 
+        data-target-menu='mobile-cabinet-menu'
+        data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
+        class="fa-solid fa-wine-bottle"
+      >
+      </i>
       &nbsp;Cabinet
     </li>
 
@@ -34,7 +49,11 @@
     <li
       data-action='click->search#resetSearchValue click->filtering#resetFilters'
     >
-      <i class="fa-solid fa-rotate-left"></i>
+      <i
+        data-action='click->search#resetSearchValue click->filtering#resetFilters' 
+        class="fa-solid fa-rotate-left"
+      >
+      </i>
       &nbsp;Reset
     </li>
   </ul>

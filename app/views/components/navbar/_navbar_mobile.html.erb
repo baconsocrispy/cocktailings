@@ -7,15 +7,11 @@
     <li id='nav-search-container-mobile'>
       <%= render partial: 'components/search_form/search_form', locals: { home: @home, id: 'mobile-search' } %>
     </li>
-    <li 
-      id='nav-menu-container-mobile'
-      data-target-menu='mobile-main-menu' 
-      data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
-    >
+    <li id='nav-menu-container-mobile'>
       <i 
         class="fa-solid fa-bars"
-        <%# data-target-menu='mobile-main-menu' 
-        data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu' %>
+        data-target-menu='mobile-main-menu' 
+        data-action='click->tabs#updateMobileMenu click->tabs#openSortMenu'
       >
       </i>
     </li>
