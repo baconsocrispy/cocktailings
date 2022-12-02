@@ -81,3 +81,16 @@
 }
 
 
+@media (max-width: 600px) {
+  #modal-header-recipe-categories {
+    display: none;
+  }
+
+  .mobile-details-container {
+    flex-wrap: wrap;
+  }
+
+  .recipe-details-container {
+    width: 100%;
+  };
+}
