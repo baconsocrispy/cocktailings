@@ -13,11 +13,11 @@
 
   <div class='form-actions text-center row my-2 border-0'>
     <div>
-      <%= link_to_add_association '➕', 
+      <%= link_to_add_association 'Add', 
         f, 
         :portions, 
         partial: 'components/cabinet_form/portion_fields',
-        class: '', 
+        class: 'add-ingredient-btn', 
         data: {
           association_insertion_node: '.portions', 
           association_insertion_method: :append,

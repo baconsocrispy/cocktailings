@@ -80,4 +80,21 @@
   #cabinet_name {
     width: 100%;
   }
+
+  .ingredients-container {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .ingredient-wrapper {
+    width: 50vw;
+    margin-top: 10px;
+  }
+
+  .add-ingredient-btn {
+    background-color: black;
+    color: white;
+    padding: 5px;
+    border-radius: 3px;
+  }
 }

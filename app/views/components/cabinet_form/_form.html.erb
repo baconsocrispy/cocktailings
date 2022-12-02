@@ -15,16 +15,17 @@
     </div>
 
    
-    <div class='row'>
+    <div class='ingredients-container'>
       <% ['Spirit', 'Modifier', 'Sugar', 'Garnish'].each do |ingredient_type| %>
-        <div class='col'>
+        <div class='ingredient-wrapper'>
           <h5 class='ingredient-header'>
             <%= ingredient_type.pluralize %>
           </h5>
 
           <div 
             id='<%= ingredient_type.downcase %>-ingredients' 
-            class='ingredient-container'>
+            class='ingredient-container'
+          >
 
             <% if @edit %>
               <%= f.simple_fields_for :portions do |portion_form| %>
